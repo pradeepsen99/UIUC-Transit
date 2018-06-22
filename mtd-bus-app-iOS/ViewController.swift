@@ -9,9 +9,11 @@
 import UIKit
 import CoreLocation
 
+
+
 class ViewController: UIViewController {
 
-    
+    @IBOutlet weak var lblTest: UILabel!
     
     // Used to start getting the users location
     let locationManager = CLLocationManager()
@@ -33,6 +35,7 @@ class ViewController: UIViewController {
             locationManager.startUpdatingLocation()
         }
         
+        lblTest.text = locationManager.location?.coordinate.latitude.description;
         
     }
     
@@ -53,7 +56,7 @@ class ViewController: UIViewController {
     // Show the popup to the user if we have been deined access
     func showLocationDisabledPopUp() {
         let alertController = UIAlertController(title: "Background Location Access Disabled",
-                                                message: "In order to deliver pizza we need your location",
+                                                message: "In order to get information about your closest stops we need your location",
                                                 preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
