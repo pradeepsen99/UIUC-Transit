@@ -16,7 +16,7 @@ struct mtd_stop_loc: Codable{
         let stop_id: String
         let stop_name: String
         let code: String
-        let distance: Int
+        let distance: Double
         let stop_points: [STOP_POINTS]
         struct STOP_POINTS: Codable{
             let code: String
@@ -65,10 +65,25 @@ class ViewController: UIViewController {
         
     }
     
-    func downloadData (){
-        let url = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat=87&lon=87")
-        
-        API = (url?.description)!
+    @IBAction func downloadData (){
+        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat=87&lon=87") else { return }
+
+        URLSession.shared.dataTask(with: gitUrl) { (data, response
+            , error) in
+            
+            guard let data = data else { return }
+            do {
+                let decoder = JSONDecoder()
+                let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
+
+                DispatchQueue.main.sync {
+                    self.API = (mtdData.stops.first?.stop_name)!
+                    
+                }
+            } catch let err {
+                print("Err", err)
+            }
+            }.resume()
     }
     
     @IBAction func Tap(_ sender: AnyObject) {
