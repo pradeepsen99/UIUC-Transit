@@ -9,11 +9,34 @@
 import UIKit
 import CoreLocation
 
-
+struct mtd_stop_loc: Codable{
+    let stops: [STOP_INFO]
+    
+    struct STOP_INFO: Codable{
+        let stop_id: String
+        let stop_name: String
+        let code: String
+        let distance: Int
+        let stop_points: [STOP_POINTS]
+        struct STOP_POINTS: Codable{
+            let code: String
+            let stop_id: String
+            let stop_lat: Double
+            let stop_lon: Double
+            let stop_name: String
+        }
+        
+    }
+    
+}
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var lblTest: UILabel!
+    var lat: Double = 0
+    var long: Double = 0
+    var counter: Int = 0
+    var API: String = ""
     
     // Used to start getting the users location
     let locationManager = CLLocationManager()
@@ -34,9 +57,34 @@ class ViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
             locationManager.startUpdatingLocation()
         }
+        downloadData()
+        displayLatLong()
         
-        lblTest.text = locationManager.location?.coordinate.latitude.description;
         
+        
+        
+    }
+    
+    func downloadData (){
+        let url = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat=87&lon=87")
+        
+        API = (url?.description)!
+    }
+    
+    @IBAction func Tap(_ sender: AnyObject) {
+        DispatchQueue.global(qos: .default).async {
+            DispatchQueue.main.async {
+                self.displayLatLong()
+            }
+        }
+    }
+    
+    
+    func displayLatLong(){
+        lat = (locationManager.location?.coordinate.latitude)!
+        long = (locationManager.location?.coordinate.longitude)!
+        counter = counter + 1
+        lblTest.text = lat.description + "\n" + long.description + "\n" + counter.description + "\n" + API
     }
     
     // Print out the location to the console
@@ -73,13 +121,13 @@ class ViewController: UIViewController {
     }
     
     
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
