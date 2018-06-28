@@ -58,7 +58,10 @@ class ViewController: UIViewController {
             locationManager.startUpdatingLocation()
         }
         downloadData()
+        sleep(1)
         displayLatLong()
+        
+        
         
         
         
@@ -66,7 +69,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func downloadData (){
-        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat=87&lon=87") else { return }
+        lat = (locationManager.location?.coordinate.latitude)!
+        long = (locationManager.location?.coordinate.longitude)!
+        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description) else { return }
 
         URLSession.shared.dataTask(with: gitUrl) { (data, response
             , error) in
@@ -77,7 +82,7 @@ class ViewController: UIViewController {
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
 
                 DispatchQueue.main.sync {
-                    self.API = (mtdData.stops.first?.stop_name)!
+                    self.API = (mtdData.stops.last?.stop_name)!
                     
                 }
             } catch let err {
@@ -96,8 +101,8 @@ class ViewController: UIViewController {
     
     
     func displayLatLong(){
-        lat = (locationManager.location?.coordinate.latitude)!
-        long = (locationManager.location?.coordinate.longitude)!
+        //lat = (locationManager.location?.coordinate.latitude)!
+        //long = (locationManager.location?.coordinate.longitude)!
         counter = counter + 1
         lblTest.text = lat.description + "\n" + long.description + "\n" + counter.description + "\n" + API
     }

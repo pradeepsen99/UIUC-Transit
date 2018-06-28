@@ -1,0 +1,6 @@
+framework module Pods_mtd_bus_app_iOS {
+  umbrella header "Pods-mtd-bus-app-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
