@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		609B058FF5EB13EAFA019C18 /* Pods_mtd_bus_app_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE87BBEB20B9540C71BF4EE /* Pods_mtd_bus_app_iOS.framework */; };
-		68E6F4C456FD53DAB4A4F07F /* Pods_mtd_bus_app_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B382CF652A4F04191060D6 /* Pods_mtd_bus_app_iOSUITests.framework */; };
+		538E1D909AF0B96B7834BA00 /* Pods_mtd_bus_app_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7D3D07AE5F70B2ACFD5DD6A /* Pods_mtd_bus_app_iOSTests.framework */; };
+		65D2CAD2E5C50CF3A40C6E4E /* Pods_mtd_bus_app_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BFBDD10188830E4190311A /* Pods_mtd_bus_app_iOS.framework */; };
 		6A023FB320D8DDB3005F362A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A023FB220D8DDB3005F362A /* AppDelegate.swift */; };
 		6A023FB520D8DDB3005F362A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A023FB420D8DDB3005F362A /* ViewController.swift */; };
 		6A023FB820D8DDB3005F362A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A023FB620D8DDB3005F362A /* Main.storyboard */; };
 		6A023FBA20D8DDB3005F362A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A023FB920D8DDB3005F362A /* Assets.xcassets */; };
 		6A023FC820D8DDB3005F362A /* mtd_bus_app_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A023FC720D8DDB3005F362A /* mtd_bus_app_iOSTests.swift */; };
 		6A023FD320D8DDB3005F362A /* mtd_bus_app_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A023FD220D8DDB3005F362A /* mtd_bus_app_iOSUITests.swift */; };
-		BDBFB33CC32B10A9662656E7 /* Pods_mtd_bus_app_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA760CF47FB6467127B784F /* Pods_mtd_bus_app_iOSTests.framework */; };
+		92ABCD4EF437F5AABFE20CAE /* Pods_mtd_bus_app_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F881D1F1498CE70D83B45BA1 /* Pods_mtd_bus_app_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03B382CF652A4F04191060D6 /* Pods_mtd_bus_app_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BE87BBEB20B9540C71BF4EE /* Pods_mtd_bus_app_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FA760CF47FB6467127B784F /* Pods_mtd_bus_app_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E7C6C4C8F09288591922620 /* Pods-mtd-bus-app-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSUITests/Pods-mtd-bus-app-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6A023FAF20D8DDB3005F362A /* mtd-bus-app-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mtd-bus-app-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A023FB220D8DDB3005F362A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A023FB420D8DDB3005F362A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,12 +49,14 @@
 		6A023FCE20D8DDB3005F362A /* mtd-bus-app-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mtd-bus-app-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A023FD220D8DDB3005F362A /* mtd_bus_app_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtd_bus_app_iOSUITests.swift; sourceTree = "<group>"; };
 		6A023FD420D8DDB3005F362A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BD5086E77F0E8D32BF51E97 /* Pods-mtd-bus-app-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSTests/Pods-mtd-bus-app-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		9AE15A46DFFE65EBA449CFFB /* Pods-mtd-bus-app-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		9F59F72772B5AA9024012B2B /* Pods-mtd-bus-app-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSTests/Pods-mtd-bus-app-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A32EF1BB4B4CADC83B05059A /* Pods-mtd-bus-app-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSUITests/Pods-mtd-bus-app-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
-		AB1A7A45769D8F7E261D2566 /* Pods-mtd-bus-app-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		C4A67B506B11C563FB0F0812 /* Pods-mtd-bus-app-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSUITests/Pods-mtd-bus-app-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F5C7E5DC56394997CB687BD /* Pods-mtd-bus-app-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSUITests/Pods-mtd-bus-app-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7EEFC8F10BFE82C213C77135 /* Pods-mtd-bus-app-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		8A59E6CE5F3676741FD5A8F0 /* Pods-mtd-bus-app-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSTests/Pods-mtd-bus-app-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		95BFBDD10188830E4190311A /* Pods_mtd_bus_app_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4BAF51A66350200EE981294 /* Pods-mtd-bus-app-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOSTests/Pods-mtd-bus-app-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		BCD5A270839AD75ED4EA312A /* Pods-mtd-bus-app-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		E7D3D07AE5F70B2ACFD5DD6A /* Pods_mtd_bus_app_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F881D1F1498CE70D83B45BA1 /* Pods_mtd_bus_app_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				609B058FF5EB13EAFA019C18 /* Pods_mtd_bus_app_iOS.framework in Frameworks */,
+				65D2CAD2E5C50CF3A40C6E4E /* Pods_mtd_bus_app_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDBFB33CC32B10A9662656E7 /* Pods_mtd_bus_app_iOSTests.framework in Frameworks */,
+				538E1D909AF0B96B7834BA00 /* Pods_mtd_bus_app_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,21 +80,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68E6F4C456FD53DAB4A4F07F /* Pods_mtd_bus_app_iOSUITests.framework in Frameworks */,
+				92ABCD4EF437F5AABFE20CAE /* Pods_mtd_bus_app_iOSUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		683377B5074F3BE95751947D /* Frameworks */ = {
+		337D6CCAAEE253E15F552416 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0BE87BBEB20B9540C71BF4EE /* Pods_mtd_bus_app_iOS.framework */,
-				5FA760CF47FB6467127B784F /* Pods_mtd_bus_app_iOSTests.framework */,
-				03B382CF652A4F04191060D6 /* Pods_mtd_bus_app_iOSUITests.framework */,
+				95BFBDD10188830E4190311A /* Pods_mtd_bus_app_iOS.framework */,
+				E7D3D07AE5F70B2ACFD5DD6A /* Pods_mtd_bus_app_iOSTests.framework */,
+				F881D1F1498CE70D83B45BA1 /* Pods_mtd_bus_app_iOSUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39443B02E04609B713366C5D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7EEFC8F10BFE82C213C77135 /* Pods-mtd-bus-app-iOS.debug.xcconfig */,
+				BCD5A270839AD75ED4EA312A /* Pods-mtd-bus-app-iOS.release.xcconfig */,
+				8A59E6CE5F3676741FD5A8F0 /* Pods-mtd-bus-app-iOSTests.debug.xcconfig */,
+				A4BAF51A66350200EE981294 /* Pods-mtd-bus-app-iOSTests.release.xcconfig */,
+				6F5C7E5DC56394997CB687BD /* Pods-mtd-bus-app-iOSUITests.debug.xcconfig */,
+				0E7C6C4C8F09288591922620 /* Pods-mtd-bus-app-iOSUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		6A023FA620D8DDB3005F362A = {
@@ -104,8 +117,8 @@
 				6A023FC620D8DDB3005F362A /* mtd-bus-app-iOSTests */,
 				6A023FD120D8DDB3005F362A /* mtd-bus-app-iOSUITests */,
 				6A023FB020D8DDB3005F362A /* Products */,
-				BEF7CC604DAB23C17CF93E7F /* Pods */,
-				683377B5074F3BE95751947D /* Frameworks */,
+				39443B02E04609B713366C5D /* Pods */,
+				337D6CCAAEE253E15F552416 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,19 +162,6 @@
 			path = "mtd-bus-app-iOSUITests";
 			sourceTree = "<group>";
 		};
-		BEF7CC604DAB23C17CF93E7F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AB1A7A45769D8F7E261D2566 /* Pods-mtd-bus-app-iOS.debug.xcconfig */,
-				9AE15A46DFFE65EBA449CFFB /* Pods-mtd-bus-app-iOS.release.xcconfig */,
-				9F59F72772B5AA9024012B2B /* Pods-mtd-bus-app-iOSTests.debug.xcconfig */,
-				8BD5086E77F0E8D32BF51E97 /* Pods-mtd-bus-app-iOSTests.release.xcconfig */,
-				C4A67B506B11C563FB0F0812 /* Pods-mtd-bus-app-iOSUITests.debug.xcconfig */,
-				A32EF1BB4B4CADC83B05059A /* Pods-mtd-bus-app-iOSUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,11 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A023FD720D8DDB3005F362A /* Build configuration list for PBXNativeTarget "mtd-bus-app-iOS" */;
 			buildPhases = (
-				920DDF8D2346905B6181BB95 /* [CP] Check Pods Manifest.lock */,
+				66C7C6760478819195145005 /* [CP] Check Pods Manifest.lock */,
 				6A023FAB20D8DDB3005F362A /* Sources */,
 				6A023FAC20D8DDB3005F362A /* Frameworks */,
 				6A023FAD20D8DDB3005F362A /* Resources */,
-				51AB8DA3B1743E531428780D /* [CP] Embed Pods Frameworks */,
+				E3F5F65700D1F3B0E2B3A113 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,7 +188,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A023FDA20D8DDB3005F362A /* Build configuration list for PBXNativeTarget "mtd-bus-app-iOSTests" */;
 			buildPhases = (
-				BF657A4888325C5C029EC4C1 /* [CP] Check Pods Manifest.lock */,
+				C0EF3D557692A6F31D95A804 /* [CP] Check Pods Manifest.lock */,
 				6A023FBF20D8DDB3005F362A /* Sources */,
 				6A023FC020D8DDB3005F362A /* Frameworks */,
 				6A023FC120D8DDB3005F362A /* Resources */,
@@ -207,7 +207,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A023FDD20D8DDB3005F362A /* Build configuration list for PBXNativeTarget "mtd-bus-app-iOSUITests" */;
 			buildPhases = (
-				3E51657F4ECC808B7A7753AB /* [CP] Check Pods Manifest.lock */,
+				D48413232D912BDE638C2929 /* [CP] Check Pods Manifest.lock */,
 				6A023FCA20D8DDB3005F362A /* Sources */,
 				6A023FCB20D8DDB3005F362A /* Frameworks */,
 				6A023FCC20D8DDB3005F362A /* Resources */,
@@ -295,45 +295,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3E51657F4ECC808B7A7753AB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mtd-bus-app-iOSUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		51AB8DA3B1743E531428780D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
-				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		920DDF8D2346905B6181BB95 /* [CP] Check Pods Manifest.lock */ = {
+		66C7C6760478819195145005 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,7 +313,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BF657A4888325C5C029EC4C1 /* [CP] Check Pods Manifest.lock */ = {
+		C0EF3D557692A6F31D95A804 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -367,6 +329,44 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D48413232D912BDE638C2929 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mtd-bus-app-iOSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3F5F65700D1F3B0E2B3A113 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
+				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -533,7 +533,7 @@
 		};
 		6A023FD820D8DDB3005F362A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AB1A7A45769D8F7E261D2566 /* Pods-mtd-bus-app-iOS.debug.xcconfig */;
+			baseConfigurationReference = 7EEFC8F10BFE82C213C77135 /* Pods-mtd-bus-app-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -543,13 +543,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "pradeep.mtd-bus-app-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		6A023FD920D8DDB3005F362A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AE15A46DFFE65EBA449CFFB /* Pods-mtd-bus-app-iOS.release.xcconfig */;
+			baseConfigurationReference = BCD5A270839AD75ED4EA312A /* Pods-mtd-bus-app-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -559,13 +560,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "pradeep.mtd-bus-app-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		6A023FDB20D8DDB3005F362A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F59F72772B5AA9024012B2B /* Pods-mtd-bus-app-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = 8A59E6CE5F3676741FD5A8F0 /* Pods-mtd-bus-app-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -583,7 +585,7 @@
 		};
 		6A023FDC20D8DDB3005F362A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BD5086E77F0E8D32BF51E97 /* Pods-mtd-bus-app-iOSTests.release.xcconfig */;
+			baseConfigurationReference = A4BAF51A66350200EE981294 /* Pods-mtd-bus-app-iOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -601,7 +603,7 @@
 		};
 		6A023FDE20D8DDB3005F362A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4A67B506B11C563FB0F0812 /* Pods-mtd-bus-app-iOSUITests.debug.xcconfig */;
+			baseConfigurationReference = 6F5C7E5DC56394997CB687BD /* Pods-mtd-bus-app-iOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -618,7 +620,7 @@
 		};
 		6A023FDF20D8DDB3005F362A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A32EF1BB4B4CADC83B05059A /* Pods-mtd-bus-app-iOSUITests.release.xcconfig */;
+			baseConfigurationReference = 0E7C6C4C8F09288591922620 /* Pods-mtd-bus-app-iOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
