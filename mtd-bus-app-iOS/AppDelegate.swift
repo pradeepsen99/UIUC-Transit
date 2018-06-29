@@ -43,11 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        
-        
+        let appToolbarController = AppToolbarController(rootViewController: ViewController())
+        let leftViewController = LeftViewController()
+
         
         window = UIWindow(frame: Screen.bounds)
-        window!.rootViewController = ViewController()
+        window!.rootViewController = AppNavigationDrawerController(rootViewController: appToolbarController, leftViewController: leftViewController)
         window!.makeKeyAndVisible()
     }
 

@@ -33,9 +33,6 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController {
-    fileprivate var menuButton: IconButton!
-    fileprivate var switchControl: Switch!
-    fileprivate var moreButton1: IconButton!
     
     fileprivate var card: Card!
     fileprivate var toolbar: Toolbar!
@@ -45,6 +42,7 @@ class ViewController: UIViewController {
     fileprivate var dateFormatter: DateFormatter!
     fileprivate var dateLabel: UILabel!
     fileprivate var favoriteButton: IconButton!
+    
     
     
     @IBOutlet weak var lblTest: UILabel!
@@ -63,7 +61,9 @@ class ViewController: UIViewController {
         
         view.backgroundColor = Color.grey.lighten5
         
-        prepareDateFormatter()
+        prepareToolbar()
+        
+        /**prepareDateFormatter()
         prepareDateLabel()
         prepareFavoriteButton()
         prepareMoreButton()
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
         prepareToolbar(stopName: "PAR STOP")
         prepareContentView(content: "FAR")
         prepareBottomBar()
-        prepareCard(shift: 200)
+        prepareCard(shift: 200)*/
         
         // For use when the app is open & in the background
         locationManager.requestAlwaysAuthorization()
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
         //displayLatLong()
         
         
-        
+
         
         
         
@@ -245,39 +245,14 @@ extension ViewController {
         view.layout(card).horizontally(left: 5, right: 5).center()
         view.layout(card).vertically(top: CGFloat(shift)).center()
     }
-}
-
-extension ViewController {
-    fileprivate func prepareMenuButton() {
-        menuButton = IconButton(image: Icon.cm.menu)
-        menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
-    }
-    
-    fileprivate func prepareSwitch() {
-        switchControl = Switch(state: .off, style: .light, size: .small)
-    }
-    
-    fileprivate func prepareMoreButton1() {
-        moreButton = IconButton(image: Icon.cm.moreVertical)
-        moreButton.addTarget(self, action: #selector(handleMoreButton), for: .touchUpInside)
-    }
-    
     
     fileprivate func prepareToolbar() {
-        toolbar.leftViews = [menuButton]
-        toolbar.rightViews = [switchControl, moreButton]
-    }
-}
-
-extension ViewController {
-    @objc
-    fileprivate func handleMenuButton() {
-        navigationDrawerController?.toggleLeftView()
-    }
-    
-    @objc
-    fileprivate func handleMoreButton() {
-        navigationDrawerController?.toggleRightView()
+        guard let tc = toolbarController else {
+            return
+        }
+        
+        tc.toolbar.title = "Material"
+        tc.toolbar.detail = "Build Beautiful Software"
     }
 }
 
