@@ -68,9 +68,18 @@ class ViewController: UIViewController {
         prepareFavoriteButton()
         prepareMoreButton()
         prepareToolbar()
-        prepareContentView()
+        prepareContentView(content: "FAR")
         prepareBottomBar()
-        prepareCard()
+        prepareCard(shift: -300)
+        
+        prepareDateFormatter()
+        prepareDateLabel()
+        prepareFavoriteButton()
+        prepareMoreButton()
+        prepareToolbar()
+        prepareContentView(content: "FAR")
+        prepareBottomBar()
+        prepareCard(shift: 40)
         
         // For use when the app is open & in the background
         locationManager.requestAlwaysAuthorization()
@@ -85,7 +94,6 @@ class ViewController: UIViewController {
             locationManager.startUpdatingLocation()
         }
         downloadData()
-        sleep(1)
         displayLatLong()
         
         
@@ -131,7 +139,7 @@ class ViewController: UIViewController {
         //lat = (locationManager.location?.coordinate.latitude)!
         //long = (locationManager.location?.coordinate.longitude)!
         counter = counter + 1
-        lblTest.text = lat.description + "\n" + long.description + "\n" + counter.description + "\n" + API
+        //lblTest.text = lat.description + "\n" + long.description + "\n" + counter.description + "\n" + API
     }
 
     
@@ -181,7 +189,7 @@ extension ViewController {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
         dateLabel.textColor = Color.grey.base
-        dateLabel.text = dateFormatter.string(from: Date.distantFuture)
+        dateLabel.text = dateFormatter.string(from: Date.init())
     }
     
     fileprivate func prepareFavoriteButton() {
@@ -203,10 +211,10 @@ extension ViewController {
         toolbar.detailLabel.textColor = Color.grey.base
     }
     
-    fileprivate func prepareContentView() {
+    fileprivate func prepareContentView(content: String) {
         contentView = UILabel()
         contentView.numberOfLines = 0
-        contentView.text = "Material is an animation and graphics framework that is used to create beautiful applications."
+        contentView.text = content
         contentView.font = RobotoFont.regular(with: 14)
     }
     
@@ -217,7 +225,7 @@ extension ViewController {
         bottomBar.rightViews = [dateLabel]
     }
     
-    fileprivate func prepareCard() {
+    fileprivate func prepareCard(shift: Float) {
         card = Card()
         
         card.toolbar = toolbar
@@ -231,7 +239,8 @@ extension ViewController {
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
         
-        view.layout(card).horizontally(left: 20, right: 20).center()
+        view.layout(card).horizontally(left: 5, right: 5).center()
+        view.layout(card).vertically(top: CGFloat(shift)).center()
     }
 }
 
