@@ -10,30 +10,47 @@ import UIKit
 import Material
 
 class LeftViewController: UIViewController {
-    fileprivate var transitionButton: FlatButton!
+    fileprivate var transitionButton1: FlatButton!
+    fileprivate var transitionButton2: FlatButton!
+
     
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.blue.base
         
-        prepareTransitionButton()
+        prepareTransitionButton1()
+        prepareTransitionButton2()
     }
 }
 
 extension LeftViewController {
-    fileprivate func prepareTransitionButton() {
-        transitionButton = FlatButton(title: "Transition VC", titleColor: .white)
-        transitionButton.pulseColor = .white
-        transitionButton.addTarget(self, action: #selector(handleTransitionButton), for: .touchUpInside)
-        
-        view.layout(transitionButton).horizontally().center()
+    fileprivate func prepareTransitionButton1() {
+        transitionButton1 = FlatButton(title: "Near Me", titleColor: .white)
+        transitionButton1.pulseColor = .white
+        transitionButton1.addTarget(self, action: #selector(handleTransitionButtonNearMe), for: .touchDown)
+        view.layout(transitionButton1).horizontally().center()
+        view.layout(transitionButton1).vertically(top: -400).center()
+    }
+    
+    fileprivate func prepareTransitionButton2() {
+        transitionButton2 = FlatButton(title: "Favorites", titleColor: .white)
+        transitionButton2.pulseColor = .white
+        transitionButton2.addTarget(self, action: #selector(handleTransitionButtonFavorites), for: .touchDown)
+        view.layout(transitionButton2).horizontally().center()
+        view.layout(transitionButton2).vertically(top: 400).center()
+
     }
 }
 
 extension LeftViewController {
     @objc
-    fileprivate func handleTransitionButton() {
+    fileprivate func handleTransitionButtonNearMe() {
         toolbarController?.transition(to: TransitionedViewController(), completion: closeNavigationDrawer)
+    }
+    
+    @objc
+    fileprivate func handleTransitionButtonFavorites() {
+        toolbarController?.transition(to: ViewController(), completion: closeNavigationDrawer)
     }
     
     fileprivate func closeNavigationDrawer(result: Bool) {

@@ -251,8 +251,8 @@ extension ViewController {
             return
         }
         
-        tc.toolbar.title = "Material"
-        tc.toolbar.detail = "Build Beautiful Software"
+        tc.toolbar.title = "Stops Near Me"
+        //tc.toolbar.detail = "Build Beautiful Software"
     }
 }
 
