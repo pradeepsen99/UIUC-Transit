@@ -33,7 +33,9 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController {
-    
+    fileprivate var menuButton: IconButton!
+    fileprivate var switchControl: Switch!
+    fileprivate var moreButton1: IconButton!
     
     fileprivate var card: Card!
     fileprivate var toolbar: Toolbar!
@@ -242,6 +244,40 @@ extension ViewController {
         
         view.layout(card).horizontally(left: 5, right: 5).center()
         view.layout(card).vertically(top: CGFloat(shift)).center()
+    }
+}
+
+extension ViewController {
+    fileprivate func prepareMenuButton() {
+        menuButton = IconButton(image: Icon.cm.menu)
+        menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
+    }
+    
+    fileprivate func prepareSwitch() {
+        switchControl = Switch(state: .off, style: .light, size: .small)
+    }
+    
+    fileprivate func prepareMoreButton1() {
+        moreButton = IconButton(image: Icon.cm.moreVertical)
+        moreButton.addTarget(self, action: #selector(handleMoreButton), for: .touchUpInside)
+    }
+    
+    
+    fileprivate func prepareToolbar() {
+        toolbar.leftViews = [menuButton]
+        toolbar.rightViews = [switchControl, moreButton]
+    }
+}
+
+extension ViewController {
+    @objc
+    fileprivate func handleMenuButton() {
+        navigationDrawerController?.toggleLeftView()
+    }
+    
+    @objc
+    fileprivate func handleMoreButton() {
+        navigationDrawerController?.toggleRightView()
     }
 }
 
