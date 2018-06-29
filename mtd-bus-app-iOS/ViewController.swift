@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         
         prepareToolbar()
         
-        /**prepareDateFormatter()
+        prepareDateFormatter()
         prepareDateLabel()
         prepareFavoriteButton()
         prepareMoreButton()
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
         prepareToolbar(stopName: "PAR STOP")
         prepareContentView(content: "FAR")
         prepareBottomBar()
-        prepareCard(shift: 200)*/
+        prepareCard(shift: 200)
         
         // For use when the app is open & in the background
         locationManager.requestAlwaysAuthorization()

@@ -8,23 +8,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-All you need is a Mac running the latest version of expo.
+All you need is a Mac running the latest version of XCode.
 
 ### Installing
 
 First you will need to clone the repository to your desired location
 
-Say what the step will be
-
 ```
 git clone https://github.com/pradeepsen99/mtd-bus-app-iOS.git
 ```
-And after that open the file from XCode and you can run it localy from there.
+And after that open the file from XCode and you can run it via Simulator or from your iPhone
 
 ## Built With
 
 * [Swift](https://developer.apple.com/swift/)
-* [XCode](https://docs.expo.io/versions/latest/index.html) - Dependency Management
+* [Material](https://github.com/CosmicMind/Material.git) - UI Library
 
 ## Authors
 
@@ -32,4 +30,4 @@ And after that open the file from XCode and you can run it localy from there.
 
 ## License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the BDS-3 Clause - see the [LICENSE.md](LICENSE.md) file for details
