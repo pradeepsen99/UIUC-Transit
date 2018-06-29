@@ -36,22 +36,20 @@ class ViewController: UIViewController {
     
     
     fileprivate var card: Card!
-    
     fileprivate var toolbar: Toolbar!
     fileprivate var moreButton: IconButton!
-    
     fileprivate var contentView: UILabel!
-    
     fileprivate var bottomBar: Bar!
     fileprivate var dateFormatter: DateFormatter!
     fileprivate var dateLabel: UILabel!
     fileprivate var favoriteButton: IconButton!
     
+    
     @IBOutlet weak var lblTest: UILabel!
-    var lat: Double = 0
-    var long: Double = 0
-    var counter: Int = 0
-    var API: String = ""
+    fileprivate var lat: Double = 0
+    fileprivate var long: Double = 0
+    fileprivate var counter: Int = 0
+    fileprivate var API: String = ""
     
     
     
@@ -67,19 +65,19 @@ class ViewController: UIViewController {
         prepareDateLabel()
         prepareFavoriteButton()
         prepareMoreButton()
-        prepareToolbar()
+        prepareToolbar(stopName: "FAR STOP")
         prepareContentView(content: "FAR")
         prepareBottomBar()
-        prepareCard(shift: -300)
+        prepareCard(shift: -500)
         
         prepareDateFormatter()
         prepareDateLabel()
         prepareFavoriteButton()
         prepareMoreButton()
-        prepareToolbar()
+        prepareToolbar(stopName: "PAR STOP")
         prepareContentView(content: "FAR")
         prepareBottomBar()
-        prepareCard(shift: 40)
+        prepareCard(shift: 200)
         
         // For use when the app is open & in the background
         locationManager.requestAlwaysAuthorization()
@@ -93,8 +91,8 @@ class ViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
             locationManager.startUpdatingLocation()
         }
-        downloadData()
-        displayLatLong()
+        //downloadData()
+        //displayLatLong()
         
         
         
@@ -179,6 +177,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
+    
+    
     fileprivate func prepareDateFormatter() {
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -198,17 +198,18 @@ extension ViewController {
     
     fileprivate func prepareMoreButton() {
         moreButton = IconButton(image: Icon.cm.moreVertical, tintColor: Color.grey.base)
+        
     }
     
-    fileprivate func prepareToolbar() {
+    fileprivate func prepareToolbar(stopName: String) {
         toolbar = Toolbar(rightViews: [moreButton])
         
-        toolbar.title = "Material"
-        toolbar.titleLabel.textAlignment = .left
+        toolbar.title = stopName
+        toolbar.titleLabel.textAlignment = .center
         
-        toolbar.detail = "Build Beautiful Software"
+        /**toolbar.detail = ""
         toolbar.detailLabel.textAlignment = .left
-        toolbar.detailLabel.textColor = Color.grey.base
+        toolbar.detailLabel.textColor = Color.grey.base*/
     }
     
     fileprivate func prepareContentView(content: String) {
