@@ -68,13 +68,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.startUpdatingLocation()
         }
         downloadData()
-        displayLatLong()
         
         
         
         
         
         
+    }
+    
+    func displayTable(){
+        let barHeight: CGFloat = 0
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        
+        self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+        self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.stopTableView.dataSource = self
+        self.stopTableView.delegate = self
+        self.stopTableView.separatorStyle = .none
+        
+        self.view.addSubview(self.stopTableView)
     }
     
     @IBAction func downloadData (){
@@ -90,49 +103,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let decoder = JSONDecoder()
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
 
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
 
                     for i in 0..<mtdData.stops.count {
                         self.API += (mtdData.stops[i].stop_name) + "\n"
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                     }
                     print(self.API)
-
+                    self.displayTable()
                 }
                 
-                let barHeight: CGFloat = 0
-                let displayWidth: CGFloat = self.view.frame.width
-                let displayHeight: CGFloat = self.view.frame.height
                 
-                self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-                self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-                self.stopTableView.dataSource = self
-                self.stopTableView.delegate = self
-                self.stopTableView.separatorStyle = .none
-                
-                self.view.addSubview(self.stopTableView)
             } catch let err {
                 print("Err", err)
             }
             }.resume()
     }
-    
-    @IBAction func Tap(_ sender: AnyObject) {
-        DispatchQueue.global(qos: .default).async {
-            DispatchQueue.main.async {
-                self.displayLatLong()
-            }
-        }
-    }
-    
-    
-    func displayLatLong(){
-        //lat = (locationManager.location?.coordinate.latitude)!
-        //long = (locationManager.location?.coordinate.longitude)!
-        counter = counter + 1
-        //lblTest.text = lat.description + "\n" + long.description + "\n" + counter.description + "\n" + API
-    }
-
     
     // If we have been deined access give the user the option to change it
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
