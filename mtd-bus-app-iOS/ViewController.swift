@@ -32,12 +32,16 @@ struct mtd_stop_loc: Codable{
     
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     fileprivate var lat: Double = 0
     fileprivate var long: Double = 0
     fileprivate var counter: Int = 0
     fileprivate var API: String = ""
+    
+    fileprivate var stopNameArr: NSArray = []
+    fileprivate var stopTableView: UITableView!
+
 
     let locationManager = CLLocationManager()
     
@@ -47,6 +51,8 @@ class ViewController: UIViewController {
         view.backgroundColor = Color.grey.lighten5
         
         prepareToolbar()
+        
+        
 
         
         // For use when the app is open & in the background
@@ -61,11 +67,11 @@ class ViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
             locationManager.startUpdatingLocation()
         }
-        //downloadData()
-        //displayLatLong()
+        downloadData()
+        displayLatLong()
         
         
-
+        
         
         
         
@@ -85,9 +91,26 @@ class ViewController: UIViewController {
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
 
                 DispatchQueue.main.sync {
-                    self.API = (mtdData.stops[1].stop_name)!
-                    
+
+                    for i in 0..<mtdData.stops.count {
+                        self.API += (mtdData.stops[i].stop_name) + "\n"
+                        self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
+                    }
+                    print(self.API)
+
                 }
+                
+                let barHeight: CGFloat = 0
+                let displayWidth: CGFloat = self.view.frame.width
+                let displayHeight: CGFloat = self.view.frame.height
+                
+                self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+                self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+                self.stopTableView.dataSource = self
+                self.stopTableView.delegate = self
+                self.stopTableView.separatorStyle = .none
+                
+                self.view.addSubview(self.stopTableView)
             } catch let err {
                 print("Err", err)
             }
@@ -143,6 +166,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Num: \(indexPath.row)")
+        print("Value: \(stopNameArr[indexPath.row])")
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stopNameArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
+        return cell
+    }
     
 }
 
