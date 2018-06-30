@@ -34,33 +34,11 @@ struct mtd_stop_loc: Codable{
 
 class ViewController: UIViewController {
     
-    fileprivate var card: Card!
-    fileprivate var toolbar: Toolbar!
-    fileprivate var moreButton: IconButton!
-    fileprivate var contentView: UILabel!
-    fileprivate var bottomBar: Bar!
-    fileprivate var dateFormatter: DateFormatter!
-    fileprivate var dateLabel: UILabel!
-    fileprivate var favoriteButton: IconButton!
-    
-    
-    
-    @IBOutlet weak var lblTest: UILabel!
     fileprivate var lat: Double = 0
     fileprivate var long: Double = 0
     fileprivate var counter: Int = 0
     fileprivate var API: String = ""
-    
-    
-    let scrollView: UIScrollView = {
-        let v = UIScrollView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .cyan
-        return v
-    }()
-    
-    
-    // Used to start getting the users location
+
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -69,34 +47,7 @@ class ViewController: UIViewController {
         view.backgroundColor = Color.grey.lighten5
         
         prepareToolbar()
-        
-        // add the scroll view to self.view
-        self.view.addSubview(scrollView)
-        
-        // constrain the scroll view to 8-pts on each side
-        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8.0).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8.0).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0).isActive = true
-        
-        prepareDateFormatter()
-        prepareDateLabel()
-        prepareFavoriteButton()
-        prepareMoreButton()
-        prepareToolbar(stopName: "FAR STOP")
-        prepareContentView(content: "FAR")
-        prepareBottomBar()
-        prepareCard(shift: -500)
-        
-        prepareDateFormatter()
-        prepareDateLabel()
-        prepareFavoriteButton()
-        prepareMoreButton()
-        prepareToolbar(stopName: "PAR STOP")
-        prepareContentView(content: "FAR")
-        prepareBottomBar()
-        prepareCard(shift: 200)
-        
+
         
         // For use when the app is open & in the background
         locationManager.requestAlwaysAuthorization()
@@ -196,74 +147,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
-    
-    
-    fileprivate func prepareDateFormatter() {
-        dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-    }
-    
-    fileprivate func prepareDateLabel() {
-        dateLabel = UILabel()
-        dateLabel.font = RobotoFont.regular(with: 12)
-        dateLabel.textColor = Color.grey.base
-        dateLabel.text = dateFormatter.string(from: Date.init())
-    }
-    
-    fileprivate func prepareFavoriteButton() {
-        favoriteButton = IconButton(image: Icon.favorite, tintColor: Color.red.base)
-    }
-    
-    fileprivate func prepareMoreButton() {
-        moreButton = IconButton(image: Icon.cm.moreVertical, tintColor: Color.grey.base)
-        
-    }
-    
-    fileprivate func prepareToolbar(stopName: String) {
-        toolbar = Toolbar(rightViews: [moreButton])
-        
-        toolbar.title = stopName
-        toolbar.titleLabel.textAlignment = .center
-        
-        /**toolbar.detail = ""
-        toolbar.detailLabel.textAlignment = .left
-        toolbar.detailLabel.textColor = Color.grey.base*/
-    }
-    
-    fileprivate func prepareContentView(content: String) {
-        contentView = UILabel()
-        contentView.numberOfLines = 0
-        contentView.text = content
-        contentView.font = RobotoFont.regular(with: 14)
-    }
-    
-    fileprivate func prepareBottomBar() {
-        bottomBar = Bar()
-        
-        bottomBar.leftViews = [favoriteButton]
-        bottomBar.rightViews = [dateLabel]
-    }
-    
-    fileprivate func prepareCard(shift: Float) {
-        card = Card()
-        
-        card.toolbar = toolbar
-        card.toolbarEdgeInsetsPreset = .square3
-        card.toolbarEdgeInsets.bottom = 0
-        card.toolbarEdgeInsets.right = 8
-        
-        card.contentView = contentView
-        card.contentViewEdgeInsetsPreset = .wideRectangle3
-        
-        card.bottomBar = bottomBar
-        card.bottomBarEdgeInsetsPreset = .wideRectangle2
-        
-        view.layout(card).horizontally(left: 5, right: 5).center()
-        view.layout(card).vertically(top: CGFloat(shift)).center()
-        
-        scrollView.addSubview(card)
-    }
+
     
     fileprivate func prepareToolbar() {
         guard let tc = toolbarController else {
@@ -271,6 +155,7 @@ extension ViewController {
         }
         
         tc.toolbar.title = "Stops Near Me"
+        tc.toolbar.detail = ""
     }
 }
 
