@@ -85,7 +85,7 @@ class ViewController: UIViewController {
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
 
                 DispatchQueue.main.sync {
-                    self.API = (mtdData.stops.last?.stop_name)!
+                    self.API = (mtdData.stops[1].stop_name)!
                     
                 }
             } catch let err {
