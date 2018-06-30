@@ -52,16 +52,32 @@ class ViewController: UIViewController {
     fileprivate var API: String = ""
     
     
+    let scrollView: UIScrollView = {
+        let v = UIScrollView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = .cyan
+        return v
+    }()
+    
     
     // Used to start getting the users location
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         view.backgroundColor = Color.grey.lighten5
         
         prepareToolbar()
+        
+        // add the scroll view to self.view
+        self.view.addSubview(scrollView)
+        
+        // constrain the scroll view to 8-pts on each side
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8.0).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8.0).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0).isActive = true
         
         prepareDateFormatter()
         prepareDateLabel()
@@ -80,6 +96,7 @@ class ViewController: UIViewController {
         prepareContentView(content: "FAR")
         prepareBottomBar()
         prepareCard(shift: 200)
+        
         
         // For use when the app is open & in the background
         locationManager.requestAlwaysAuthorization()
@@ -244,6 +261,8 @@ extension ViewController {
         
         view.layout(card).horizontally(left: 5, right: 5).center()
         view.layout(card).vertically(top: CGFloat(shift)).center()
+        
+        scrollView.addSubview(card)
     }
     
     fileprivate func prepareToolbar() {
@@ -252,7 +271,6 @@ extension ViewController {
         }
         
         tc.toolbar.title = "Stops Near Me"
-        //tc.toolbar.detail = "Build Beautiful Software"
     }
 }
 
