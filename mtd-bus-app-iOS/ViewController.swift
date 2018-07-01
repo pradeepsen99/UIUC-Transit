@@ -34,12 +34,12 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    fileprivate var menuButton: IconButton!
+    
     fileprivate var busStopTransition = BusStopTransitionView()
     
     fileprivate var lat: Double = 0
     fileprivate var long: Double = 0
-    fileprivate var counter: Int = 0
-    fileprivate var API: String = ""
     
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopTableView: UITableView!
@@ -55,29 +55,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         prepareToolbar()
         
-        
-
-        
-        // For use when the app is open & in the background
-        locationManager.requestAlwaysAuthorization()
-        
         // For use when the app is open
-        //locationManager.requestWhenInUseAuthorization()
-        
+        locationManager.requestWhenInUseAuthorization()
         // If location services is enabled get the users location
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self as? CLLocationManagerDelegate
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-        downloadCurrentStopData()
-        
-        
-        
-        
 
+        downloadCurrentStopData()
     }
     
+
     func displayTable(){
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
@@ -109,7 +99,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 DispatchQueue.main.async {
 
                     for i in 0..<mtdData.stops.count {
-                        self.API += (mtdData.stops[i].stop_name) + "\n"
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                     }
                     //print(self.API)
@@ -137,14 +126,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         print("Failed")
                     }
                     
-                    
                     self.displayTable()
-                    
-                    
-                    
                 }
-                
-                
             } catch let err {
                 print("Err", err)
             }
@@ -213,7 +196,7 @@ extension ViewController {
     
     @objc
     func handleNextButton() {
-        navigationController?.pushViewController(busStopTransition, animated: true)
+        navigationController?.pushViewController(BusStopTransitionView(), animated: true)
         //toolbarController?.transition(to: BusStopTransitionView())
     }
 }

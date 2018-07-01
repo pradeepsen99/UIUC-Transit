@@ -11,13 +11,12 @@ import Material
 
 class AppToolbarController: ToolbarController {
     fileprivate var menuButton: IconButton!
-    fileprivate var switchControl: Switch!
-    fileprivate var moreButton: IconButton!
     
     override func prepare() {
         super.prepare()
         prepareMenuButton()
         prepareToolbar()
+        //prepareBackButton()
     }
 }
 
@@ -26,10 +25,11 @@ extension AppToolbarController {
         menuButton = IconButton(image: Icon.cm.menu)
         menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
     }
-
     
     fileprivate func prepareToolbar() {
-        toolbar.leftViews = [menuButton]
+        if(menuButton != nil){
+            toolbar.leftViews = [menuButton]
+        }
     }
 }
 

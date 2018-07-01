@@ -23,14 +23,17 @@ And after that open the file from XCode and you can run it via Simulator or from
 
 * [Swift](https://developer.apple.com/swift/)
 * [Material](https://github.com/CosmicMind/Material.git) - UI Library
+* [TestFlight] (https://itunes.apple.com/us/app/testflight/id899247664?mt=8) - Beta Testing
 
 ## Authors
 
 * **Pradeep Senthil** [pradeepsen99](https://github.com/pradeepsen99)
 
 ## Resources Used:
+* [Material Samples - Cosmic Mind](https://github.com/CosmicMind/Samples)
 * [Create UITableView programmatically in Swift - Stack Overflow](https://stackoverflow.com/questions/40220905/create-uitableview-programmatically-in-swift)
 * [Core Data with Swift 4 for Beginners - Shashikant Jagtap](https://medium.com/xcblog/core-data-with-swift-4-for-beginners-1fc067cca707)
+* [Developer Resources CUMTD](https://developer.cumtd.com)
 
 
 ## License
