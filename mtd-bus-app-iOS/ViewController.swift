@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Material
+import CoreData
 
 
 struct mtd_stop_loc: Codable{
@@ -42,6 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopTableView: UITableView!
 
+    fileprivate var currentStopData: mtd_stop_loc? = nil
 
     let locationManager = CLLocationManager()
     
@@ -67,13 +69,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
             locationManager.startUpdatingLocation()
         }
-        downloadData()
+        downloadCurrentStopData()
         
         
         
         
-        
-        
+
     }
     
     func displayTable(){
@@ -90,7 +91,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.view.addSubview(self.stopTableView)
     }
     
-    @IBAction func downloadData (){
+    
+    
+    @IBAction func downloadCurrentStopData (){
         lat = (locationManager.location?.coordinate.latitude)!
         long = (locationManager.location?.coordinate.longitude)!
         guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description) else { return }
@@ -102,15 +105,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             do {
                 let decoder = JSONDecoder()
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
-
+                self.currentStopData = mtdData
                 DispatchQueue.main.async {
 
                     for i in 0..<mtdData.stops.count {
                         self.API += (mtdData.stops[i].stop_name) + "\n"
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                     }
-                    print(self.API)
+                    //print(self.API)
+                    
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let context = appDelegate.persistentContainer.viewContext
+                    let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
+                    let newUser = NSManagedObject(entity: entity!, insertInto: context)
+                    
+                    newUser.setValue(mtdData, forKey: "currentStopList")
+                    
+                    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StopData")
+                    request.returnsObjectsAsFaults = false
+                    
+                    
+                    //Fetching data from CoreData
+                    do {
+                        let result = try context.fetch(request)
+                        for data in result as! [NSManagedObject] {
+                            let tempTest: mtd_stop_loc = data.value(forKey: "currentStopList") as! mtd_stop_loc
+                            print(tempTest.stops[1].stop_name)
+                        }
+                    } catch {
+                        print("Failed")
+                    }
+                    
+                    
                     self.displayTable()
+                    
+                    
+                    
                 }
                 
                 
@@ -154,8 +185,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Num: \(indexPath.row)")
-        print("Value: \(stopNameArr[indexPath.row])")
+        print("someone pressed me!")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -171,8 +201,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController {
-
-    
+    //Sets the top toolbar
     fileprivate func prepareToolbar() {
         guard let tc = toolbarController else {
             return
