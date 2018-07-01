@@ -34,6 +34,7 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    fileprivate var busStopTransition = BusStopTransitionView()
     
     fileprivate var lat: Double = 0
     fileprivate var long: Double = 0
@@ -87,7 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.stopTableView.dataSource = self
         self.stopTableView.delegate = self
         self.stopTableView.separatorStyle = .none
-        
         self.view.addSubview(self.stopTableView)
     }
     
@@ -185,7 +185,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("someone pressed me!")
+        handleNextButton()
+        print("hi")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -206,9 +207,14 @@ extension ViewController {
         guard let tc = toolbarController else {
             return
         }
-        
         tc.toolbar.title = "Stops Near Me"
         tc.toolbar.detail = ""
+    }
+    
+    @objc
+    func handleNextButton() {
+        navigationController?.pushViewController(busStopTransition, animated: true)
+        //toolbarController?.transition(to: BusStopTransitionView())
     }
 }
 
