@@ -58,12 +58,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.startUpdatingLocation()
         }
         
+        checkCacheStopData()
+        
+        print("test")
+        
+        
+    }
+    
+    func checkCacheStopData(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StopData")
         request.returnsObjectsAsFaults = false
-        
-        
         //Fetching data from CoreData
         do {
             let result = try context.fetch(request)
@@ -79,14 +85,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         self.stopNameArr = self.stopNameArr.adding(tempTest.stops[i].stop_name) as NSArray
                     }
                 }
-            self.displayTable()
+                self.displayTable()
             }
         } catch {
             print("Failed")
         }
-        print("test")
-        
-        
     }
     
     
@@ -100,7 +103,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.stopTableView.dataSource = self
         self.stopTableView.delegate = self
         self.stopTableView.separatorStyle = .none
-        self.view.addSubview(self.stopTableView)
+        view.addSubview(self.stopTableView)
     }
     
     
@@ -189,7 +192,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController {
-
+    func stopBusView(){
+        //navigationController.
+    }
 }
 
 
