@@ -6,6 +6,7 @@ target 'mtd-bus-app-iOS' do
   use_frameworks!
 
   # Pods for mtd-bus-app-iOS
+  pod 'Material', '~> 2.0'
 
   target 'mtd-bus-app-iOSTests' do
     inherit! :search_paths
