@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Material
 import CoreData
 
 @UIApplicationMain
@@ -15,16 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func applicationDidFinishLaunching(_ application: UIApplication) {
-        let appToolbarController = AppToolbarController(rootViewController: ViewController())
-        let leftViewController = LeftViewController()
 
-        
-        window = UIWindow(frame: Screen.bounds)
-        window!.rootViewController = AppNavigationDrawerController(rootViewController: appToolbarController, leftViewController: leftViewController)
-        window!.rootViewController?.addChildViewController(AppNavigationController(rootViewController: ViewController()))
-        window!.makeKeyAndVisible()
-    }
     
     // MARK: - Core Data stack
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import Material
 import CoreData
 
 
@@ -34,9 +33,6 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    fileprivate var menuButton: IconButton!
-    
-    fileprivate var busStopTransition = BusStopTransitionView()
     
     fileprivate var lat: Double = 0
     fileprivate var long: Double = 0
@@ -51,10 +47,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Color.grey.lighten5
-        
-        prepareToolbar()
-        
+        view.backgroundColor = UIColor.darkGray
+                
         // For use when the app is open
         locationManager.requestWhenInUseAuthorization()
         // If location services is enabled get the users location
@@ -179,8 +173,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewWillDisappear(true)
-        handleNextButton()
+        //TableCell on click
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -192,46 +185,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
         return cell
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated);
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
 
-    
 }
 
 extension ViewController {
-    fileprivate func prepareMenuButton() {
-        menuButton = IconButton(image: Icon.cm.menu)
-        menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
-    }
-    
-    @objc
-    fileprivate func handleMenuButton() {
-        navigationDrawerController?.toggleLeftView()
-    }
-    
-    //Sets the top toolbar
-    fileprivate func prepareToolbar() {
-        guard let tc = toolbarController else {
-            return
-        }
-        tc.toolbar.title = "Stops Near Me"
-        tc.toolbar.detail = ""
-        tc.toolbar.leftViews = [menuButton]
-    }
-    
-    @objc
-    func handleNextButton() {
-        //navigationController?.pushViewController(BusStopTransitionView(), animated: true)
-        toolbarController?.transition(to: BusStopTransitionView())
-    }
+
 }
 
 
