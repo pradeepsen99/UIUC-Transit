@@ -15,15 +15,21 @@ class BusStopTransitionView: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.green.base
-        
+        prepareMenuButton()
         prepareToolbar()
     }
 }
 
 extension BusStopTransitionView {
     fileprivate func prepareMenuButton() {
-        menuButton = IconButton(image: Icon.cm.menu)
-        //menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
+        menuButton = IconButton(image: Icon.cm.arrowBack)
+        menuButton.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
+    }
+    
+    @objc
+    func handleNextButton() {
+        //navigationController?.pushViewController(BusStopTransitionView(), animated: true)
+        toolbarController?.transition(to: ViewController())
     }
     
     fileprivate func prepareToolbar() {
@@ -33,5 +39,7 @@ extension BusStopTransitionView {
 
         tc.toolbar.title = "Stop: "
         tc.toolbar.detail = "___ Miles"
+        
+        tc.toolbar.leftViews = [menuButton]
     }
 }

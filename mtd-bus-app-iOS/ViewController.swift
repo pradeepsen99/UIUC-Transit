@@ -129,35 +129,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     for i in 0..<mtdData.stops.count {
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                     }
-                    //print(self.API)
-                    
-                    
+
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let context = appDelegate.persistentContainer.viewContext
                     let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
                     let newUser = NSManagedObject(entity: entity!, insertInto: context)
-                    
+                    //Adds the stop data to the currentStopList
                     newUser.setValue(mtdData, forKey: "currentStopList")
-                    
-                    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StopData")
-                    request.returnsObjectsAsFaults = false
-                    
-                    
-                    //Fetching data from CoreData
-                    do {
-                        let result = try context.fetch(request)
-                        for data in result as! [NSManagedObject] {
-                            let tempTest: mtd_stop_loc = data.value(forKey: "currentStopList") as! mtd_stop_loc
-                            print(tempTest.stops[1].stop_name)
-                        }
-                    } catch {
-                        print("Failed")
-                    }
-                    
+
                     self.displayTable()
                 }
             } catch let err {
-                print("Err", err)
+                print("Error Downloading data", err)
             }
             }.resume()
     }
@@ -196,6 +179,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewWillDisappear(true)
         handleNextButton()
     }
     
@@ -209,9 +193,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated);
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    
 }
 
 extension ViewController {
+    fileprivate func prepareMenuButton() {
+        menuButton = IconButton(image: Icon.cm.menu)
+        menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
+    }
+    
+    @objc
+    fileprivate func handleMenuButton() {
+        navigationDrawerController?.toggleLeftView()
+    }
+    
     //Sets the top toolbar
     fileprivate func prepareToolbar() {
         guard let tc = toolbarController else {
@@ -219,6 +224,7 @@ extension ViewController {
         }
         tc.toolbar.title = "Stops Near Me"
         tc.toolbar.detail = ""
+        tc.toolbar.leftViews = [menuButton]
     }
     
     @objc
@@ -227,6 +233,8 @@ extension ViewController {
         toolbarController?.transition(to: BusStopTransitionView())
     }
 }
+
+
 
 
 
