@@ -43,14 +43,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopTableView: UITableView!
-
+    
     fileprivate var currentStopData: mtd_stop_loc? = nil
-
+    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         view.backgroundColor = Color.grey.lighten5
         
         prepareToolbar()
@@ -63,11 +63,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-
-        downloadCurrentStopData()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StopData")
+        request.returnsObjectsAsFaults = false
+        
+        
+        //Fetching data from CoreData
+        do {
+            let result = try context.fetch(request)
+            print(result.count)
+            if(result.count == 0){
+                print("no cache")
+                downloadCurrentStopData()
+            }else{
+                print("cache exists")
+                for data in result as! [NSManagedObject] {
+                    let tempTest: mtd_stop_loc = data.value(forKey: "currentStopList") as! mtd_stop_loc
+                    for i in 0..<tempTest.stops.count {
+                        self.stopNameArr = self.stopNameArr.adding(tempTest.stops[i].stop_name) as NSArray
+                    }
+                }
+            self.displayTable()
+            }
+        } catch {
+            print("Failed")
+        }
+        print("test")
+        
+        
     }
     
-
+    
     func displayTable(){
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
@@ -87,7 +115,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         lat = (locationManager.location?.coordinate.latitude)!
         long = (locationManager.location?.coordinate.longitude)!
         guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description) else { return }
-
+        
         URLSession.shared.dataTask(with: gitUrl) { (data, response
             , error) in
             
@@ -97,7 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
                 self.currentStopData = mtdData
                 DispatchQueue.main.async {
-
+                    
                     for i in 0..<mtdData.stops.count {
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                     }
@@ -159,7 +187,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -169,7 +197,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         handleNextButton()
-        print("hi")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -196,9 +223,11 @@ extension ViewController {
     
     @objc
     func handleNextButton() {
-        navigationController?.pushViewController(BusStopTransitionView(), animated: true)
-        //toolbarController?.transition(to: BusStopTransitionView())
+        //navigationController?.pushViewController(BusStopTransitionView(), animated: true)
+        toolbarController?.transition(to: BusStopTransitionView())
     }
 }
+
+
 
 

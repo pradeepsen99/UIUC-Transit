@@ -23,7 +23,7 @@ And after that open the file from XCode and you can run it via Simulator or from
 
 * [Swift](https://developer.apple.com/swift/)
 * [Material](https://github.com/CosmicMind/Material.git) - UI Library
-* [TestFlight] (https://itunes.apple.com/us/app/testflight/id899247664?mt=8) - Beta Testing
+* [TestFlight](https://itunes.apple.com/us/app/testflight/id899247664?mt=8) - Beta Testing
 
 ## Authors
 
