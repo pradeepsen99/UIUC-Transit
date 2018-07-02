@@ -176,7 +176,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TableCell on click
+        stopBusView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -193,7 +193,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 extension ViewController {
     func stopBusView(){
-        //navigationController.
+        navigationController?.pushViewController(StopBusListViewController(), animated: true)
     }
 }
 
