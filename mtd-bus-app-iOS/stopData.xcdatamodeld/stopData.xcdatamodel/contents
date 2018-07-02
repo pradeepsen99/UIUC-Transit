@@ -6,6 +6,6 @@
         <attribute name="stopDataFull" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
-        <element name="StopData" positionX="-63" positionY="-18" width="128" height="30"/>
+        <element name="StopData" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

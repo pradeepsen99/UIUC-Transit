@@ -33,6 +33,10 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    //let busListViewCont = StopBusListViewController()
+    
+    var currentStop: String = ""
+    var currentStopCode: String = ""
     
     fileprivate var lat: Double = 0
     fileprivate var long: Double = 0
@@ -46,6 +50,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Nearby Stops"
         
         view.backgroundColor = UIColor.darkGray
                 
@@ -61,7 +67,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         checkCacheStopData()
         
         print("test")
-        
         
     }
     
@@ -168,7 +173,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
+    func getCurrentStop()->String{
+        return currentStop
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -176,6 +183,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentStop = stopNameArr[indexPath.item] as! String
         stopBusView()
     }
     
@@ -193,10 +201,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 extension ViewController {
     func stopBusView(){
-        navigationController?.pushViewController(StopBusListViewController(), animated: true)
+        navigationController?.pushViewController(StopBusListViewController(stop: currentStop), animated: true)
+        
     }
 }
-
 
 
 

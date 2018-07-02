@@ -17,10 +17,18 @@
                     <view key="view" contentMode="scaleToFill" id="QQy-x3-EI1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qho-Z1-Zj5">
+                                <rect key="frame" x="132" y="233" width="110" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="YYS-td-enV"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3oV-Zw-jeD"/>
+                    <navigationItem key="navigationItem" id="3oV-Zw-jeD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="0ST-lt-6Xd"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ny1-GE-5yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

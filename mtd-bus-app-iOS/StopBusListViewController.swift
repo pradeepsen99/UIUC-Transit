@@ -9,6 +9,17 @@
 import UIKit
 
 class StopBusListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var currentStop:String = ""
+    
+    init(stop: String) {
+        self.currentStop = stop
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return -1
     }
@@ -21,7 +32,14 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
 
     override func viewDidLoad() {
         view.backgroundColor = UIColor.darkGray
+        //navigationController?
         print("Worked")
+        print(ViewController().getCurrentStop())
+        if(ViewController().getCurrentStop() == ""){
+            print("fail")
+        }
+        print(currentStop)
+        self.title = currentStop
     }
 }
 
