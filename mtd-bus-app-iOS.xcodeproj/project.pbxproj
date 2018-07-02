@@ -12,7 +12,6 @@
 		6A08EEBE20EA8222005439A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBD20EA8222005439A4 /* ViewController.swift */; };
 		6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEBF20EA8222005439A4 /* Main.storyboard */; };
 		6A08EEC320EA8222005439A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEC220EA8222005439A4 /* Assets.xcassets */; };
-		6A08EEC620EA8222005439A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEC420EA8222005439A4 /* LaunchScreen.storyboard */; };
 		6A08EECB20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */; };
 		6A08EED120EA8223005439A4 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EECF20EA8223005439A4 /* Interface.storyboard */; };
 		6A08EED320EA8223005439A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EED220EA8223005439A4 /* Assets.xcassets */; };
@@ -80,7 +79,6 @@
 		6A08EEBD20EA8222005439A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6A08EEC020EA8222005439A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6A08EEC220EA8222005439A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6A08EEC520EA8222005439A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A08EEC720EA8222005439A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mtd-bus-app-iOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08EED020EA8223005439A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 				6A08EEBD20EA8222005439A4 /* ViewController.swift */,
 				6A08EEBF20EA8222005439A4 /* Main.storyboard */,
 				6A08EEC220EA8222005439A4 /* Assets.xcassets */,
-				6A08EEC420EA8222005439A4 /* LaunchScreen.storyboard */,
 				6A08EEC720EA8222005439A4 /* Info.plist */,
 				6A389C3420EA85A000A938D8 /* stopData.xcdatamodeld */,
 				6A389C3720EA862800A938D8 /* StopBusListViewController.swift */,
@@ -322,7 +319,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A08EEC620EA8222005439A4 /* LaunchScreen.storyboard in Resources */,
 				6A08EEC320EA8222005439A4 /* Assets.xcassets in Resources */,
 				6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */,
 			);
@@ -469,14 +465,6 @@
 				6A08EEC020EA8222005439A4 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6A08EEC420EA8222005439A4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6A08EEC520EA8222005439A4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		6A08EECF20EA8223005439A4 /* Interface.storyboard */ = {

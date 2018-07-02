@@ -114,8 +114,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     @IBAction func downloadCurrentStopData (){
-        lat = (locationManager.location?.coordinate.latitude)!
-        long = (locationManager.location?.coordinate.longitude)!
+        do{
+            lat = (locationManager.location?.coordinate.latitude)!
+            long = (locationManager.location?.coordinate.longitude)!
+        }catch let err{
+            print("location Error")
+            downloadCurrentStopData()
+            return
+        }
+        
         guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description) else { return }
         
         URLSession.shared.dataTask(with: gitUrl) { (data, response
