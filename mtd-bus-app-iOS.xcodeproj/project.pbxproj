@@ -224,7 +224,6 @@
 				6A08EEB520EA8222005439A4 /* Frameworks */,
 				6A08EEB620EA8222005439A4 /* Resources */,
 				6A08EEF320EA8224005439A4 /* Embed Watch Content */,
-				47C813587F248D488304EEDA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -360,26 +359,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		47C813587F248D488304EEDA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
-				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		483329B24023FB97725CD81D /* [CP] Check Pods Manifest.lock */ = {
