@@ -50,9 +50,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Nearby Stops"
-        
+                
         view.backgroundColor = UIColor.darkGray
         
         // For use when the app is open
@@ -64,6 +62,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.startUpdatingLocation()
         }
         
+        self.navigationController?.navigationBar.topItem?.title = "Nearby"
+
         checkCacheStopData()
         
         print("test")

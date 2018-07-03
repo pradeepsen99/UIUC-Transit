@@ -14,7 +14,7 @@
         <scene sceneID="1A3-Yg-YYv">
             <objects>
                 <tabBarController id="c0s-Gr-nbe" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7lw-Eo-uBf">
+                    <tabBar key="tabBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7lw-Eo-uBf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,11 +30,11 @@
             </objects>
             <point key="canvasLocation" x="-1092" y="-568"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="pRt-ZV-ofx">
             <objects>
-                <navigationController id="MCb-V4-RuA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="OeE-0m-6pO"/>
+                <navigationController title="Favorites" id="MCb-V4-RuA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="heart" id="OeE-0m-6pO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vDU-NX-ivA">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -63,11 +63,11 @@
             </objects>
             <point key="canvasLocation" x="496" y="139"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="X8o-ss-yws">
             <objects>
-                <navigationController id="GFx-km-ZWc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="DYM-RA-Ybc"/>
+                <navigationController title="Settings" id="GFx-km-ZWc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="DYM-RA-Ybc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IfQ-L0-cfs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -96,11 +96,11 @@
             </objects>
             <point key="canvasLocation" x="503" y="826"/>
         </scene>
-        <!--Item-->
+        <!--Stops-->
         <scene sceneID="JFB-hw-PVd">
             <objects>
-                <navigationController id="LZO-ia-WYS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="L4w-Bv-yki"/>
+                <navigationController title="Stops" id="LZO-ia-WYS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Stops" image="list" id="L4w-Bv-yki"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Npj-0o-3Zm">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -129,11 +129,11 @@
             </objects>
             <point key="canvasLocation" x="489" y="-580"/>
         </scene>
-        <!--Item-->
+        <!--Nearby-->
         <scene sceneID="bCb-TR-iBI">
             <objects>
-                <navigationController id="b79-Ra-Q4A" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="ic_work_white" id="CfN-l2-3dW"/>
+                <navigationController title="Nearby" id="b79-Ra-Q4A" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Nearby" image="compass" id="CfN-l2-3dW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oIp-PR-EFS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -164,6 +164,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_work_white" width="24" height="24"/>
+        <image name="compass" width="30" height="30"/>
+        <image name="heart" width="30" height="30"/>
+        <image name="list" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
     </resources>
 </document>
