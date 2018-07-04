@@ -26,6 +26,9 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = UIColor.gray
         
         //print(getDataFromText(fileName: "AllStops"))
+        
+        self.navigationController?.navigationBar.topItem?.title = "Stops"
+
         convertJSONtoArr()
         displayTable()
         
@@ -93,8 +96,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
         return cell
     }
-    
-    
 }
 
 extension StopsViewController{

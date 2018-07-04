@@ -15,7 +15,7 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         self.currentStop = stop
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -28,7 +28,6 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
         return cell
     }
-    
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.darkGray

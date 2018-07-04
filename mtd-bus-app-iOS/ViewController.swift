@@ -27,14 +27,12 @@ struct mtd_stop_loc: Codable{
             let stop_lon: Double
             let stop_name: String
         }
-        
     }
-    
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //let busListViewCont = StopBusListViewController()
-    let numberOfStops: Int = 5
+    let numberOfStops: Int = 15
     
     var currentStop: String = ""
     var currentStopCode: String = ""
@@ -118,7 +116,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         do{
             lat = (locationManager.location?.coordinate.latitude)!
             long = (locationManager.location?.coordinate.longitude)!
-        }catch let err{
+        }catch _{
             print("location Error")
             downloadCurrentStopData()
             return
