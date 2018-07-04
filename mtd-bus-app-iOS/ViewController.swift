@@ -34,6 +34,7 @@ struct mtd_stop_loc: Codable{
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //let busListViewCont = StopBusListViewController()
+    let numberOfStops: Int = 5
     
     var currentStop: String = ""
     var currentStopCode: String = ""
@@ -51,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        view.backgroundColor = UIColor.darkGray
+        view.backgroundColor = UIColor.gray
         
         // For use when the app is open
         locationManager.requestWhenInUseAuthorization()
@@ -123,7 +124,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description) else { return }
+        //Added this in because
+        let countStopsAPI = "&count=" + numberOfStops.description
+        
+        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
         
         URLSession.shared.dataTask(with: gitUrl) { (data, response
             , error) in

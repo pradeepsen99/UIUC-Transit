@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Material
 
 class StopBusListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentStop:String = ""
@@ -34,13 +33,9 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         view.backgroundColor = UIColor.darkGray
         //navigationController?
-        print("Worked")
-        print(ViewController().getCurrentStop())
-        if(ViewController().getCurrentStop() == ""){
-            print("fail")
-        }
-        print(currentStop)
         self.title = currentStop
+        
+        
     }
 }
 
