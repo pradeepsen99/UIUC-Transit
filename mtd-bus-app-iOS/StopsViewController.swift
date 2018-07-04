@@ -14,8 +14,10 @@ import Foundation
 
 class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentStop: String = ""
+    var currentStopCode: String = ""
     
     fileprivate var stopNameArr: NSArray = []
+    fileprivate var stopIDArr: NSArray = []
     fileprivate var stopTableView: UITableView!
     
     var mtdData: mtd_stop_loc? = nil
@@ -49,6 +51,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         for i in 0..<mtdData!.stops.count {
             self.stopNameArr = self.stopNameArr.adding(mtdData!.stops[i].stop_name) as NSArray
+            self.stopIDArr = self.stopIDArr.adding(mtdData!.stops[i].stop_id) as NSArray
         }
     }
     
@@ -84,7 +87,9 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentStop = stopNameArr[indexPath.item] as! String
+        currentStopCode = stopIDArr[indexPath.item] as! String
         stopBusView()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,7 +105,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 extension StopsViewController{
     func stopBusView(){
-        navigationController?.pushViewController(StopBusListViewController(stop: currentStop), animated: true)
+        navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
         
     }
 }

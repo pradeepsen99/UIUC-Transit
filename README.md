@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-All you need is a Mac running the latest version of XCode.
+All you need is a Mac running the latest version of XCode and Simulator installed.
 
 ### Installing
 
@@ -16,6 +16,7 @@ First you will need to clone the repository to your desired location
 
 ```
 git clone https://github.com/pradeepsen99/mtd-bus-app-iOS.git
+open ./mtd-bus-app-iOS.xcworkspace
 ```
 And after that open the file from XCode and you can run it via Simulator or from your iPhone
 
@@ -23,6 +24,7 @@ And after that open the file from XCode and you can run it via Simulator or from
 
 * [Swift](https://developer.apple.com/swift/)
 * [TestFlight](https://itunes.apple.com/us/app/testflight/id899247664?mt=8) - Beta Testing
+* [Icons8](https://icons8.com/ios) - In-App Icons
 
 ## Authors
 

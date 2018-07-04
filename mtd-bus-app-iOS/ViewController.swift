@@ -41,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     fileprivate var long: Double = 0
     
     fileprivate var stopNameArr: NSArray = []
+    fileprivate var stopIDArr: NSArray = []
     fileprivate var stopTableView: UITableView!
     
     fileprivate var currentStopData: mtd_stop_loc? = nil
@@ -51,6 +52,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
                 
         view.backgroundColor = UIColor.gray
+        
+
         
         // For use when the app is open
         locationManager.requestWhenInUseAuthorization()
@@ -87,6 +90,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let tempTest: mtd_stop_loc = data.value(forKey: "currentStopList") as! mtd_stop_loc
                     for i in 0..<tempTest.stops.count {
                         self.stopNameArr = self.stopNameArr.adding(tempTest.stops[i].stop_name) as NSArray
+                        self.stopIDArr = self.stopIDArr.adding(tempTest.stops[i].stop_id) as NSArray
                     }
                 }
                 self.displayTable()
@@ -118,6 +122,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             long = (locationManager.location?.coordinate.longitude)!
         }catch _{
             print("location Error")
+            //Used recursive to ensure random locationManager errors would show up.
             downloadCurrentStopData()
             return
         }
@@ -139,6 +144,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     for i in 0..<mtdData.stops.count {
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
+                        self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
                     }
                     
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -193,7 +199,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentStop = stopNameArr[indexPath.item] as! String
+        currentStopCode = stopIDArr[indexPath.item] as! String
         stopBusView()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -205,12 +213,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
         return cell
     }
-    
+
 }
 
 extension ViewController {
     func stopBusView(){
-        navigationController?.pushViewController(StopBusListViewController(stop: currentStop), animated: true)
+        navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
         
     }
 }
