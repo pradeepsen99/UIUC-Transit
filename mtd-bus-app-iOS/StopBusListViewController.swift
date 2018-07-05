@@ -14,22 +14,16 @@ struct mtd_routes: Codable{
     struct DEPATURE_INFO: Codable{
         let stop_id: String
         let headsign: String
-        let route: [ROUTES]
+        let route: ROUTES
         struct ROUTES: Codable{
             let route_color: String
             let route_id: String
-            let route_long_name: Double
-            let route_short_name: Double
+            let route_long_name: String
             let route_text_color: String
         }
         let scheduled: String
         let expected: String
-        let expected_mins: String
-        let location: [LOCATION_INFO]
-        struct LOCATION_INFO: Codable{
-            let lat: Float
-            let long: Float
-        }
+        let expected_mins: Int
     }
 }
 
@@ -71,17 +65,59 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    let favButton = UIBarButtonItem.init(
+        image: UIImage(named: "heart.png")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: #selector(favOnClick)
+    )
+    
+    @objc func favOnClick(){
+        let defaults = UserDefaults.standard
+        
+        var arrayOfStopsName: NSArray = []
+        var arrayOfStopsCode: NSArray = []
+        
+        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
+        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
+        
+        if(arrayofStopsNameDatabase.count == 0){
+            arrayOfStopsName.adding(currentStop)
+            arrayOfStopsCode.adding(currentStopCode)
+            defaults.set(arrayOfStopsName, forKey: "favStopsName")
+            defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
+        }else{
+            var isFound: Bool = false
+            for i in 0..<arrayofStopsNameDatabase.count{
+                if(arrayofStopsNameDatabase[i] == currentStop){
+                    isFound = true
+                }
+            }
+            if(isFound == false){
+                arrayOfStopsName = arrayofStopsNameDatabase as NSArray
+                arrayOfStopsName.adding(currentStop)
+                arrayOfStopsCode = arrayofStopsCodeDatabase as NSArray
+                arrayOfStopsCode.adding(currentStopCode)
+            }
+        }
+        
+        FavoritesViewController().viewDidLoad()
+    }
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.darkGray
         //navigationController?
         self.title = currentStop
-        //
+        
+        //Adds the favorite button
+        self.navigationItem.rightBarButtonItem = favButton
+
         
         guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=f298fa4670de47f68a5630304e66227d&stop_id="+currentStopCode) else { return }
         
         URLSession.shared.dataTask(with: gitUrl) { (data, response
             , error) in
-            //print(String(data: data!, encoding: .utf8)!)
+            print(String(data: data!, encoding: .utf8)!)
             guard let data = data else { return }
             do {
                 let decoder = JSONDecoder()
