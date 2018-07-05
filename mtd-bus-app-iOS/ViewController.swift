@@ -32,7 +32,6 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    //let busListViewCont = StopBusListViewController()
     let numberOfStops: Int = 15
     
     var currentStop: String = ""
@@ -149,12 +148,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                         self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
                     }
-                    
+                    //Code to acess the coreData functinality.
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let context = appDelegate.persistentContainer.viewContext
                     let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
                     let newUser = NSManagedObject(entity: entity!, insertInto: context)
-                    //Adds the stop data to the currentStopList
+                    //Adds the stop data to the currentStopList.
                     newUser.setValue(mtdData, forKey: "currentStopList")
                     
                     self.displayTable()

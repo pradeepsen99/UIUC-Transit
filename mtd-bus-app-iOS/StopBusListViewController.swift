@@ -41,20 +41,23 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
     fileprivate var busNameArr: NSArray = []
     fileprivate var stopTableView: UITableView!
     
+    
+    /// Initializer of the class
+    ///
+    /// - Parameters:
+    ///   - stop: the current stop name.
+    ///   - code: the current stop code.
     init(stop: String, code: String) {
         self.currentStop = stop
         self.currentStopCode = code
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //currentStop = busNameArr[indexPath.item] as! String
-        //currentStopCode = stopIDArr[indexPath.item] as! String
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -101,6 +104,8 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
             }.resume()
     }
     
+    
+    /// Displays the table using the given values.
     func displayTable(){
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
