@@ -54,7 +54,31 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidLoad() {
+        let defaults = UserDefaults.standard
         
+        //Title of the Tab
+        self.navigationController?.navigationBar.topItem?.title = "Favorites"
+
+        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
+        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
+        
+        stopNameArr = arrayofStopsNameDatabase as NSArray
+        
+        displayTable()
+    }
+    
+    /// Displays the table based on pre determined values. The table will fit in the middle of the screen, making sure to be under the tab bar and the navigation controller. Can change the values inside the function to make the table bigger or smaller, change color, etc.
+    func displayTable(){
+        let barHeight: CGFloat = 0
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        
+        self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+        self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.stopTableView.dataSource = self
+        self.stopTableView.delegate = self
+        self.stopTableView.separatorStyle = .none
+        view.addSubview(self.stopTableView)
     }
         
 }

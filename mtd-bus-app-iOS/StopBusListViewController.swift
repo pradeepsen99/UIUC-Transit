@@ -81,6 +81,8 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
         let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
         
+        print(arrayofStopsNameDatabase.count)
+        
         if(arrayofStopsNameDatabase.count == 0){
             arrayOfStopsName.adding(currentStop)
             arrayOfStopsCode.adding(currentStopCode)
@@ -94,6 +96,7 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
             if(isFound == false){
+                print("writing to array")
                 arrayOfStopsName = arrayofStopsNameDatabase as NSArray
                 arrayOfStopsName.adding(currentStop)
                 arrayOfStopsCode = arrayofStopsCodeDatabase as NSArray
@@ -113,11 +116,11 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         self.navigationItem.rightBarButtonItem = favButton
 
         
-        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=f298fa4670de47f68a5630304e66227d&stop_id="+currentStopCode) else { return }
+        guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=f298fa4670de47f68a5630304e66227d&stop_id="+currentStopCode+"&pt=60") else { return }
         
         URLSession.shared.dataTask(with: gitUrl) { (data, response
             , error) in
-            print(String(data: data!, encoding: .utf8)!)
+            //print(String(data: data!, encoding: .utf8)!)
             guard let data = data else { return }
             do {
                 let decoder = JSONDecoder()

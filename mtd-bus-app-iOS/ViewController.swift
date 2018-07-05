@@ -33,6 +33,7 @@ struct mtd_stop_loc: Codable{
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let numberOfStops: Int = 15
+    let feetToMileConv: Double = 0.000189393939
     
     var currentStop: String = ""
     var currentStopCode: String = ""
@@ -42,6 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopIDArr: NSArray = []
+    fileprivate var stopDistance: NSArray = []
     fileprivate var stopTableView: UITableView!
     
     fileprivate var currentStopData: mtd_stop_loc? = nil
@@ -50,9 +52,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         view.backgroundColor = UIColor.gray
-
+        
         // For use when the app is open
         locationManager.requestWhenInUseAuthorization()
         // If location services is enabled get the users location
@@ -64,10 +66,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Title of the Tab
         self.navigationController?.navigationBar.topItem?.title = "Nearby"
-
-        checkCacheStopData()
         
-        print("test")
+        checkCacheStopData()
         
     }
     
@@ -80,17 +80,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Fetching data from CoreData
         do {
             let result = try context.fetch(request)
-            print(result.count)
             if(result.count == 0){
-                print("no cache")
                 downloadCurrentStopData()
             }else{
-                print("cache exists")
                 for data in result as! [NSManagedObject] {
                     let tempTest: mtd_stop_loc = data.value(forKey: "currentStopList") as! mtd_stop_loc
                     for i in 0..<tempTest.stops.count {
                         self.stopNameArr = self.stopNameArr.adding(tempTest.stops[i].stop_name) as NSArray
                         self.stopIDArr = self.stopIDArr.adding(tempTest.stops[i].stop_id) as NSArray
+                        
+                        let currentDistacne = ((tempTest.stops[i].distance)*self.feetToMileConv)
+                        let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
+                        self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
                     }
                 }
                 self.displayTable()
@@ -143,10 +144,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
                 self.currentStopData = mtdData
                 DispatchQueue.main.async {
-                    
+                    print(mtdData.stops[1].distance.description)
                     for i in 0..<mtdData.stops.count {
                         self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                         self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
+                        
+                        let currentDistacne = ((mtdData.stops[i].distance)*self.feetToMileConv)
+                        let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
+                        self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
                     }
                     //Code to acess the coreData functinality.
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -241,11 +246,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     ///   - indexPath: Current Index of the row being added.
     /// - Returns: Completed UITableViewCell with values.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "MyCell")
         cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
+        cell.detailTextLabel?.text = "\(stopDistance[indexPath.row])"
         return cell
     }
-
+    
 }
 
 extension ViewController {

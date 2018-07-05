@@ -18,6 +18,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopIDArr: NSArray = []
+    fileprivate var stopDistance: NSArray = []
     fileprivate var stopTableView: UITableView!
     
     var mtdData: mtd_stop_loc? = nil
