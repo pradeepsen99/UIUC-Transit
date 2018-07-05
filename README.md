@@ -1,6 +1,6 @@
 # mts-bus-app
 
-An app that takes the location of where you are currently and displays the nearest MTD bus stop to you and gives you information on that bus stop nearest to you.
+An app, based on your current location in the Champaign-Urbana area, gives the nearest CUMTD bus stop and the busses that run witin those stops.
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 All you need is a Mac running the latest version of XCode and Simulator installed.
 
-### Installing
+### Installing Locally
 
 First you will need to clone the repository to your desired location
 
@@ -18,7 +18,7 @@ First you will need to clone the repository to your desired location
 git clone https://github.com/pradeepsen99/mtd-bus-app-iOS.git
 open ./mtd-bus-app-iOS.xcworkspace
 ```
-And after that open the file from XCode and you can run it via Simulator or from your iPhone
+And after that click the run button and set the build to either the Simulator or your very own iPhone!
 
 ## Built With
 
@@ -34,6 +34,8 @@ And after that open the file from XCode and you can run it via Simulator or from
 * [Create UITableView programmatically in Swift - Stack Overflow](https://stackoverflow.com/questions/40220905/create-uitableview-programmatically-in-swift)
 * [Core Data with Swift 4 for Beginners - Shashikant Jagtap](https://medium.com/xcblog/core-data-with-swift-4-for-beginners-1fc067cca707)
 * [Developer Resources CUMTD](https://developer.cumtd.com)
+* [UITableView tap to deselect cell - Stack Overflow](https://stackoverflow.com/questions/29089652/selecting-and-deselecting-uitableviewcells-swift)
+* [how to save and read array of array in NSUserdefaults in swift? - Stack Overflow](https://stackoverflow.com/questions/25179668/how-to-save-and-read-array-of-array-in-nsuserdefaults-in-swift)
 
 
 ## License
