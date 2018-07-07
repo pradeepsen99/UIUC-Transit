@@ -134,15 +134,15 @@ extension StopBusListViewController{
     @objc func favOnClick(){
         let defaults = UserDefaults.standard
         
-        var arrayOfStopsName: NSArray = []
-        var arrayOfStopsCode: NSArray = []
+        var arrayOfStopsName: NSMutableArray = []
+        var arrayOfStopsCode: NSMutableArray = []
         
         let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
         let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
 
         if(arrayofStopsNameDatabase.count == 0){
-            arrayOfStopsName = arrayOfStopsName.adding(currentStop) as NSArray
-            arrayOfStopsCode = arrayOfStopsCode.adding(currentStopCode) as NSArray
+            arrayOfStopsName = arrayOfStopsName.adding(currentStop) as! NSMutableArray
+            arrayOfStopsCode = arrayOfStopsCode.adding(currentStopCode) as! NSMutableArray
             defaults.set(arrayOfStopsName, forKey: "favStopsName")
             defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
         }else{
@@ -150,14 +150,21 @@ extension StopBusListViewController{
             for i in 0..<arrayofStopsNameDatabase.count{
                 if(arrayofStopsNameDatabase[i].description == currentStop){
                     isFound = true
+                    
+                    arrayOfStopsName = NSMutableArray(array: arrayofStopsNameDatabase)
+                    arrayOfStopsCode = NSMutableArray(array: arrayofStopsCodeDatabase)
+
+                    arrayOfStopsName.remove(arrayOfStopsName[i])
+                    arrayOfStopsCode.remove(arrayOfStopsCode[i])
+                    
                 }
             }
             if(isFound == false){
                 print("writing to array")
-                arrayOfStopsName = arrayofStopsNameDatabase as NSArray
-                arrayOfStopsName = arrayOfStopsName.adding(currentStop) as NSArray
-                arrayOfStopsCode = arrayofStopsCodeDatabase as NSArray
-                arrayOfStopsCode = arrayOfStopsCode.adding(currentStopCode) as NSArray
+                arrayOfStopsName = NSMutableArray(array: arrayofStopsNameDatabase)
+                arrayOfStopsName = NSMutableArray(array: arrayOfStopsName.adding(currentStop))
+                arrayOfStopsCode = NSMutableArray(array: arrayofStopsCodeDatabase)
+                arrayOfStopsCode = NSMutableArray(array: arrayOfStopsCode.adding(currentStopCode))
             }
             defaults.set(arrayOfStopsName, forKey: "favStopsName")
             defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
