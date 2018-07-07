@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-All you need is a Mac running the latest version of XCode and Simulator installed.
+All you need is a Mac running the latest version of XCode and Simulator installed. 
 
 ### Installing Locally
 
@@ -22,7 +22,7 @@ And after that click the run button and set the build to either the Simulator or
 
 ## Built With
 
-* [Swift](https://developer.apple.com/swift/)
+* [Swift](https://developer.apple.com/swift/) - Language
 * [TestFlight](https://itunes.apple.com/us/app/testflight/id899247664?mt=8) - Beta Testing
 * [Icons8](https://icons8.com/ios) - In-App Icons
 
@@ -37,6 +37,7 @@ And after that click the run button and set the build to either the Simulator or
 
 * - [x] Display route info on clicking on a stop
 * - [ ] Favorites Tab with Favorite bus stops.
+* - [ ] Search bar for any stop
 * - [ ] Settings tab with settings related to app.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.

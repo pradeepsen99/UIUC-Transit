@@ -120,53 +120,50 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /// This function updates the current Lat and Long values. It also downloads the stop data based on the current lat+long values
     @IBAction func downloadCurrentStopData (){
-        //Added this do catch statement because sometimes locationManager threw errors
-        do{
+        if(locationManager.location?.coordinate.latitude != nil || ((locationManager.location?.coordinate.longitude) != nil)){
             lat = (locationManager.location?.coordinate.latitude)!
             long = (locationManager.location?.coordinate.longitude)!
-        }catch _{
-            //Used recursive to ensure random locationManager errors would show up.
-            downloadCurrentStopData()
-            return
-        }
-        
-        //had to add this because adding it directly to the url made swift throw an error.
-        let countStopsAPI = "&count=" + numberOfStops.description
-        
-        guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
-        
-        URLSession.shared.dataTask(with: apiURL) { (data, response
-            , error) in
             
-            guard let data = data else { return }
-            do {
-                let decoder = JSONDecoder()
-                let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
-                self.currentStopData = mtdData
-                DispatchQueue.main.async {
-                    print(mtdData.stops[1].distance.description)
-                    for i in 0..<mtdData.stops.count {
-                        self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
-                        self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
+
+            //had to add this because adding it directly to the url made swift throw an error.
+            let countStopsAPI = "&count=" + numberOfStops.description
+            
+            guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
+            
+            URLSession.shared.dataTask(with: apiURL) { (data, response
+                , error) in
+                
+                guard let data = data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
+                    self.currentStopData = mtdData
+                    DispatchQueue.main.async {
+                        for i in 0..<mtdData.stops.count {
+                            self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
+                            self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
+                            
+                            let currentDistacne = ((mtdData.stops[i].distance)*self.feetToMileConv)
+                            let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
+                            self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
+                        }
+                        //Code to acess the coreData functinality.
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        let context = appDelegate.persistentContainer.viewContext
+                        let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
+                        let newUser = NSManagedObject(entity: entity!, insertInto: context)
+                        //Adds the stop data to the currentStopList.
+                        newUser.setValue(mtdData, forKey: "currentStopList")
                         
-                        let currentDistacne = ((mtdData.stops[i].distance)*self.feetToMileConv)
-                        let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
-                        self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
+                        self.displayTable()
                     }
-                    //Code to acess the coreData functinality.
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let context = appDelegate.persistentContainer.viewContext
-                    let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
-                    let newUser = NSManagedObject(entity: entity!, insertInto: context)
-                    //Adds the stop data to the currentStopList.
-                    newUser.setValue(mtdData, forKey: "currentStopList")
-                    
-                    self.displayTable()
+                } catch let err {
+                    print("Error Downloading data", err)
                 }
-            } catch let err {
-                print("Error Downloading data", err)
-            }
-            }.resume()
+                }.resume()
+        }else{
+            downloadCurrentStopData()
+        }
     }
     
     

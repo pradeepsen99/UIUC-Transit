@@ -54,21 +54,34 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidLoad() {
-        let defaults = UserDefaults.standard
+        print("test")
         
         //Title of the Tab
         self.navigationController?.navigationBar.topItem?.title = "Favorites"
-
-        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
-        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
         
-        stopNameArr = arrayofStopsNameDatabase as NSArray
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+
         
         displayTable()
+        
     }
     
     /// Displays the table based on pre determined values. The table will fit in the middle of the screen, making sure to be under the tab bar and the navigation controller. Can change the values inside the function to make the table bigger or smaller, change color, etc.
     func displayTable(){
+        print("displaying Table")
+        
+        let defaults = UserDefaults.standard
+        
+        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
+        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
+        
+        
+        stopNameArr = arrayofStopsNameDatabase as NSArray
+        stopIDArr = arrayofStopsCodeDatabase as NSArray
+        
+        print("StopID: " + stopIDArr.count.description)
+        print("StopArr: " + stopNameArr.count.description)
+        
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
@@ -80,7 +93,24 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.stopTableView.separatorStyle = .none
         view.addSubview(self.stopTableView)
     }
+    
+    @objc func loadList(){
+        //load data here
         
+        let defaults = UserDefaults.standard
+
+        
+        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
+        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
+        
+        
+        stopNameArr = arrayofStopsNameDatabase as NSArray
+        stopIDArr = arrayofStopsCodeDatabase as NSArray
+        
+        print("reloading Data")
+        self.stopTableView.reloadData()
+    }
+    
 }
 
 extension FavoritesViewController{

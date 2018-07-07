@@ -65,49 +65,16 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-    let favButton = UIBarButtonItem.init(
-        image: UIImage(named: "heart.png")?.withRenderingMode(.alwaysTemplate),
-        style: .plain,
-        target: self,
-        action: #selector(favOnClick)
-    )
-    
-    @objc func favOnClick(){
-        let defaults = UserDefaults.standard
-        
-        var arrayOfStopsName: NSArray = []
-        var arrayOfStopsCode: NSArray = []
-        
-        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
-        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
-        
-        print(arrayofStopsNameDatabase.count)
-        
-        if(arrayofStopsNameDatabase.count == 0){
-            arrayOfStopsName.adding(currentStop)
-            arrayOfStopsCode.adding(currentStopCode)
-            defaults.set(arrayOfStopsName, forKey: "favStopsName")
-            defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
-        }else{
-            var isFound: Bool = false
-            for i in 0..<arrayofStopsNameDatabase.count{
-                if(arrayofStopsNameDatabase[i] == currentStop){
-                    isFound = true
-                }
-            }
-            if(isFound == false){
-                print("writing to array")
-                arrayOfStopsName = arrayofStopsNameDatabase as NSArray
-                arrayOfStopsName.adding(currentStop)
-                arrayOfStopsCode = arrayofStopsCodeDatabase as NSArray
-                arrayOfStopsCode.adding(currentStopCode)
-            }
-        }
-        
-        FavoritesViewController().viewDidLoad()
-    }
+    var favButton: UIBarButtonItem? = nil
     
     override func viewDidLoad() {
+        favButton = UIBarButtonItem.init(
+            image: UIImage(named: "heart.png")?.withRenderingMode(.alwaysTemplate),
+            style: .plain,
+            target: self,
+            action: #selector(favOnClick)
+        )
+        
         view.backgroundColor = UIColor.darkGray
         //navigationController?
         self.title = currentStop
@@ -160,5 +127,38 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
 extension StopBusListViewController{
-    
+    @objc func favOnClick(){
+        let defaults = UserDefaults.standard
+        
+        var arrayOfStopsName: NSArray = []
+        var arrayOfStopsCode: NSArray = []
+        
+        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
+        let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
+
+        if(arrayofStopsNameDatabase.count == 0){
+            arrayOfStopsName = arrayOfStopsName.adding(currentStop) as NSArray
+            arrayOfStopsCode = arrayOfStopsCode.adding(currentStopCode) as NSArray
+            defaults.set(arrayOfStopsName, forKey: "favStopsName")
+            defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
+        }else{
+            var isFound: Bool = false
+            for i in 0..<arrayofStopsNameDatabase.count{
+                if(arrayofStopsNameDatabase[i].description == currentStop){
+                    isFound = true
+                }
+            }
+            if(isFound == false){
+                print("writing to array")
+                arrayOfStopsName = arrayofStopsNameDatabase as NSArray
+                arrayOfStopsName = arrayOfStopsName.adding(currentStop) as NSArray
+                arrayOfStopsCode = arrayofStopsCodeDatabase as NSArray
+                arrayOfStopsCode = arrayOfStopsCode.adding(currentStopCode) as NSArray
+            }
+            defaults.set(arrayOfStopsName, forKey: "favStopsName")
+            defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+    }
 }
