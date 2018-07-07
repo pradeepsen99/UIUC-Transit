@@ -33,6 +33,7 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
     
     fileprivate var currentStopData: mtd_routes? = nil
     fileprivate var busNameArr: NSArray = []
+    fileprivate var busTimeArr: NSArray = []
     fileprivate var stopTableView: UITableView!
     
     
@@ -60,8 +61,9 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "MyCell")
         cell.textLabel!.text = "\(busNameArr[indexPath.row])"
+        cell.detailTextLabel?.text = "\(busTimeArr[indexPath.row])"
         return cell
     }
     
@@ -96,9 +98,11 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
                 DispatchQueue.main.async {
                     if(mtdData.departures.count == 0){
                         self.busNameArr = self.busNameArr.adding("Currently No Stops") as NSArray
+                        self.busTimeArr = self.busTimeArr.adding("n/a") as NSArray
                     }else{
                         for i in 0..<mtdData.departures.count {
                             self.busNameArr = self.busNameArr.adding(mtdData.departures[i].headsign) as NSArray
+                            self.busTimeArr = self.busTimeArr.adding(mtdData.departures[i].expected_mins.description + " mins") as NSArray
                         }
                     }
                     
