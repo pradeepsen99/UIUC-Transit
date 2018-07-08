@@ -27,6 +27,7 @@
 		6A389C3E20EBE22700A938D8 /* AllStops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6A389C3D20EBE22700A938D8 /* AllStops.txt */; };
 		6A389C4020ECA14900A938D8 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A389C3F20ECA14900A938D8 /* FavoritesViewController.swift */; };
 		6A389C4220EE212000A938D8 /* Launch_Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A389C4120EE212000A938D8 /* Launch_Screen.storyboard */; };
+		6A4BB55B20F21B1000850FC4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */; };
 		AF106747649DFE224B80DC53 /* Pods_mtd_bus_app_iOS_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9A485519CAAB5DCF48344E /* Pods_mtd_bus_app_iOS_WatchKit_App.framework */; };
 		EA25A7B7BEC2F71ED127F44D /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075606FDF3A534DF11960679 /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		6A389C3D20EBE22700A938D8 /* AllStops.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllStops.txt; sourceTree = "<group>"; };
 		6A389C3F20ECA14900A938D8 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		6A389C4120EE212000A938D8 /* Launch_Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch_Screen.storyboard; sourceTree = "<group>"; };
+		6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		73492DBA1067B6F6B20CB21C /* Pods-mtd-bus-app-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7B9A485519CAAB5DCF48344E /* Pods_mtd_bus_app_iOS_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOS_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80FCBACE694357A8B71DBACE /* Pods-mtd-bus-app-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				6A389C3D20EBE22700A938D8 /* AllStops.txt */,
 				6A389C3F20ECA14900A938D8 /* FavoritesViewController.swift */,
 				6A389C4120EE212000A938D8 /* Launch_Screen.storyboard */,
+				6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */,
 			);
 			path = "mtd-bus-app-iOS";
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 			files = (
 				6A08EEBE20EA8222005439A4 /* ViewController.swift in Sources */,
 				6A389C3820EA862800A938D8 /* StopBusListViewController.swift in Sources */,
+				6A4BB55B20F21B1000850FC4 /* SettingsViewController.swift in Sources */,
 				6A389C3620EA85A000A938D8 /* stopData.xcdatamodeld in Sources */,
 				6A389C3C20EBD8BA00A938D8 /* StopsViewController.swift in Sources */,
 				6A389C4020ECA14900A938D8 /* FavoritesViewController.swift in Sources */,

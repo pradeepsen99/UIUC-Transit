@@ -98,7 +98,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         checkCacheStopData()
         
-        
     }
     
     /// This function checks the CoreData file to see if the stop info is already stored. If it is not stored then it will proceed to download the data through the downloadCurrentStopData() function.

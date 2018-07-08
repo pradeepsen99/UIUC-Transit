@@ -38,7 +38,12 @@ import CoreData
 import Foundation
 
 
-class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //
+    }
+    
+    
     var currentStop: String = ""
     var currentStopCode: String = ""
     
@@ -47,8 +52,11 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     fileprivate var stopDistance: NSArray = []
     
     fileprivate var stopTableView: UITableView!
+    
     var leftConstraint: NSLayoutConstraint!
     var searchBar = UISearchBar()
+    let expandableView = ExpandableView()
+    var resultSearchController = UISearchController()
     
     var mtdData: mtd_stop_loc? = nil
     
@@ -60,24 +68,45 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //print(getDataFromText(fileName: "AllStops"))
         
         self.navigationController?.navigationBar.topItem?.title = "Stops"
-
+        
         convertJSONtoArr()
         displayTable()
+        
+        self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            controller.searchBar.barStyle = UIBarStyle.black
+            controller.searchBar.barTintColor = UIColor.white
+            controller.searchBar.backgroundColor = UIColor.clear
+            //self.stopTableView.tableHeaderView = controller.searchBar
+            return controller
+        })()
+        
         //displaySearchBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        
+        if resultSearchController.isActive {
+            resultSearchController.isActive = false
+        }
+        super.viewWillDisappear(false)
+    }
+
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.resultSearchController.searchBar
     }
     
     func displaySearchBar(){
         // Expandable area.
-        let expandableView = ExpandableView()
-        navigationItem.titleView?.addSubview(expandableView)
-        
+        //navigationItem.titleView = (expandableView)
         
         // Search button.
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(toggle))
-        
-        
-        //        expandableView.superview!.addConstraint(NSLayoutConstraint(item: expandableView, attribute: .right, relatedBy: .equal, toItem: expandableView.superview!, attribute: .right, multiplier: 1, constant: 60))
-        
         
         // Search bar.
         searchBar = UISearchBar()
@@ -88,13 +117,10 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         searchBar.rightAnchor.constraint(equalTo: expandableView.rightAnchor).isActive = true
         searchBar.topAnchor.constraint(equalTo: expandableView.topAnchor).isActive = true
         searchBar.bottomAnchor.constraint(equalTo: expandableView.bottomAnchor).isActive = true
-        
-        // Remove search bar border.
-        searchBar.layer.borderColor = UIColor.lightGray.cgColor
-        searchBar.layer.borderWidth = 1
+
         
         // Match background color.
-        searchBar.barTintColor = UIColor.lightGray
+        //searchBar.barTintColor = UIColor.lightGray
     }
     
     @objc func toggle() {
@@ -104,12 +130,15 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         leftConstraint.isActive = isOpen ? false : true
         
         if isOpen {
+            print("isOpen: True")
+            navigationItem.titleView = nil
+            navigationItem.title = "Stops"
             leftConstraint.isActive = false
-            //navigationItem.setUpTitle(title: "Around Me")
             self.navigationController?.navigationBar.topItem?.title = "Stops"
-
-            //navigationItem.setLeftBarButton(leftBarButtonItem, animated: true)
         } else {
+            print("isOpen: False")
+            //displaySearchBar()
+            navigationItem.titleView = expandableView
             leftConstraint.isActive = true
             navigationItem.setLeftBarButton(nil, animated: true)
         }
@@ -191,20 +220,7 @@ extension StopsViewController{
     }
 }
 
-extension UINavigationItem {
-    func setUpTitle(title: String){
-        let titleLabel = UILabel()
-        
-        let titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23)]
-        titleLabel.attributedText = NSAttributedString(string: title, attributes: titleTextAttributes)
-        titleLabel.sizeToFit()
-        let leftItem = UIBarButtonItem(customView: titleLabel)
-        self.leftBarButtonItem = leftItem
-    }
-}
-
 class ExpandableView: UIView {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .none
