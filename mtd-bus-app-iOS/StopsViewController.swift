@@ -66,13 +66,13 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         convertJSONtoArr()
         displayTable()
-        displaySearchBar()
+        //displaySearchBar()
     }
     
     func displaySearchBar(){
         // Expandable area.
         let expandableView = ExpandableView()
-        navigationItem.titleView = expandableView
+        navigationItem.titleView?.addSubview(expandableView)
         
         
         // Search button.
@@ -102,14 +102,15 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func toggle() {
         
-        let isOpen = leftConstraint.isActive == true
+        let isOpen = (leftConstraint.isActive == true)
         
         leftConstraint.isActive = isOpen ? false : true
         
         if isOpen {
             leftConstraint.isActive = false
-            navigationItem.setUpTitle(title: "Around Me")
-            
+            //navigationItem.setUpTitle(title: "Around Me")
+            self.navigationController?.navigationBar.topItem?.title = "Stops"
+
             //navigationItem.setLeftBarButton(leftBarButtonItem, animated: true)
         } else {
             leftConstraint.isActive = true
@@ -117,7 +118,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         // Animate change to visible.
-        UIView.animate(withDuration: 1.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.navigationItem.titleView?.alpha = isOpen ? 0 : 1
             self.navigationController?.view.layoutIfNeeded()
         })
@@ -151,8 +152,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.stopTableView.separatorStyle = .none
         view.addSubview(self.stopTableView)
     }
-    
-    
     
     func getDataFromText(fileName: String) -> String{
         var text: String = ""
@@ -196,7 +195,6 @@ extension StopsViewController{
 }
 
 extension UINavigationItem {
-    
     func setUpTitle(title: String){
         let titleLabel = UILabel()
         

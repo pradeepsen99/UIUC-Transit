@@ -168,8 +168,8 @@ extension StopBusListViewController{
         let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
 
         if(arrayofStopsNameDatabase.count == 0){
-            arrayOfStopsName = arrayOfStopsName.adding(currentStop) as! NSMutableArray
-            arrayOfStopsCode = arrayOfStopsCode.adding(currentStopCode) as! NSMutableArray
+            arrayOfStopsName = NSMutableArray(array: arrayOfStopsName.adding(currentStop))
+            arrayOfStopsCode = NSMutableArray(array: arrayOfStopsCode.adding(currentStopCode))
             defaults.set(arrayOfStopsName, forKey: "favStopsName")
             defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
         }else{
