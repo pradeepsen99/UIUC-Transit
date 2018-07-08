@@ -12,14 +12,17 @@ import CoreData
 import Foundation
 
 
-class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var currentStop: String = ""
     var currentStopCode: String = ""
     
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopIDArr: NSArray = []
     fileprivate var stopDistance: NSArray = []
+    
     fileprivate var stopTableView: UITableView!
+    var leftConstraint: NSLayoutConstraint!
+    let searchBar = UISearchBar()
     
     var mtdData: mtd_stop_loc? = nil
     
@@ -34,11 +37,53 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         convertJSONtoArr()
         displayTable()
-        
+        displaySearchBar()
     }
     
-    func convertToJson(){
+    func displaySearchBar(){
+        // Expandable area.
+        let expandableView = ExpandableView()
+        navigationItem.titleView = expandableView
         
+        // Search button.
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(toggle))
+        
+        // Search bar.
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        expandableView.addSubview(searchBar)
+        leftConstraint = searchBar.leftAnchor.constraint(equalTo: expandableView.leftAnchor)
+        leftConstraint.isActive = false
+        searchBar.rightAnchor.constraint(equalTo: expandableView.rightAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: expandableView.topAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: expandableView.bottomAnchor).isActive = true
+    }
+    
+    @objc func toggle() {
+        
+        let isOpen = leftConstraint.isActive == true
+        
+        // Inactivating the left constraint closes the expandable header.
+        leftConstraint.isActive = isOpen ? false : true
+        
+        if isOpen {
+            leftConstraint.isActive = false
+            self.navigationController?.navigationBar.topItem?.title = "Stops"
+            //navigationItem.setLeftBarButton(leftBarButtonItem, animated: true)
+            print("true")
+        } else {
+            leftConstraint.isActive = true
+            navigationItem.setLeftBarButton(nil, animated: true)
+            print("false")
+        }
+        
+        // Animate change to visible.
+        UIView.animate(withDuration: 1.5, animations: {
+            self.navigationItem.titleView?.alpha = isOpen ? 0 : 1
+            self.navigationController?.view.layoutIfNeeded()
+        })
+        self.navigationController?.navigationBar.topItem?.title = "Stops"
+
     }
     
     func convertJSONtoArr(){
@@ -102,11 +147,31 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
         return cell
     }
+    
 }
 
 extension StopsViewController{
     func stopBusView(){
         navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
         
+    }
+}
+
+
+class ExpandableView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .none
+        translatesAutoresizingMaskIntoConstraints = false
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return UILayoutFittingExpandedSize
     }
 }

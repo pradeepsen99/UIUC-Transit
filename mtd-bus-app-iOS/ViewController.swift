@@ -32,6 +32,7 @@ struct mtd_stop_loc: Codable{
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     let numberOfStops: Int = 15
     let feetToMileConv: Double = 0.000189393939
     
@@ -53,6 +54,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         view.backgroundColor = UIColor.gray
         
         // For use when the app is open
@@ -68,6 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.navigationBar.topItem?.title = "Nearby"
         
         checkCacheStopData()
+        
         
     }
     
