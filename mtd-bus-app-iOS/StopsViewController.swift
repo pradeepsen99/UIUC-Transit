@@ -85,10 +85,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             navigationItem.searchController = resultSearchController
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
-            //Let the user know search is not supported for iOS 10
-            let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Search Functionality is not Available for iOS 10", style: .default))
-            self.present(alert, animated: true, completion: nil)
+            stopTableView.tableHeaderView = resultSearchController.searchBar
         }
     }
     

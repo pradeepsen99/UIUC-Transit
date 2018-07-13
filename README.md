@@ -34,14 +34,16 @@ And after that click the run button and set the build to either the Simulator or
 * [how to save and read array of array in NSUserdefaults in swift? - Stack Overflow](https://stackoverflow.com/questions/25179668/how-to-save-and-read-array-of-array-in-nsuserdefaults-in-swift)
 * [How to reload tableview from another view controller in swift - Stack Overflow](https://stackoverflow.com/questions/25921623/how-to-reload-tableview-from-another-view-controller-in-swift)
 * [Swift Expandable Search Bar in Header? - Stack Overflow](https://stackoverflow.com/questions/38580175/swift-expandable-search-bar-in-header)
-* [How would I create a UIAlertView in Swift? - Stack Overflow](https://stackoverflow.com/questions/24022479/how-would-i-create-a-uialertview-in-swift)
+* [Search controller below navigation item prior to iOS 11 - Stack Overflow](https://stackoverflow.com/questions/46515105/search-controller-below-navigation-item-prior-to-ios-11)
 
 ## TODO
 
 * - [x] Display route info on clicking on a stop
 * - [x] Favorites Tab with Favorite bus stops.
 * - [x] Search bar for any stop in 'stops' tab
+* - [ ] Add dynamic favorites button
 * - [ ] Settings tab with settings related to app.
+* - [ ] Add slide down to refresh option.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.
 * - [ ] Info on the Bus stop when clicked such as lat+long and show in Maps/Google Maps.
