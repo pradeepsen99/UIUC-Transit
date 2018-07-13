@@ -56,7 +56,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var resultSearchController = UISearchController()
     
     var mtdData: mtd_stop_loc? = nil
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +81,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return controller
         })()
         
+        //Checking if iOS Version is 11+ then can use navigationItem.searchController
         if #available(iOS 11.0, *) {
             navigationItem.searchController = resultSearchController
             navigationItem.hidesSearchBarWhenScrolling = false
@@ -123,15 +124,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         stopTableView.reloadData()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-        return resultSearchController.searchBar.frame.height
-    }
-    
-    
     func convertJSONtoArr(){
         let allStopsTxt = getDataFromText(fileName: "AllStops")
         let decoder = JSONDecoder()
@@ -146,19 +138,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.stopIDArr = self.stopIDArr.adding(mtdData!.stops[i].stop_id) as NSArray
         }
     }
-    
-    func displayTable(){
-        let barHeight: CGFloat = 0
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        
-        self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-        self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        self.stopTableView.dataSource = self
-        self.stopTableView.delegate = self
-        self.stopTableView.separatorStyle = .none
-        view.addSubview(self.stopTableView)
-    }
+
     
     func getDataFromText(fileName: String) -> String{
         var text: String = ""
@@ -172,6 +152,20 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         return text
+    }
+    
+    
+    func displayTable(){
+        let barHeight: CGFloat = 0
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        
+        self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+        self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.stopTableView.dataSource = self
+        self.stopTableView.delegate = self
+        self.stopTableView.separatorStyle = .none
+        view.addSubview(self.stopTableView)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

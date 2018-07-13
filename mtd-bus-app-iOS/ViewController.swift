@@ -76,6 +76,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     fileprivate var currentStopData: mtd_stop_loc? = nil
     
+    private let refreshControl = UIRefreshControl()
+    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -122,11 +124,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
                     }
                 }
-                self.displayTable()
             }
         } catch {
             print("Failed")
         }
+        self.displayTable()
     }
     
     
@@ -142,6 +144,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.stopTableView.delegate = self
         self.stopTableView.separatorStyle = .none
         view.addSubview(self.stopTableView)
+        
+        if #available(iOS 10.0, *) {
+            stopTableView.refreshControl = refreshControl
+        } else {
+            stopTableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshStopData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
+    }
+    
+    @objc private func refreshStopData(_ sender: Any) {
+        self.refreshControl.beginRefreshing()
+        // Fetch Weather Data
+        DispatchQueue.main.async {
+            self.downloadCurrentStopData()
+            self.stopTableView.reloadData()
+        }
+        self.refreshControl.endRefreshing()
     }
     
     
@@ -183,7 +203,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         //Adds the stop data to the currentStopList.
                         newUser.setValue(mtdData, forKey: "currentStopList")
                         
-                        self.displayTable()
+                        self.stopTableView.reloadData()
                     }
                 } catch let err {
                     print("Error Downloading data", err)
