@@ -38,24 +38,21 @@ import CoreData
 import Foundation
 
 
-class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        //
-    }
-    
+class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
     var currentStop: String = ""
     var currentStopCode: String = ""
     
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopIDArr: NSArray = []
-    fileprivate var stopDistance: NSArray = []
+    
+    fileprivate var stopNameArrFiltered: NSArray = []
+    fileprivate var stopIDArrFiltered: NSArray = []
+    
+    fileprivate var isSearching: Bool = false
     
     fileprivate var stopTableView: UITableView!
     
-    var leftConstraint: NSLayoutConstraint!
-    var searchBar = UISearchBar()
-    let expandableView = ExpandableView()
     var resultSearchController = UISearchController()
     
     var mtdData: mtd_stop_loc? = nil
@@ -65,6 +62,10 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         view.backgroundColor = UIColor.gray
         
+        self.definesPresentationContext = true
+        
+        //resultSearchController.definesPresentationContext = true
+        
         //print(getDataFromText(fileName: "AllStops"))
         
         self.navigationController?.navigationBar.topItem?.title = "Stops"
@@ -72,84 +73,74 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         convertJSONtoArr()
         displayTable()
         
+        //Search-Bar properties.
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
-            controller.searchResultsUpdater = self
+            controller.searchBar.delegate = self
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
             controller.searchBar.barStyle = UIBarStyle.black
             controller.searchBar.barTintColor = UIColor.white
             controller.searchBar.backgroundColor = UIColor.clear
-            //self.stopTableView.tableHeaderView = controller.searchBar
             return controller
         })()
         
-        //displaySearchBar()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        
-        if resultSearchController.isActive {
-            resultSearchController.isActive = false
-        }
-        super.viewWillDisappear(false)
-    }
-
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.resultSearchController.searchBar
-    }
-    
-    func displaySearchBar(){
-        // Expandable area.
-        //navigationItem.titleView = (expandableView)
-        
-        // Search button.
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(toggle))
-        
-        // Search bar.
-        searchBar = UISearchBar()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        expandableView.addSubview(searchBar)
-        leftConstraint = searchBar.leftAnchor.constraint(equalTo: expandableView.leftAnchor)
-        leftConstraint.isActive = false
-        searchBar.rightAnchor.constraint(equalTo: expandableView.rightAnchor).isActive = true
-        searchBar.topAnchor.constraint(equalTo: expandableView.topAnchor).isActive = true
-        searchBar.bottomAnchor.constraint(equalTo: expandableView.bottomAnchor).isActive = true
-
-        
-        // Match background color.
-        //searchBar.barTintColor = UIColor.lightGray
-    }
-    
-    @objc func toggle() {
-        
-        let isOpen = (leftConstraint.isActive == true)
-        
-        leftConstraint.isActive = isOpen ? false : true
-        
-        if isOpen {
-            print("isOpen: True")
-            navigationItem.titleView = nil
-            navigationItem.title = "Stops"
-            leftConstraint.isActive = false
-            self.navigationController?.navigationBar.topItem?.title = "Stops"
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = resultSearchController
+            navigationItem.hidesSearchBarWhenScrolling = false
         } else {
-            print("isOpen: False")
-            //displaySearchBar()
-            navigationItem.titleView = expandableView
-            leftConstraint.isActive = true
-            navigationItem.setLeftBarButton(nil, animated: true)
+            //Let the user know search is not supported for iOS 10
+            let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Search Functionality is not Available for iOS 10", style: .default))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        self.resultSearchController.searchBar.sizeToFit()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("Search updating, TEXT: " + searchBar.text!)
+        isSearching = true
+        
+        //Reset arrays
+        stopNameArrFiltered = []
+        stopIDArrFiltered = []
+        
+        for i in 0..<stopNameArr.count {
+            var currentStrArr: String = stopNameArr[i] as! String
+            currentStrArr = currentStrArr.lowercased()
+            let currentStrSearch: String = searchBar.text!.lowercased()
+            if((currentStrArr.range(of: currentStrSearch)) != nil){
+                stopNameArrFiltered = stopNameArrFiltered.adding(stopNameArr[i]) as NSArray
+                stopIDArrFiltered = stopIDArrFiltered.adding(stopIDArr[i]) as NSArray
+            }
         }
         
-        // Animate change to visible.
-        UIView.animate(withDuration: 0.5, animations: {
-            self.navigationItem.titleView?.alpha = isOpen ? 0 : 1
-            self.navigationController?.view.layoutIfNeeded()
-        })
+        stopTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        isSearching = false
+        
+        print("clicked cancel button")
+        
+        //Removing search vars
+        stopNameArrFiltered = []
+        stopIDArrFiltered = []
+        stopTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        return resultSearchController.searchBar.frame.height
+    }
+    
     
     func convertJSONtoArr(){
         let allStopsTxt = getDataFromText(fileName: "AllStops")
@@ -159,7 +150,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }catch{
             print(error)
         }
-
+        
         for i in 0..<mtdData!.stops.count {
             self.stopNameArr = self.stopNameArr.adding(mtdData!.stops[i].stop_name) as NSArray
             self.stopIDArr = self.stopIDArr.adding(mtdData!.stops[i].stop_id) as NSArray
@@ -193,46 +184,43 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //print(text)
         return text
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentStop = stopNameArr[indexPath.item] as! String
-        currentStopCode = stopIDArr[indexPath.item] as! String
+        if(isSearching){
+            currentStop = stopNameArrFiltered[indexPath.item] as! String
+            currentStopCode = stopIDArrFiltered[indexPath.item] as! String
+        }else{
+            currentStop = stopNameArr[indexPath.item] as! String
+            currentStopCode = stopIDArr[indexPath.item] as! String
+        }
+        
         stopBusView()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stopNameArr.count
+        if isSearching {
+            return stopNameArrFiltered.count
+        }else{
+            return stopNameArr.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
-        cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
+        if(isSearching){
+            //print(stopNameArrFiltered.count)
+            cell.textLabel!.text = "\(stopNameArrFiltered[indexPath.row])"
+        }else{
+            cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
+        }
         return cell
     }
-    
 }
+
 
 extension StopsViewController{
     func stopBusView(){
         navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
-        
-    }
-}
-
-class ExpandableView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .none
-        translatesAutoresizingMaskIntoConstraints = false
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return UILayoutFittingExpandedSize
     }
 }

@@ -80,8 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+                
         view.backgroundColor = UIColor.gray
         
         // For use when the app is open

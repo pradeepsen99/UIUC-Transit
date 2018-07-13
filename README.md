@@ -1,4 +1,4 @@
-# mts-bus-app
+# cumtd-bus-app
 
 An app, based on your current location in the Champaign-Urbana area, gives the nearest CUMTD bus stop and the busses that run witin those stops.
 
@@ -34,13 +34,12 @@ And after that click the run button and set the build to either the Simulator or
 * [how to save and read array of array in NSUserdefaults in swift? - Stack Overflow](https://stackoverflow.com/questions/25179668/how-to-save-and-read-array-of-array-in-nsuserdefaults-in-swift)
 * [How to reload tableview from another view controller in swift - Stack Overflow](https://stackoverflow.com/questions/25921623/how-to-reload-tableview-from-another-view-controller-in-swift)
 * [Swift Expandable Search Bar in Header? - Stack Overflow](https://stackoverflow.com/questions/38580175/swift-expandable-search-bar-in-header)
-* []()
 
 ## TODO
 
 * - [x] Display route info on clicking on a stop
 * - [x] Favorites Tab with Favorite bus stops.
-* - [ ] Search bar for any stop
+* - [x] Search bar for any stop in 'stops' tab
 * - [ ] Settings tab with settings related to app.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.
@@ -57,8 +56,6 @@ And after that click the run button and set the build to either the Simulator or
 ## Authors
 
 * **Pradeep Senthil** [pradeepsen99](https://github.com/pradeepsen99)
-
-
 
 ## License
 
