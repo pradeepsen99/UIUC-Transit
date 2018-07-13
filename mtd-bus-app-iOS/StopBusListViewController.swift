@@ -115,7 +115,6 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         
         URLSession.shared.dataTask(with: gitUrl) { (data, response
             , error) in
-            //print(String(data: data!, encoding: .utf8)!)
             guard let data = data else { return }
             do {
                 let decoder = JSONDecoder()
@@ -187,7 +186,6 @@ extension StopBusListViewController{
                 }
             }
             if(isFound == false){
-                print("writing to array")
                 arrayOfStopsName = NSMutableArray(array: arrayofStopsNameDatabase)
                 arrayOfStopsName = NSMutableArray(array: arrayOfStopsName.adding(currentStop))
                 arrayOfStopsCode = NSMutableArray(array: arrayofStopsCodeDatabase)

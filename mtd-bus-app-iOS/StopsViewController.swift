@@ -64,10 +64,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.definesPresentationContext = true
         
-        //resultSearchController.definesPresentationContext = true
-        
-        //print(getDataFromText(fileName: "AllStops"))
-        
         self.navigationController?.navigationBar.topItem?.title = "Stops"
         
         convertJSONtoArr()
@@ -102,7 +98,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Search updating, TEXT: " + searchBar.text!)
         isSearching = true
         
         //Reset arrays
@@ -124,8 +119,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         isSearching = false
-        
-        print("clicked cancel button")
         
         //Removing search vars
         stopNameArrFiltered = []
@@ -181,7 +174,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 print(error)
             }
         }
-        //print(text)
         return text
     }
     
@@ -209,7 +201,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
         if(isSearching){
-            //print(stopNameArrFiltered.count)
             cell.textLabel!.text = "\(stopNameArrFiltered[indexPath.row])"
         }else{
             cell.textLabel!.text = "\(stopNameArr[indexPath.row])"
