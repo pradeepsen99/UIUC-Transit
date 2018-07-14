@@ -101,11 +101,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+                        
         view.backgroundColor = UIColor.gray
         
         // For use when the app is open
-        locationManager.requestWhenInUseAuthorization()
+        DispatchQueue.main.async {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
         
         // If location services is enabled get the users location
         if CLLocationManager.locationServicesEnabled() {

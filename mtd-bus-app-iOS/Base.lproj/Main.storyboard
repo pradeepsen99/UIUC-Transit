@@ -13,13 +13,12 @@
         <!--Tab Bar Controller-->
         <scene sceneID="1A3-Yg-YYv">
             <objects>
-                <tabBarController id="c0s-Gr-nbe" sceneMemberID="viewController">
-                    <tabBar key="tabBar" autoresizesSubviews="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="7lw-Eo-uBf">
+                <tabBarController extendedLayoutIncludesOpaqueBars="YES" id="c0s-Gr-nbe" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" autoresizesSubviews="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7lw-Eo-uBf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.20364633407943661" green="0.24004610572965876" blue="0.795501708984375" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="barTintColor" red="0.9032135009765625" green="0.9032135009765625" blue="0.9032135009765625" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="b79-Ra-Q4A" kind="relationship" relationship="viewControllers" id="jIB-aQ-9iO"/>
@@ -58,7 +57,7 @@
             <objects>
                 <viewController title="Favorites" id="wGc-Xb-1C4" customClass="FavoritesViewController" customModule="mtd_bus_app_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SAI-rf-zFK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="023-eB-TU3"/>
@@ -95,7 +94,7 @@
             <objects>
                 <viewController title="Settings" id="fJr-6Z-aOT" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aLl-XQ-uYb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="bgg-q3-WD5"/>
@@ -134,7 +133,7 @@
             <objects>
                 <viewController title="Stops" id="TjX-M6-0f5" customClass="StopsViewController" customModule="mtd_bus_app_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X0b-en-dyS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4By-DL-C9k"/>
@@ -171,7 +170,7 @@
             <objects>
                 <viewController title="Nearest" id="0iS-Bk-IYm" customClass="ViewController" customModule="mtd_bus_app_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mc2-CH-EoA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="HJs-9w-wal"/>

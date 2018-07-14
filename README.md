@@ -8,7 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-All you need is a Mac running the latest version of XCode and Simulator installed. 
+All you need is a Mac running the latest version of XCode and Simulator installed.
+* XCode Version: 9.4.1
+* Mac Version: 10.13.5 
 
 ### Installing Locally
 
@@ -38,7 +40,7 @@ And after that click the run button and set the build to either the Simulator or
 
 ## TODO
 
-* - [ ] Fix first time location acess w/o request crash.
+* - [ ] Fix first time location acess, w/o request, crash.
 * - [x] Display route info on clicking on a stop.
 * - [x] Favorites Tab with Favorite bus stops.
 * - [x] Search bar for any stop in 'stops' tab.
