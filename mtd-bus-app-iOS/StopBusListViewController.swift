@@ -88,20 +88,45 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
     
     var favButton: UIBarButtonItem? = nil
     
-    override func viewDidLoad() {
+    func checkIfStopChangeColor(){
+        favButton = nil
+        
         favButton = UIBarButtonItem.init(
-            image: UIImage(named: "heart.png")?.withRenderingMode(.alwaysTemplate),
+            image: UIImage(named: "star.png")?.withRenderingMode(.alwaysTemplate),
             style: .plain,
             target: self,
             action: #selector(favOnClick)
         )
         
+        let defaults = UserDefaults.standard
+        
+        let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
+        
+        var isFound: Bool = false
+        
+        for i in 0..<arrayofStopsNameDatabase.count {
+            if(currentStop == arrayofStopsNameDatabase[i]){
+                isFound = true
+            }
+        }
+        
+        if(isFound){
+            favButton?.tintColor = .blue
+        }else{
+            favButton?.tintColor = .white
+        }
+        
+        
+        self.navigationItem.rightBarButtonItem = favButton
+    }
+    
+    override func viewDidLoad() {
+        checkIfStopChangeColor()
+        
         view.backgroundColor = UIColor.darkGray
-        //navigationController?
         self.title = currentStop
         
         //Adds the favorite button
-        self.navigationItem.rightBarButtonItem = favButton
 
         
         guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=f298fa4670de47f68a5630304e66227d&stop_id="+currentStopCode+"&pt=60") else { return }
@@ -151,6 +176,7 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
 
 extension StopBusListViewController{
     @objc func favOnClick(){
+        
         let defaults = UserDefaults.standard
         
         var arrayOfStopsName: NSMutableArray = []
@@ -189,5 +215,7 @@ extension StopBusListViewController{
         }
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+        
+        checkIfStopChangeColor()
     }
 }

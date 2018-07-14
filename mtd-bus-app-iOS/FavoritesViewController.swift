@@ -81,7 +81,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidLoad() {
-        print("test")
         
         //Title of the Tab
         self.navigationController?.navigationBar.topItem?.title = "Favorites"

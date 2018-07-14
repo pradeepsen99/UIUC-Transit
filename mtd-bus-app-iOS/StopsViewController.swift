@@ -79,12 +79,33 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             controller.searchBar.barStyle = UIBarStyle.black
             controller.searchBar.barTintColor = UIColor.white
             controller.searchBar.backgroundColor = UIColor.clear
+            controller.searchBar.tintColor = UIColor.white
+            
             return controller
         })()
         
         //Checking if iOS Version is 11+ then can use navigationItem.searchController
         if #available(iOS 11.0, *) {
-            navigationItem.searchController = resultSearchController
+            let sc = UISearchController(searchResultsController: nil)
+            sc.searchBar.delegate = self
+            let scb = sc.searchBar
+            scb.tintColor = UIColor.white
+            scb.barTintColor = UIColor.white
+            
+            //Added this piece of code in to fix the issue where the search bar text was hard to see.
+            if let textfield = scb.value(forKey: "searchField") as? UITextField {
+                textfield.textColor = UIColor.black
+                if let backgroundview = textfield.subviews.first {
+                    
+                    // Background color
+                    backgroundview.backgroundColor = UIColor.white
+                    
+                    // Rounded corner
+                    backgroundview.layer.cornerRadius = 10;
+                    backgroundview.clipsToBounds = true;
+                }
+            }
+            navigationItem.searchController = sc
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
             stopTableView.tableHeaderView = resultSearchController.searchBar

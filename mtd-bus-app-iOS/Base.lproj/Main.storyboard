@@ -35,7 +35,7 @@
         <scene sceneID="pRt-ZV-ofx">
             <objects>
                 <navigationController title="Favorites" id="MCb-V4-RuA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="heart" id="OeE-0m-6pO"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="star" id="OeE-0m-6pO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vDU-NX-ivA">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -184,8 +184,8 @@
     </scenes>
     <resources>
         <image name="compass" width="30" height="30"/>
-        <image name="heart" width="30" height="30"/>
         <image name="list" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
+        <image name="star" width="30" height="30"/>
     </resources>
 </document>

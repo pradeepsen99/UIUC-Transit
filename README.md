@@ -37,10 +37,10 @@ And after that click the run button and set the build to either the Simulator or
 * [How to reload tableview from another view controller in swift - Stack Overflow](https://stackoverflow.com/questions/25921623/how-to-reload-tableview-from-another-view-controller-in-swift)
 * [Swift Expandable Search Bar in Header? - Stack Overflow](https://stackoverflow.com/questions/38580175/swift-expandable-search-bar-in-header)
 * [Search controller below navigation item prior to iOS 11 - Stack Overflow](https://stackoverflow.com/questions/46515105/search-controller-below-navigation-item-prior-to-ios-11)
+* [iOS 11 customise search bar in navigation bar - Stack Overflow](https://stackoverflow.com/questions/46007260/ios-11-customise-search-bar-in-navigation-bar)
 
 ## TODO
 
-* - [ ] Fix first time location acess, w/o request, crash.
 * - [x] Display route info on clicking on a stop.
 * - [x] Favorites Tab with Favorite bus stops.
 * - [x] Search bar for any stop in 'stops' tab.
