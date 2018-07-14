@@ -38,23 +38,25 @@ And after that click the run button and set the build to either the Simulator or
 
 ## TODO
 
-* - [x] Display route info on clicking on a stop
+* - [ ] Fix first time location acess w/o request crash.
+* - [x] Display route info on clicking on a stop.
 * - [x] Favorites Tab with Favorite bus stops.
-* - [x] Search bar for any stop in 'stops' tab
-* - [ ] Add dynamic favorites button
+* - [x] Search bar for any stop in 'stops' tab.
+* - [ ] Add dynamic favorites button.
 * - [ ] Settings tab with settings related to app.
-* - [ ] Add slide down to refresh option.
+* - [x] Add slide down to refresh option.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.
 * - [ ] Info on the Bus stop when clicked such as lat+long and show in Maps/Google Maps.
 * - [ ] Notifications on bus arrivial/departure.
-* - [ ] 3D-Touch compatability inside app.
+* - [x] 3D-Touch compatability inside app.
 * - [ ] 3D-Touch compatability outside app to acess tabs inside the app.
 * - [ ] Watch App compatability.
 * - [ ] Notifications on watch app.
 * - [ ] Splash Screen.
 * - [ ] App Icons.
 * - [ ] Night Mode.
+* - [ ] Color blind Mode.
 
 ## Authors
 

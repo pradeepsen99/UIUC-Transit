@@ -1,3 +1,4 @@
+
 //
 //  ViewController.swift
 //  mtd-bus-app-iOS
@@ -58,7 +59,25 @@ struct mtd_stop_loc: Codable{
     }
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = stopTableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        currentStop = stopNameArr[indexPath.row] as! String
+        currentStopCode = stopIDArr[indexPath.row] as! String
+        print(currentStop)
+        print(currentStopCode)
+        
+        return StopBusListViewController(stop: currentStop, code: currentStopCode)
+    }
+    
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        stopBusView()
+    }
+    
     
     let numberOfStops: Int = 15
     let feetToMileConv: Double = 0.000189393939
@@ -87,6 +106,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // For use when the app is open
         locationManager.requestWhenInUseAuthorization()
+        
         // If location services is enabled get the users location
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self as? CLLocationManagerDelegate
@@ -99,8 +119,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         checkCacheStopData()
         
+        registerForPreviewing(with: self, sourceView: stopTableView)
+
+        
     }
-    
+
     /// This function checks the CoreData file to see if the stop info is already stored. If it is not stored then it will proceed to download the data through the downloadCurrentStopData() function.
     func checkCacheStopData(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -156,7 +179,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @objc private func refreshStopData(_ sender: Any) {
         self.refreshControl.beginRefreshing()
-        // Fetch Weather Data
+        // Re-Fetch Stop Data
         DispatchQueue.main.async {
             self.downloadCurrentStopData()
             self.stopTableView.reloadData()
@@ -210,7 +233,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
                 }.resume()
         }else{
-            downloadCurrentStopData()
+            showLocationDisabledPopUp()
         }
     }
     
@@ -245,14 +268,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    /// A simple getter for currentStop
-    ///
-    /// - Returns: currentStop
-    func getCurrentStop()->String{
-        return currentStop
-    }
-    
     
     /// Function runs if memory is too high, this function will reduce the resources until memory goes down.
     override func didReceiveMemoryWarning() {

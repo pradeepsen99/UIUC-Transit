@@ -40,6 +40,7 @@ import Foundation
 
 class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
+    
     var currentStop: String = ""
     var currentStopCode: String = ""
     
