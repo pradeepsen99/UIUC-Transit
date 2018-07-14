@@ -9,8 +9,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 All you need is a Mac running the latest version of XCode and Simulator installed.
-* XCode Version: 9.4.1
-* Mac Version: 10.13.5 
+* XCode Version - [9.4.1]
+* Mac Version - [10.13.5] 
 
 ### Installing Locally
 

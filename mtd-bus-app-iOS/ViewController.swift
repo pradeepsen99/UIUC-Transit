@@ -39,26 +39,6 @@ import CoreLocation
 import CoreData
 
 
-/// The design of the JSON recieved from stopsNearMe
-struct mtd_stop_loc: Codable{
-    let stops: [STOP_INFO]
-    
-    struct STOP_INFO: Codable{
-        let stop_id: String
-        let stop_name: String
-        let code: String
-        let distance: Double
-        let stop_points: [STOP_POINTS]
-        struct STOP_POINTS: Codable{
-            let code: String
-            let stop_id: String
-            let stop_lat: Double
-            let stop_lon: Double
-            let stop_name: String
-        }
-    }
-}
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -101,7 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        
         view.backgroundColor = UIColor.gray
         
         // For use when the app is open
@@ -314,6 +294,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.detailTextLabel?.text = "\(stopDistance[indexPath.row])"
         return cell
     }
+    
+
     
 }
 

@@ -33,25 +33,8 @@
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import UIKit
+import UserNotifications
 
-struct mtd_routes: Codable{
-    let departures: [DEPATURE_INFO]
-    
-    struct DEPATURE_INFO: Codable{
-        let stop_id: String
-        let headsign: String
-        let route: ROUTES
-        struct ROUTES: Codable{
-            let route_color: String
-            let route_id: String
-            let route_long_name: String
-            let route_text_color: String
-        }
-        let scheduled: String
-        let expected: String
-        let expected_mins: Int
-    }
-}
 
 class StopBusListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentStop:String = ""
@@ -91,6 +74,16 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
         cell.textLabel!.text = "\(busNameArr[indexPath.row])"
         cell.detailTextLabel?.text = "\(busTimeArr[indexPath.row])"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        
+        let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
+            
+        }
+        share.backgroundColor = .blue
+        
+        return [share]
     }
     
     var favButton: UIBarButtonItem? = nil
