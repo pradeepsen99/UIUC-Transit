@@ -141,6 +141,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
 
 extension FavoritesViewController{
     func stopBusView(){
-        navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
+        navigationController?.pushViewController(RoutesViewController(stop: currentStop, code: currentStopCode), animated: true)
     }
 }

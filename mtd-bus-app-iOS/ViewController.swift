@@ -37,6 +37,7 @@
 import UIKit
 import CoreLocation
 import CoreData
+import UserNotifications
 
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
@@ -50,7 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(currentStop)
         print(currentStopCode)
         
-        return StopBusListViewController(stop: currentStop, code: currentStopCode)
+        return RoutesViewController(stop: currentStop, code: currentStopCode)
     }
     
     
@@ -79,6 +80,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let locationManager = CLLocationManager()
     
+    let center = UNUserNotificationCenter.current()
+    let options: UNAuthorizationOptions = [.alert, .sound];
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,6 +92,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // For use when the app is open
         DispatchQueue.main.async {
             self.locationManager.requestWhenInUseAuthorization()
+            
+            self.center.requestAuthorization(options: self.options) { (granted, error) in
+                if !granted {
+                    print("Something went wrong")
+                }
+            }
+
         }
         
         // If location services is enabled get the users location
@@ -303,7 +315,7 @@ extension ViewController {
     
     /// This function uses the navigationController to open up a new new controller: StopBusListViewController with the values of the currentStopCode and the currentStop in the constructor. It is also animated to look good.
     func stopBusView(){
-        navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
+        navigationController?.pushViewController(RoutesViewController(stop: currentStop, code: currentStopCode), animated: true)
         
     }
 }

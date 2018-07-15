@@ -69,21 +69,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         convertJSONtoArr()
         displayTable()
-        
-        //Search-Bar properties.
-        self.resultSearchController = ({
-            let controller = UISearchController(searchResultsController: nil)
-            controller.searchBar.delegate = self
-            controller.dimsBackgroundDuringPresentation = false
-            controller.searchBar.sizeToFit()
-            controller.searchBar.barStyle = UIBarStyle.black
-            controller.searchBar.barTintColor = UIColor.white
-            controller.searchBar.backgroundColor = UIColor.clear
-            controller.searchBar.tintColor = UIColor.white
-            
-            return controller
-        })()
-        
+
         //Checking if iOS Version is 11+ then can use navigationItem.searchController
         if #available(iOS 11.0, *) {
             let sc = UISearchController(searchResultsController: nil)
@@ -110,6 +96,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             stopTableView.tableHeaderView = resultSearchController.searchBar
         }
+        
     }
     
     
@@ -160,7 +147,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.stopIDArr = self.stopIDArr.adding(mtdData!.stops[i].stop_id) as NSArray
         }
     }
-
+    
     
     func getDataFromText(fileName: String) -> String{
         var text: String = ""
@@ -225,6 +212,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 extension StopsViewController{
     func stopBusView(){
-        navigationController?.pushViewController(StopBusListViewController(stop: currentStop, code: currentStopCode), animated: true)
+        navigationController?.pushViewController(RoutesViewController(stop: currentStop, code: currentStopCode), animated: true)
     }
 }

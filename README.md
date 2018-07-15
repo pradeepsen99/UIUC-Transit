@@ -44,7 +44,7 @@ And after that click the run button and set the build to either the Simulator or
 * - [x] Display route info on clicking on a stop.
 * - [x] Favorites Tab with Favorite bus stops.
 * - [x] Search bar for any stop in 'stops' tab.
-* - [ ] Add dynamic favorites button.
+* - [x] Add dynamic favorites button.
 * - [ ] Settings tab with settings related to app.
 * - [x] Add slide down to refresh option.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.

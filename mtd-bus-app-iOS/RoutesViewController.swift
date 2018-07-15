@@ -36,7 +36,7 @@ import UIKit
 import UserNotifications
 
 
-class StopBusListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentStop:String = ""
     var currentStopCode: String = ""
     
@@ -174,7 +174,7 @@ class StopBusListViewController: UIViewController, UITableViewDelegate, UITableV
     }
 }
 
-extension StopBusListViewController{
+extension RoutesViewController{
     @objc func favOnClick(){
         
         let defaults = UserDefaults.standard
