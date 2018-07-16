@@ -45,6 +45,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     fileprivate var busTimeArr: NSArray = []
     fileprivate var stopTableView: UITableView!
     
+    var favButton: UIBarButtonItem? = nil
     
     /// Initializer of the class
     ///
@@ -57,10 +58,18 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.init(nibName: nil, bundle: nil)
     }
     
+    /// Required function to have a constructor
+    ///
+    /// - Parameter aDecoder: un-used var
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Function to deselect cell on e unclicked.
+    ///
+    /// - Parameters:
+    ///   - tableView: tableView clicked at
+    ///   - indexPath: index of cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -76,18 +85,20 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         
-        let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
-            
+        let share = UITableViewRowAction(style: .normal, title: "Add Notification") { action, index in
+            //Stuff to add when swiped.
         }
         share.backgroundColor = .blue
         
         return [share]
     }
     
-    var favButton: UIBarButtonItem? = nil
     
+    
+    /// This function determines the color of the favorite by seeing if it is part of the favStopsName array and if it is changes it to blue, otherwise it chsanges it to white. Runs after favOnClick() is run
     func checkIfStopChangeColor(){
         favButton = nil
         
@@ -115,7 +126,6 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }else{
             favButton?.tintColor = .white
         }
-        
         
         self.navigationItem.rightBarButtonItem = favButton
     }
@@ -182,9 +192,11 @@ extension RoutesViewController{
         var arrayOfStopsName: NSMutableArray = []
         var arrayOfStopsCode: NSMutableArray = []
         
+        //Gets the data stored in the device on the favorited stops and the associated code for the stop.
         let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
         let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
 
+        //If the name array stored in the database has no values then automatically adds selected stop to it without checking for redundencies.
         if(arrayofStopsNameDatabase.count == 0){
             arrayOfStopsName = NSMutableArray(array: arrayOfStopsName.adding(currentStop))
             arrayOfStopsCode = NSMutableArray(array: arrayOfStopsCode.adding(currentStopCode))
@@ -192,6 +204,8 @@ extension RoutesViewController{
             defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
         }else{
             var isFound: Bool = false
+            
+            //Goes through the entire favorites array and checks if the current stop favorited is mentioned, if found it sets the flag var to True and removes the instance from the temp database array.
             for i in 0..<arrayofStopsNameDatabase.count{
                 if(arrayofStopsNameDatabase[i].description == currentStop){
                     isFound = true
@@ -204,18 +218,23 @@ extension RoutesViewController{
                     
                 }
             }
+            //If not found then a new addition to the temp database name array is made.
             if(isFound == false){
                 arrayOfStopsName = NSMutableArray(array: arrayofStopsNameDatabase)
                 arrayOfStopsName = NSMutableArray(array: arrayOfStopsName.adding(currentStop))
                 arrayOfStopsCode = NSMutableArray(array: arrayofStopsCodeDatabase)
                 arrayOfStopsCode = NSMutableArray(array: arrayOfStopsCode.adding(currentStopCode))
             }
+            
+            //Temp array set to be the UserDefaults, stores the favorited stops name and corresponding stop code.
             defaults.set(arrayOfStopsName, forKey: "favStopsName")
             defaults.set(arrayOfStopsCode, forKey: "favStopsCode")
         }
         
+        //Tells the FavoritesViewController to run the function load which refreshes the table values with the newly added ones.
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         
+        //Runs the function to determine wether the favorite button should change color depending on wether it's part of the favorited list.
         checkIfStopChangeColor()
     }
 }

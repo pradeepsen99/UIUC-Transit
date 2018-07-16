@@ -41,25 +41,7 @@ import UserNotifications
 
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = stopTableView.indexPathForRow(at: location) else {
-            return nil
-        }
-        currentStop = stopNameArr[indexPath.row] as! String
-        currentStopCode = stopIDArr[indexPath.row] as! String
-        print(currentStop)
-        print(currentStopCode)
-        
-        return RoutesViewController(stop: currentStop, code: currentStopCode)
-    }
-    
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        stopBusView()
-    }
-    
-    
+
     let numberOfStops: Int = 15
     let feetToMileConv: Double = 0.000189393939
     
@@ -91,8 +73,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // For use when the app is open
         DispatchQueue.main.async {
+            //Requests the user to provide access to use their location.
             self.locationManager.requestWhenInUseAuthorization()
             
+            //Requests the user to provide access to give them notifications for stuff like bus timings.
             self.center.requestAuthorization(options: self.options) { (granted, error) in
                 if !granted {
                     print("Something went wrong")
@@ -113,6 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         checkCacheStopData()
         
+        //Set up for 3D Touch in the cells of stopTableView
         registerForPreviewing(with: self, sourceView: stopTableView)
 
         
@@ -162,6 +147,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.stopTableView.separatorStyle = .none
         view.addSubview(self.stopTableView)
         
+        //Swiping down to refresh code.
         if #available(iOS 10.0, *) {
             stopTableView.refreshControl = refreshControl
         } else {
@@ -171,6 +157,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
     }
     
+    
+    /// This functions runs when the user pulls down and activates the refreshControl.
+    ///
+    /// - Parameter sender: un-used var
     @objc private func refreshStopData(_ sender: Any) {
         self.refreshControl.beginRefreshing()
         // Re-Fetch Stop Data
@@ -185,10 +175,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /// This function updates the current Lat and Long values. It also downloads the stop data based on the current lat+long values
     @IBAction func downloadCurrentStopData (){
+        
+        //If for some reason location location is not acessible, then it will display prompt that location services was not enabled for the app.
         if(locationManager.location?.coordinate.latitude != nil || ((locationManager.location?.coordinate.longitude) != nil)){
+            
             lat = (locationManager.location?.coordinate.latitude)!
             long = (locationManager.location?.coordinate.longitude)!
-            
 
             //had to add this because adding it directly to the url made swift throw an error.
             let countStopsAPI = "&count=" + numberOfStops.description
@@ -201,13 +193,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 guard let data = data else { return }
                 do {
                     let decoder = JSONDecoder()
+                    //Decodes the JSON recieved from the url.
                     let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
                     self.currentStopData = mtdData
                     DispatchQueue.main.async {
+                        //Iterates through all of the stops in the decoded data (stops) in mtdData.
                         for i in 0..<mtdData.stops.count {
+                            //Adds the stop name and stop id to respective arrays.
                             self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
                             self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
                             
+                            //Gets the distance, in feet, and converts it to miles and adds it to the array.
                             let currentDistacne = ((mtdData.stops[i].distance)*self.feetToMileConv)
                             let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
                             self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
@@ -217,6 +213,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let context = appDelegate.persistentContainer.viewContext
                         let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
                         let newUser = NSManagedObject(entity: entity!, insertInto: context)
+                        
                         //Adds the stop data to the currentStopList.
                         newUser.setValue(mtdData, forKey: "currentStopList")
                         
@@ -307,6 +304,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
+    /// This function runs when the user uses 3D touch and lightly presses (peek). This changes the currentStop and currentStopCode to the data of the cell the user pressed on.
+    ///
+    /// - Parameters:
+    ///   - previewingContext: The viewController to display when peeking
+    ///   - location: Point in the screen where the user is pressing down.
+    /// - Returns: The ViewController to be displayed.
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = stopTableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        currentStop = stopNameArr[indexPath.row] as! String
+        currentStopCode = stopIDArr[indexPath.row] as! String
+        print(currentStop)
+        print(currentStopCode)
+        
+        return RoutesViewController(stop: currentStop, code: currentStopCode)
+    }
+    
+    
+    /// This function runs when the user uses the 3D touch and presses on it with full force. This pushes the selected view using the navigation controller.
+    ///
+    /// - Parameters:
+    ///   - previewingContext: un-used var
+    ///   - viewControllerToCommit: un-used var
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        stopBusView()
+    }
 
     
 }

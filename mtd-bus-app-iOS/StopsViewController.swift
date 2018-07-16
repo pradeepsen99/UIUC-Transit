@@ -104,13 +104,20 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.resultSearchController.searchBar.sizeToFit()
     }
     
+    /// This funciton is run when the user types in something into the search bar, anytime the string changes this function is run with the updated string.
+    ///
+    /// - Parameters:
+    ///   - searchBar: The search bar being used.
+    ///   - searchText: The text thats currently in the search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //Flag variable, used in deciding wether to sue the regular array or the filtered array.
         isSearching = true
         
-        //Reset arrays
+        //Reset arrays to prevent repeats
         stopNameArrFiltered = []
         stopIDArrFiltered = []
         
+        //Iterates through all the stops and anything that has a matching string (all lowercased) will be added to the Filtered array
         for i in 0..<stopNameArr.count {
             var currentStrArr: String = stopNameArr[i] as! String
             currentStrArr = currentStrArr.lowercased()
@@ -121,6 +128,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         
+        //Reloads the tableView
         stopTableView.reloadData()
     }
     
@@ -134,14 +142,16 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func convertJSONtoArr(){
+        //All the stops are stored in a txt file named AllStops, access it through here.
         let allStopsTxt = getDataFromText(fileName: "AllStops")
         let decoder = JSONDecoder()
+        
+        //Decodes the whole JSON file using the mtd_stop_loc struct declated in StructsJSON.swift
         do{
             mtdData = try decoder.decode(mtd_stop_loc.self, from: allStopsTxt.data(using: String.Encoding.utf8)!)
         }catch{
             print(error)
         }
-        
         for i in 0..<mtdData!.stops.count {
             self.stopNameArr = self.stopNameArr.adding(mtdData!.stops[i].stop_name) as NSArray
             self.stopIDArr = self.stopIDArr.adding(mtdData!.stops[i].stop_id) as NSArray
@@ -149,6 +159,10 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
+    /// Helper function to get all of the contents from the described .txt file.
+    ///
+    /// - Parameter fileName: The file name
+    /// - Returns: Text of the whole file
     func getDataFromText(fileName: String) -> String{
         var text: String = ""
         if let path = Bundle.main.path(forResource: fileName, ofType: "txt") {
@@ -177,7 +191,9 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.addSubview(self.stopTableView)
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //If isSearching is true then uses values from the filtered array because that's what is being displayed, if false, then uses the regular array.
         if(isSearching){
             currentStop = stopNameArrFiltered[indexPath.item] as! String
             currentStopCode = stopIDArrFiltered[indexPath.item] as! String
@@ -191,6 +207,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //If isSearching is true then uses count from the filtered array because that's what is being displayed, if false, then uses the regular array.
         if isSearching {
             return stopNameArrFiltered.count
         }else{
@@ -199,6 +216,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //If isSearching is true then uses values from the filtered array because that's what is being displayed, if false, then uses the refular array.
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
         if(isSearching){
             cell.textLabel!.text = "\(stopNameArrFiltered[indexPath.row])"
