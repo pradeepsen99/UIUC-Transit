@@ -50,7 +50,7 @@ And after that click the run button and set the build to either the Simulator or
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.
 * - [ ] Info on the Bus stop when clicked such as lat+long and show in Maps/Google Maps.
-* - [ ] Notifications on bus arrivial/departure.
+* - [x] Notifications on scheduled bus arrivial.
 * - [x] 3D-Touch compatability inside app.
 * - [ ] 3D-Touch compatability outside app to acess tabs inside the app.
 * - [ ] Watch App compatability.

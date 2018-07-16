@@ -85,7 +85,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "MyCell")
         cell.textLabel!.text = "\(busNameArr[indexPath.row])"
-        cell.detailTextLabel?.text = "\(busTimeArr[indexPath.row])"
+        cell.detailTextLabel?.text = "\(busTimeArr[indexPath.row]) mins"
         return cell
     }
     
@@ -98,8 +98,16 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             content.body = (self.busNameArr[editActionsForRowAt.row] as! String).description + " has arrived at " + self.currentStop
             content.sound = UNNotificationSound.default()
             content.categoryIdentifier = "UYLReminderCategory"
-
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3,
+            
+            print(self.busTimeArr[editActionsForRowAt.row])
+            let busTimeStr: String = self.busTimeArr[editActionsForRowAt.row] as! String
+            var busTimeInSec: Double = Double(busTimeStr)! * 60
+            
+            if(busTimeInSec == 0){
+                busTimeInSec = 1.0
+            }
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: busTimeInSec,
                                                             repeats: false)
             
             let identifier = "UYLLocalNotification"
@@ -178,7 +186,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }else{
                         for i in 0..<mtdData.departures.count {
                             self.busNameArr = self.busNameArr.adding(mtdData.departures[i].headsign) as NSArray
-                            self.busTimeArr = self.busTimeArr.adding(mtdData.departures[i].expected_mins.description + " mins") as NSArray
+                            self.busTimeArr = self.busTimeArr.adding(mtdData.departures[i].expected_mins.description) as NSArray
                         }
                     }
                     
