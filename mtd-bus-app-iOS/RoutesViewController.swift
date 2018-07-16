@@ -47,6 +47,10 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var favButton: UIBarButtonItem? = nil
     
+    let center = UNUserNotificationCenter.current()
+    
+    let options: UNAuthorizationOptions = [.alert, .sound];
+    
     /// Initializer of the class
     ///
     /// - Parameters:
@@ -88,8 +92,27 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         
-        let share = UITableViewRowAction(style: .normal, title: "Add Notification") { action, index in
-            //Stuff to add when swiped.
+        let share = UITableViewRowAction(style: .normal, title: "Add Reminder") { action, index in
+            let content = UNMutableNotificationContent()
+            content.title = "Bus Reminder!"
+            content.body = (self.busNameArr[editActionsForRowAt.row] as! String).description + " has arrived at " + self.currentStop
+            content.sound = UNNotificationSound.default()
+            content.categoryIdentifier = "UYLReminderCategory"
+
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3,
+                                                            repeats: false)
+            
+            let identifier = "UYLLocalNotification"
+            let request = UNNotificationRequest(identifier: identifier,
+                                                content: content, trigger: trigger)
+            self.center.add(request, withCompletionHandler: { (error) in
+                if let error = error {
+                    print("swipe error")
+                }
+            })
+            
+            print("worked")
+            
         }
         share.backgroundColor = .blue
         

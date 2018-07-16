@@ -99,8 +99,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Set up for 3D Touch in the cells of stopTableView
         registerForPreviewing(with: self, sourceView: stopTableView)
-
-        
     }
 
     /// This function checks the CoreData file to see if the stop info is already stored. If it is not stored then it will proceed to download the data through the downloadCurrentStopData() function.
@@ -333,7 +331,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         stopBusView()
     }
 
-    
 }
 
 extension ViewController {
