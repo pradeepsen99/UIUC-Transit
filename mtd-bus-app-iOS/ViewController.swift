@@ -183,7 +183,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //had to add this because adding it directly to the url made swift throw an error.
             let countStopsAPI = "&count=" + numberOfStops.description
             
-            guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=f298fa4670de47f68a5630304e66227d&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
+            guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
             
             URLSession.shared.dataTask(with: apiURL) { (data, response
                 , error) in

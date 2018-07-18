@@ -38,6 +38,7 @@ And after that click the run button and set the build to either the Simulator or
 * [Swift Expandable Search Bar in Header? - Stack Overflow](https://stackoverflow.com/questions/38580175/swift-expandable-search-bar-in-header)
 * [Search controller below navigation item prior to iOS 11 - Stack Overflow](https://stackoverflow.com/questions/46515105/search-controller-below-navigation-item-prior-to-ios-11)
 * [iOS 11 customise search bar in navigation bar - Stack Overflow](https://stackoverflow.com/questions/46007260/ios-11-customise-search-bar-in-navigation-bar)
+* [Local Notifications with iOS 10 - useyourloaf](https://useyourloaf.com/blog/local-notifications-with-ios-10/)
 
 ## TODO
 

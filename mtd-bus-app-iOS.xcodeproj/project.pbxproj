@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C18E0567CFC94B7FBD8F39A /* Pods_mtd_bus_app_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4257FE171747D61B21C25B4 /* Pods_mtd_bus_app_iOS.framework */; };
 		6A08EEBC20EA8222005439A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBB20EA8222005439A4 /* AppDelegate.swift */; };
 		6A08EEBE20EA8222005439A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBD20EA8222005439A4 /* ViewController.swift */; };
 		6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEBF20EA8222005439A4 /* Main.storyboard */; };
-		6A08EEC320EA8222005439A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEC220EA8222005439A4 /* Assets.xcassets */; };
 		6A08EECB20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */; };
 		6A08EED120EA8223005439A4 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EECF20EA8223005439A4 /* Interface.storyboard */; };
 		6A08EED320EA8223005439A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EED220EA8223005439A4 /* Assets.xcassets */; };
@@ -30,8 +28,7 @@
 		6A4BB55B20F21B1000850FC4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */; };
 		6AB3C37820FA316300690648 /* StructsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3C37720FA316300690648 /* StructsJSON.swift */; };
 		6AB3C37C20FCC7B200690648 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3C37B20FCC7B200690648 /* Constants.swift */; };
-		AF106747649DFE224B80DC53 /* Pods_mtd_bus_app_iOS_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9A485519CAAB5DCF48344E /* Pods_mtd_bus_app_iOS_WatchKit_App.framework */; };
-		EA25A7B7BEC2F71ED127F44D /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075606FDF3A534DF11960679 /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework */; };
+		6AB3C37E20FE580000690648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB3C37D20FE57FF00690648 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,15 +74,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		075606FDF3A534DF11960679 /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOS_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2408CC370CD2E7A2F398FD2C /* Pods-mtd-bus-app-iOS WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS WatchKit App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS WatchKit App/Pods-mtd-bus-app-iOS WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
-		433728A2FF2FAC4554BB8837 /* Pods-mtd-bus-app-iOS WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS WatchKit Extension/Pods-mtd-bus-app-iOS WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		61F4B72DF3109247AB2ED74C /* Pods-mtd-bus-app-iOS WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS WatchKit Extension/Pods-mtd-bus-app-iOS WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		6A08EEB820EA8222005439A4 /* mtd-bus-app-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mtd-bus-app-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08EEBB20EA8222005439A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A08EEBD20EA8222005439A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6A08EEC020EA8222005439A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6A08EEC220EA8222005439A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A08EEC720EA8222005439A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mtd-bus-app-iOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08EED020EA8223005439A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -108,11 +100,7 @@
 		6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6AB3C37720FA316300690648 /* StructsJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsJSON.swift; sourceTree = "<group>"; };
 		6AB3C37B20FCC7B200690648 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		73492DBA1067B6F6B20CB21C /* Pods-mtd-bus-app-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7B9A485519CAAB5DCF48344E /* Pods_mtd_bus_app_iOS_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOS_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		80FCBACE694357A8B71DBACE /* Pods-mtd-bus-app-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS/Pods-mtd-bus-app-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		9BE1E8F51B03A2D413917B6C /* Pods-mtd-bus-app-iOS WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtd-bus-app-iOS WatchKit App.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtd-bus-app-iOS WatchKit App/Pods-mtd-bus-app-iOS WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
-		A4257FE171747D61B21C25B4 /* Pods_mtd_bus_app_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mtd_bus_app_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AB3C37D20FE57FF00690648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF106747649DFE224B80DC53 /* Pods_mtd_bus_app_iOS_WatchKit_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +115,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C18E0567CFC94B7FBD8F39A /* Pods_mtd_bus_app_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +122,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA25A7B7BEC2F71ED127F44D /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +135,6 @@
 				6A08EECE20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App */,
 				6A08EEDD20EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension */,
 				6A08EEB920EA8222005439A4 /* Products */,
-				A7AE4D61150AF0452A1EDBE6 /* Pods */,
-				F533BBA1CCCD34AAC23B2BF0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,8 +154,8 @@
 				6A08EEBB20EA8222005439A4 /* AppDelegate.swift */,
 				6A08EEBD20EA8222005439A4 /* ViewController.swift */,
 				6A08EEBF20EA8222005439A4 /* Main.storyboard */,
-				6A08EEC220EA8222005439A4 /* Assets.xcassets */,
 				6A08EEC720EA8222005439A4 /* Info.plist */,
+				6AB3C37D20FE57FF00690648 /* Assets.xcassets */,
 				6A389C3420EA85A000A938D8 /* stopData.xcdatamodeld */,
 				6A389C3720EA862800A938D8 /* RoutesViewController.swift */,
 				6A389C3B20EBD8BA00A938D8 /* StopsViewController.swift */,
@@ -210,29 +193,6 @@
 			path = "mtd-bus-app-iOS WatchKit Extension";
 			sourceTree = "<group>";
 		};
-		A7AE4D61150AF0452A1EDBE6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				73492DBA1067B6F6B20CB21C /* Pods-mtd-bus-app-iOS.debug.xcconfig */,
-				80FCBACE694357A8B71DBACE /* Pods-mtd-bus-app-iOS.release.xcconfig */,
-				2408CC370CD2E7A2F398FD2C /* Pods-mtd-bus-app-iOS WatchKit App.debug.xcconfig */,
-				9BE1E8F51B03A2D413917B6C /* Pods-mtd-bus-app-iOS WatchKit App.release.xcconfig */,
-				433728A2FF2FAC4554BB8837 /* Pods-mtd-bus-app-iOS WatchKit Extension.debug.xcconfig */,
-				61F4B72DF3109247AB2ED74C /* Pods-mtd-bus-app-iOS WatchKit Extension.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		F533BBA1CCCD34AAC23B2BF0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A4257FE171747D61B21C25B4 /* Pods_mtd_bus_app_iOS.framework */,
-				7B9A485519CAAB5DCF48344E /* Pods_mtd_bus_app_iOS_WatchKit_App.framework */,
-				075606FDF3A534DF11960679 /* Pods_mtd_bus_app_iOS_WatchKit_Extension.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,7 +200,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A08EEF420EA8224005439A4 /* Build configuration list for PBXNativeTarget "mtd-bus-app-iOS" */;
 			buildPhases = (
-				0ADE1E057D3B599F3FC592BD /* [CP] Check Pods Manifest.lock */,
 				6A08EEB420EA8222005439A4 /* Sources */,
 				6A08EEB520EA8222005439A4 /* Frameworks */,
 				6A08EEB620EA8222005439A4 /* Resources */,
@@ -260,7 +219,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A08EEF020EA8224005439A4 /* Build configuration list for PBXNativeTarget "mtd-bus-app-iOS WatchKit App" */;
 			buildPhases = (
-				483329B24023FB97725CD81D /* [CP] Check Pods Manifest.lock */,
 				6A08EEC820EA8223005439A4 /* Resources */,
 				6A08EEEF20EA8224005439A4 /* Embed App Extensions */,
 				1A79023D25D9B869F4F0377F /* Frameworks */,
@@ -279,7 +237,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A08EEEC20EA8224005439A4 /* Build configuration list for PBXNativeTarget "mtd-bus-app-iOS WatchKit Extension" */;
 			buildPhases = (
-				877C200A05485DF4918A9FAA /* [CP] Check Pods Manifest.lock */,
 				6A08EED520EA8223005439A4 /* Sources */,
 				6A08EED620EA8223005439A4 /* Frameworks */,
 				6A08EED720EA8223005439A4 /* Resources */,
@@ -305,6 +262,11 @@
 				TargetAttributes = {
 					6A08EEB720EA8222005439A4 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					6A08EEC920EA8223005439A4 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -339,9 +301,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A08EEC320EA8222005439A4 /* Assets.xcassets in Resources */,
 				6A389C4220EE212000A938D8 /* Launch_Screen.storyboard in Resources */,
 				6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */,
+				6AB3C37E20FE580000690648 /* Assets.xcassets in Resources */,
 				6A389C3E20EBE22700A938D8 /* AllStops.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,63 +326,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0ADE1E057D3B599F3FC592BD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mtd-bus-app-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		483329B24023FB97725CD81D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mtd-bus-app-iOS WatchKit App-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		877C200A05485DF4918A9FAA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mtd-bus-app-iOS WatchKit Extension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6A08EEB420EA8222005439A4 /* Sources */ = {
@@ -601,7 +506,6 @@
 		};
 		6A08EEED20EA8224005439A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 433728A2FF2FAC4554BB8837 /* Pods-mtd-bus-app-iOS WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
@@ -624,7 +528,6 @@
 		};
 		6A08EEEE20EA8224005439A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61F4B72DF3109247AB2ED74C /* Pods-mtd-bus-app-iOS WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
@@ -647,7 +550,6 @@
 		};
 		6A08EEF120EA8224005439A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2408CC370CD2E7A2F398FD2C /* Pods-mtd-bus-app-iOS WatchKit App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -667,7 +569,6 @@
 		};
 		6A08EEF220EA8224005439A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9BE1E8F51B03A2D413917B6C /* Pods-mtd-bus-app-iOS WatchKit App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -687,13 +588,12 @@
 		};
 		6A08EEF520EA8224005439A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73492DBA1067B6F6B20CB21C /* Pods-mtd-bus-app-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YUVCNXW3P2;
 				INFOPLIST_FILE = "mtd-bus-app-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -707,13 +607,12 @@
 		};
 		6A08EEF620EA8224005439A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80FCBACE694357A8B71DBACE /* Pods-mtd-bus-app-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YUVCNXW3P2;
 				INFOPLIST_FILE = "mtd-bus-app-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
