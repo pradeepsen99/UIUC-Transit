@@ -12,13 +12,13 @@
 		6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEBF20EA8222005439A4 /* Main.storyboard */; };
 		6A08EECB20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */; };
 		6A08EED120EA8223005439A4 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EECF20EA8223005439A4 /* Interface.storyboard */; };
-		6A08EED320EA8223005439A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EED220EA8223005439A4 /* Assets.xcassets */; };
+		6A08EED320EA8223005439A4 /* AssetsWatch.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EED220EA8223005439A4 /* AssetsWatch.xcassets */; };
 		6A08EEDA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A08EED920EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6A08EEDF20EA8223005439A4 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEDE20EA8223005439A4 /* InterfaceController.swift */; };
 		6A08EEE120EA8223005439A4 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEE020EA8223005439A4 /* ExtensionDelegate.swift */; };
 		6A08EEE320EA8223005439A4 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEE220EA8223005439A4 /* NotificationController.swift */; };
 		6A08EEE520EA8223005439A4 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEE420EA8223005439A4 /* ComplicationController.swift */; };
-		6A08EEE720EA8224005439A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEE620EA8224005439A4 /* Assets.xcassets */; };
+		6A08EEE720EA8224005439A4 /* AssetsWatchExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEE620EA8224005439A4 /* AssetsWatchExtension.xcassets */; };
 		6A389C3620EA85A000A938D8 /* stopData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A389C3420EA85A000A938D8 /* stopData.xcdatamodeld */; };
 		6A389C3820EA862800A938D8 /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A389C3720EA862800A938D8 /* RoutesViewController.swift */; };
 		6A389C3C20EBD8BA00A938D8 /* StopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A389C3B20EBD8BA00A938D8 /* StopsViewController.swift */; };
@@ -81,14 +81,14 @@
 		6A08EEC720EA8222005439A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mtd-bus-app-iOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08EED020EA8223005439A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		6A08EED220EA8223005439A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A08EED220EA8223005439A4 /* AssetsWatch.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AssetsWatch.xcassets; sourceTree = "<group>"; };
 		6A08EED420EA8223005439A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A08EED920EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "mtd-bus-app-iOS WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08EEDE20EA8223005439A4 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		6A08EEE020EA8223005439A4 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		6A08EEE220EA8223005439A4 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		6A08EEE420EA8223005439A4 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		6A08EEE620EA8224005439A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A08EEE620EA8224005439A4 /* AssetsWatchExtension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AssetsWatchExtension.xcassets; sourceTree = "<group>"; };
 		6A08EEE820EA8224005439A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A08EEE920EA8224005439A4 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		6A389C3520EA85A000A938D8 /* stopData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = stopData.xcdatamodel; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				6A08EECF20EA8223005439A4 /* Interface.storyboard */,
-				6A08EED220EA8223005439A4 /* Assets.xcassets */,
+				6A08EED220EA8223005439A4 /* AssetsWatch.xcassets */,
 				6A08EED420EA8223005439A4 /* Info.plist */,
 			);
 			path = "mtd-bus-app-iOS WatchKit App";
@@ -186,7 +186,7 @@
 				6A08EEE020EA8223005439A4 /* ExtensionDelegate.swift */,
 				6A08EEE220EA8223005439A4 /* NotificationController.swift */,
 				6A08EEE420EA8223005439A4 /* ComplicationController.swift */,
-				6A08EEE620EA8224005439A4 /* Assets.xcassets */,
+				6A08EEE620EA8224005439A4 /* AssetsWatchExtension.xcassets */,
 				6A08EEE820EA8224005439A4 /* Info.plist */,
 				6A08EEE920EA8224005439A4 /* PushNotificationPayload.apns */,
 			);
@@ -263,6 +263,9 @@
 					6A08EEB720EA8222005439A4 = {
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
@@ -312,7 +315,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A08EED320EA8223005439A4 /* Assets.xcassets in Resources */,
+				6A08EED320EA8223005439A4 /* AssetsWatch.xcassets in Resources */,
 				6A08EED120EA8223005439A4 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,7 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A08EEE720EA8224005439A4 /* Assets.xcassets in Resources */,
+				6A08EEE720EA8224005439A4 /* AssetsWatchExtension.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
