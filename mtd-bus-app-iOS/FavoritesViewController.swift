@@ -103,32 +103,44 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         stopNameArr = arrayofStopsNameDatabase as NSArray
         stopIDArr = arrayofStopsCodeDatabase as NSArray
         
-        let barHeight: CGFloat = 0
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        
-        self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-        self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        self.stopTableView.dataSource = self
-        self.stopTableView.delegate = self
-        self.stopTableView.separatorStyle = .none
-        view.addSubview(self.stopTableView)
+        if(arrayofStopsCodeDatabase.count != 0){
+            let barHeight: CGFloat = 0
+            let displayWidth: CGFloat = self.view.frame.width
+            let displayHeight: CGFloat = self.view.frame.height
+            
+            self.stopTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+            self.stopTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+            self.stopTableView.tag = 100
+            self.stopTableView.dataSource = self
+            self.stopTableView.delegate = self
+            self.stopTableView.separatorStyle = .none
+            view.addSubview(self.stopTableView)
+        }
     }
     
     @objc func loadList(){
-        //load data here
         let defaults = UserDefaults.standard
-
         
         let arrayofStopsNameDatabase = defaults.stringArray(forKey: "favStopsName") ?? [String]()
         let arrayofStopsCodeDatabase = defaults.stringArray(forKey: "favStopsCode") ?? [String]()
         
-        
         stopNameArr = arrayofStopsNameDatabase as NSArray
         stopIDArr = arrayofStopsCodeDatabase as NSArray
         
+        if(stopTableView == nil){
+            displayTable()
+        }
+        
+        if(arrayofStopsCodeDatabase.count == 0){
+            let viewWithTag = self.view.viewWithTag(100)
+            viewWithTag?.removeFromSuperview()
+        }else{
+            self.stopTableView.reloadData()
+        }
+
+
         print("reloading Data")
-        self.stopTableView.reloadData()
+        
     }
     
 }
