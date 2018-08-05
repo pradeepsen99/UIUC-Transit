@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A034260210325E800DEC169 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A03425F210325E800DEC169 /* Assets.xcassets */; };
 		6A08EEBC20EA8222005439A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBB20EA8222005439A4 /* AppDelegate.swift */; };
 		6A08EEBE20EA8222005439A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBD20EA8222005439A4 /* ViewController.swift */; };
 		6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEBF20EA8222005439A4 /* Main.storyboard */; };
@@ -28,7 +29,6 @@
 		6A4BB55B20F21B1000850FC4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */; };
 		6AB3C37820FA316300690648 /* StructsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3C37720FA316300690648 /* StructsJSON.swift */; };
 		6AB3C37C20FCC7B200690648 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3C37B20FCC7B200690648 /* Constants.swift */; };
-		6AB3C37E20FE580000690648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB3C37D20FE57FF00690648 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A03425F210325E800DEC169 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A08EEB820EA8222005439A4 /* mtd-bus-app-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mtd-bus-app-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A08EEBB20EA8222005439A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A08EEBD20EA8222005439A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +101,6 @@
 		6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6AB3C37720FA316300690648 /* StructsJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsJSON.swift; sourceTree = "<group>"; };
 		6AB3C37B20FCC7B200690648 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		6AB3C37D20FE57FF00690648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +155,6 @@
 				6A08EEBD20EA8222005439A4 /* ViewController.swift */,
 				6A08EEBF20EA8222005439A4 /* Main.storyboard */,
 				6A08EEC720EA8222005439A4 /* Info.plist */,
-				6AB3C37D20FE57FF00690648 /* Assets.xcassets */,
 				6A389C3420EA85A000A938D8 /* stopData.xcdatamodeld */,
 				6A389C3720EA862800A938D8 /* RoutesViewController.swift */,
 				6A389C3B20EBD8BA00A938D8 /* StopsViewController.swift */,
@@ -165,6 +164,7 @@
 				6A4BB55A20F21B1000850FC4 /* SettingsViewController.swift */,
 				6AB3C37720FA316300690648 /* StructsJSON.swift */,
 				6AB3C37B20FCC7B200690648 /* Constants.swift */,
+				6A03425F210325E800DEC169 /* Assets.xcassets */,
 			);
 			path = "mtd-bus-app-iOS";
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 			files = (
 				6A389C4220EE212000A938D8 /* Launch_Screen.storyboard in Resources */,
 				6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */,
-				6AB3C37E20FE580000690648 /* Assets.xcassets in Resources */,
+				6A034260210325E800DEC169 /* Assets.xcassets in Resources */,
 				6A389C3E20EBE22700A938D8 /* AllStops.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

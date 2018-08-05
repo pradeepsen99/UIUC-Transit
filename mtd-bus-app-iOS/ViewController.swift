@@ -41,7 +41,7 @@ import UserNotifications
 
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
-
+    
     let numberOfStops: Int = 15
     let feetToMileConv: Double = 0.000189393939
     
@@ -64,12 +64,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let center = UNUserNotificationCenter.current()
     let options: UNAuthorizationOptions = [.alert, .sound];
-
+    
+    var initialLoad: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.gray
+        //view.backgroundColor = UIColor.gray
         
         // For use when the app is open
         DispatchQueue.main.async {
@@ -82,7 +84,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     print("Something went wrong")
                 }
             }
-
+            
         }
         
         // If location services is enabled get the users location
@@ -97,10 +99,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         checkCacheStopData()
         
-        //Set up for 3D Touch in the cells of stopTableView
-        registerForPreviewing(with: self, sourceView: stopTableView)
+        if(!isStopArrEmpty()){
+            //Set up for 3D Touch in the cells of stopTableView
+            registerForPreviewing(with: self, sourceView: stopTableView)
+        }
+        
     }
-
+    
+    func isStopArrEmpty() -> Bool{
+        return stopNameArr.count == 0
+    }
+    
     /// This function checks the CoreData file to see if the stop info is already stored. If it is not stored then it will proceed to download the data through the downloadCurrentStopData() function.
     func checkCacheStopData(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -128,12 +137,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch {
             print("Failed")
         }
-        self.displayTable()
+        self.initTable()
     }
     
     
     /// Displays the table based on pre determined values. The table will fit in the middle of the screen, making sure to be under the tab bar and the navigation controller. Can change the values inside the function to make the table bigger or smaller, change color, etc.
-    func displayTable(){
+    func initTable(){
+        
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
@@ -143,16 +153,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.stopTableView.dataSource = self
         self.stopTableView.delegate = self
         self.stopTableView.separatorStyle = .none
-        view.addSubview(self.stopTableView)
         
-        //Swiping down to refresh code.
-        if #available(iOS 10.0, *) {
-            stopTableView.refreshControl = refreshControl
-        } else {
-            stopTableView.addSubview(refreshControl)
+        
+        
+        
+    }
+    
+    func displayTable(){
+        if(!isStopArrEmpty()){
+            view.addSubview(self.stopTableView)
+            
+            //Swiping down to refresh code.
+            if #available(iOS 10.0, *) {
+                stopTableView.refreshControl = refreshControl
+            } else {
+                stopTableView.addSubview(refreshControl)
+            }
+            refreshControl.addTarget(self, action: #selector(refreshStopData(_:)), for: .valueChanged)
+            refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
         }
-        refreshControl.addTarget(self, action: #selector(refreshStopData(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
     }
     
     
@@ -179,7 +198,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             lat = (locationManager.location?.coordinate.latitude)!
             long = (locationManager.location?.coordinate.longitude)!
-
+            
             //had to add this because adding it directly to the url made swift throw an error.
             let countStopsAPI = "&count=" + numberOfStops.description
             
@@ -215,7 +234,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         //Adds the stop data to the currentStopList.
                         newUser.setValue(mtdData, forKey: "currentStopList")
                         
-                        self.stopTableView.reloadData()
+                        if(!self.initialLoad){
+                            self.initialLoad = true
+                            self.displayTable()
+                            
+                        }
+                        if(!self.isStopArrEmpty()){
+                            self.stopTableView.reloadData()
+                            print(self.view.subviews.count)
+                        }
+                        
                     }
                 } catch let err {
                     print("Error Downloading data", err)
@@ -330,7 +358,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         stopBusView()
     }
-
+    
 }
 
 extension ViewController {
