@@ -101,7 +101,7 @@
         <!--Settings-->
         <scene sceneID="3Jk-hn-pBR">
             <objects>
-                <viewController title="Settings" id="fJr-6Z-aOT" sceneMemberID="viewController">
+                <viewController title="Settings" id="fJr-6Z-aOT" customClass="SettingsViewController" customModule="mtd_bus_app_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aLl-XQ-uYb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEo-4N-PhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="503" y="826"/>
+            <point key="canvasLocation" x="501.60000000000002" y="825.33733133433293"/>
         </scene>
         <!--Stops-->
         <scene sceneID="JFB-hw-PVd">

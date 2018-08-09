@@ -32,17 +32,48 @@
 //  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-//import UIKit
-//
-//class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//
-//
-//
-//}
+import UIKit
+
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    fileprivate var settingsArr: NSArray = []
+    fileprivate var settingsTableView: UITableView!
+
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return settingsArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "MyCell")
+        cell.textLabel!.text = "\(settingsArr[indexPath.row])"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        settingsArr = settingsArr.adding("hi") as NSArray
+        displayTable()
+    }
+    
+    func displayTable(){
+        
+        let barHeight: CGFloat = 0
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        
+        self.settingsTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+        self.settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.settingsTableView.dataSource = self
+        self.settingsTableView.delegate = self
+        self.settingsTableView.separatorStyle = .none
+        
+        
+        
+        view.addSubview(self.settingsTableView)
+    }
+
+}
