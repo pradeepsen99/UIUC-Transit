@@ -46,17 +46,33 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "MyCell")
         cell.textLabel!.text = "\(settingsArr[indexPath.row])"
+        
+        let switchView = UISwitch(frame: .zero)
+        switchView.setOn(false, animated: true)
+        switchView.tag = indexPath.row // for detect which row switch Changed
+        switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        cell.accessoryView = switchView
+        
+        let image : UIImage = UIImage(named: "advertising")!
+        cell.imageView?.image = image
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    @objc func switchChanged(_ sender : UISwitch!){
+        print("table row switch Changed \(sender.tag)")
+        print("The switch is \(sender.isOn ? "ON" : "OFF")")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsArr = settingsArr.adding("hi") as NSArray
+        settingsArr = settingsArr.adding("Notifications") as NSArray
         displayTable()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 50;//Choose your custom row height
     }
     
     func displayTable(){
@@ -64,15 +80,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        
-        self.settingsTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+
+        self.settingsTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight))
         self.settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
-        self.settingsTableView.separatorStyle = .none
+        self.settingsTableView.separatorStyle = .singleLine
+        self.settingsTableView.rowHeight = UITableViewAutomaticDimension
         
-        
-        
+        self.settingsTableView.alwaysBounceVertical = false
+        self.settingsTableView.allowsSelection = false
+
         view.addSubview(self.settingsTableView)
     }
 
