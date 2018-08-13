@@ -60,19 +60,32 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func switchChanged(_ sender : UISwitch!){
-        print("table row switch Changed \(sender.tag)")
-        print("The switch is \(sender.isOn ? "ON" : "OFF")")
+        
+        let defaults = UserDefaults.standard
+        let notificationsCheck = defaults.bool(forKey: "notificationsCheck")
+        
+        if(notificationsCheck){
+            defaults.set(false, forKey: "notificationsCheck")
+        }else{
+            defaults.set(true, forKey: "notificationsCheck")
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.topItem?.title = "Settings"
+        
+        //Adds the options to select from
         settingsArr = settingsArr.adding("Notifications") as NSArray
+        
         displayTable()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 50;//Choose your custom row height
+        return 50
     }
     
     func displayTable(){

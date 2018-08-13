@@ -45,6 +45,11 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     fileprivate var busTimeArr: NSArray = []
     fileprivate var stopTableView: UITableView!
     
+    var alertController: UIAlertController?
+    var alertTimer: Timer?
+    var remainingTime = 0
+    var baseMessage: String?
+    
     var favButton: UIBarButtonItem? = nil
     
     let center = UNUserNotificationCenter.current()
@@ -93,42 +98,49 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         
         let share = UITableViewRowAction(style: .normal, title: "Add Reminder") { action, index in
-            let content = UNMutableNotificationContent()
-            content.title = "Bus Reminder!"
-            content.body = (self.busNameArr[editActionsForRowAt.row] as! String).description + " has arrived at " + self.currentStop
-            content.sound = UNNotificationSound.default()
-            content.categoryIdentifier = "UYLReminderCategory"
             
-            print(self.busTimeArr[editActionsForRowAt.row])
-            let busTimeStr: String = self.busTimeArr[editActionsForRowAt.row] as! String
-            var busTimeInSec: Double = Double(busTimeStr)! * 60
+            let defaults = UserDefaults.standard
+            let notificationsCheck = defaults.bool(forKey: "notificationsCheck")
             
-            if(busTimeInSec == 0){
-                busTimeInSec = 1.0
-            }
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: busTimeInSec,
-                                                            repeats: false)
-            
-            let identifier = "UYLLocalNotification"
-            let request = UNNotificationRequest(identifier: identifier,
-                                                content: content, trigger: trigger)
-            self.center.add(request, withCompletionHandler: { (error) in
-                if let error = error {
-                    print("swipe error")
+            if(notificationsCheck){
+                let content = UNMutableNotificationContent()
+                content.title = "Bus Reminder!"
+                content.body = (self.busNameArr[editActionsForRowAt.row] as! String).description + " has arrived at " + self.currentStop
+                content.sound = UNNotificationSound.default()
+                content.categoryIdentifier = "UYLReminderCategory"
+                
+                print(self.busTimeArr[editActionsForRowAt.row])
+                let busTimeStr: String = self.busTimeArr[editActionsForRowAt.row] as! String
+                var busTimeInSec: Double = Double(busTimeStr)! * 60
+                
+                if(busTimeInSec == 0){
+                    busTimeInSec = 1.0
                 }
-            })
-            
-            print("worked")
-            
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: busTimeInSec,
+                                                                repeats: false)
+                
+                let identifier = "UYLLocalNotification"
+                let request = UNNotificationRequest(identifier: identifier,
+                                                    content: content, trigger: trigger)
+                self.center.add(request, withCompletionHandler: { (error) in
+                    if let error = error {
+                        print("swipe error")
+                    }
+                })
+                
+                print("worked")
+            }else{
+                self.showAlertMsg(title: "You have notifications disabled, please re-enable them", message: "This will disappear in ", time: 5)
+
+            }
+
         }
         share.backgroundColor = .blue
         
         return [share]
     }
-    
-    
-    
+
     /// This function determines the color of the favorite by seeing if it is part of the favStopsName array and if it is changes it to blue, otherwise it chsanges it to white. Runs after favOnClick() is run
     func checkIfStopChangeColor(){
         favButton = nil
@@ -267,5 +279,57 @@ extension RoutesViewController{
         
         //Runs the function to determine wether the favorite button should change color depending on wether it's part of the favorited list.
         checkIfStopChangeColor()
+    }
+    
+    
+    func showAlertMsg(title: String, message: String, time: Int) {
+        
+        guard (self.alertController == nil) else {
+            print("Alert already displayed")
+            return
+        }
+        
+        self.baseMessage = message
+        self.remainingTime = time
+        
+        self.alertController = UIAlertController(title: title, message: self.alertMessage(), preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            self.alertController=nil;
+            self.alertTimer?.invalidate()
+            self.alertTimer=nil
+        }
+        
+        self.alertController!.addAction(cancelAction)
+        
+        self.alertTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(RoutesViewController.countDown), userInfo: nil, repeats: true)
+        
+        self.present(self.alertController!, animated: true, completion: nil)
+    }
+    
+    @objc func countDown() {
+        
+        self.remainingTime -= 1
+        if (self.remainingTime < 0) {
+            self.alertTimer?.invalidate()
+            self.alertTimer = nil
+            self.alertController!.dismiss(animated: true, completion: {
+                self.alertController = nil
+            })
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 3
+            }
+        } else {
+            self.alertController!.message = self.alertMessage()
+        }
+        
+    }
+    
+    func alertMessage() -> String {
+        var message=""
+        if let baseMessage=self.baseMessage {
+            message=baseMessage+" "
+        }
+        return(message+"\(self.remainingTime)")
     }
 }
