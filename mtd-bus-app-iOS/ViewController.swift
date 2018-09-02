@@ -368,7 +368,7 @@ extension ViewController {
     /// This function uses the navigationController to open up a new new controller: StopBusListViewController with the values of the currentStopCode and the currentStop in the constructor. It is also animated to look good.
     func stopBusView(){
         navigationController?.pushViewController(RoutesViewController(stop: currentStop, code: currentStopCode), animated: true)
-        
+
     }
 }
 

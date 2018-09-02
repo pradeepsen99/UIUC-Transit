@@ -131,7 +131,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 print("worked")
             }else{
-                self.showAlertMsg(title: "You have notifications disabled, please re-enable them", message: "This will disappear in ", time: 5)
+                self.showAlertMsg(title: "You have notifications disabled, please re-enable them", message: "You will be redirected to the settings menu in: ", time: 5)
 
             }
 
@@ -298,6 +298,9 @@ extension RoutesViewController{
             self.alertController=nil;
             self.alertTimer?.invalidate()
             self.alertTimer=nil
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 3
+            }
         }
         
         self.alertController!.addAction(cancelAction)

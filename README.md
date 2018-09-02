@@ -1,4 +1,4 @@
-# cumtd-bus-app
+# Navigation for CUMTD 
 
 An app, based on your current location in the Champaign-Urbana area, gives the nearest CUMTD bus stop and the busses that run witin those stops.
 
@@ -46,7 +46,7 @@ And after that click the run button and set the build to either the Simulator or
 * - [x] Favorites Tab with Favorite bus stops.
 * - [x] Search bar for any stop in 'stops' tab.
 * - [x] Add dynamic favorites button.
-* - [ ] Settings tab with settings related to app.
+* - [x] Settings tab with settings related to app.
 * - [x] Add slide down to refresh option.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.
