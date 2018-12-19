@@ -56,6 +56,8 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let options: UNAuthorizationOptions = [.alert, .sound];
     
+    private let refreshControl = UIRefreshControl()
+    
     /// Initializer of the class
     ///
     /// - Parameters:
