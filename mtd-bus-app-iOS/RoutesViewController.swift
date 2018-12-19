@@ -226,6 +226,13 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.stopTableView.delegate = self
         self.stopTableView.separatorStyle = .none
         view.addSubview(self.stopTableView)
+        
+        //Swiping down to refresh code.
+        if #available(iOS 10.0, *) {
+            stopTableView.refreshControl = refreshControl
+        } else {
+            stopTableView.addSubview(refreshControl)
+        }
     }
 }
 

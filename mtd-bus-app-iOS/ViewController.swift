@@ -74,6 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         //view.backgroundColor = UIColor.gray
+        initTable()
         
         // For use when the app is open
         DispatchQueue.main.async {
@@ -99,7 +100,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Title of the Tab
         self.navigationController?.navigationBar.topItem?.title = "Nearby"
         
-        checkCacheStopData()
+        downloadCurrentStopData()
         
         if(!isStopArrEmpty()){
             //Set up for 3D Touch in the cells of stopTableView
@@ -111,37 +112,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func isStopArrEmpty() -> Bool{
         return stopNameArr.count == 0
     }
-    
-    /// This function checks the CoreData file to see if the stop info is already stored. If it is not stored then it will proceed to download the data through the downloadCurrentStopData() function.
-    func checkCacheStopData(){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StopData")
-        request.returnsObjectsAsFaults = false
-        // Fetching data from CoreData
-        do {
-            let result = try context.fetch(request)
-            if(result.count == 0){
-                downloadCurrentStopData()
-            }else{
-                for data in result as! [NSManagedObject] {
-                    let tempTest: mtd_stop_loc = data.value(forKey: "currentStopList") as! mtd_stop_loc
-                    for i in 0..<tempTest.stops.count {
-                        self.stopNameArr = self.stopNameArr.adding(tempTest.stops[i].stop_name) as NSArray
-                        self.stopIDArr = self.stopIDArr.adding(tempTest.stops[i].stop_id) as NSArray
-                        
-                        let currentDistacne = ((tempTest.stops[i].distance)*self.feetToMileConv)
-                        let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
-                        self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
-                    }
-                }
-            }
-        } catch {
-            print("Failed")
-        }
-        self.initTable()
-    }
-    
     
     /// Displays the table based on pre determined values. The table will fit in the middle of the screen, making sure to be under the tab bar and the navigation controller. Can change the values inside the function to make the table bigger or smaller, change color, etc.
     func initTable(){
@@ -184,6 +154,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.refreshControl.beginRefreshing()
         // Re-Fetch Stop Data
         DispatchQueue.main.async {
+            self.stopNameArr = []
+            self.stopIDArr = []
+            self.stopDistance = []
             self.downloadCurrentStopData()
             self.stopTableView.reloadData()
         }
