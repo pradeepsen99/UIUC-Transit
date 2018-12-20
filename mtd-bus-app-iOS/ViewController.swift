@@ -168,65 +168,60 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     /// This function updates the current Lat and Long values. It also downloads the stop data based on the current lat+long values
     @IBAction func downloadCurrentStopData (){
         
-        //If for some reason location location is not acessible, then it will display prompt that location services was not enabled for the app.
-        if(locationManager.location?.coordinate.latitude != nil || ((locationManager.location?.coordinate.longitude) != nil)){
+        lat = (locationManager.location?.coordinate.latitude)!
+        long = (locationManager.location?.coordinate.longitude)!
+        
+        //had to add this because adding it directly to the url made swift throw an error.
+        let countStopsAPI = "&count=" + numberOfStops.description
+        
+        guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
+        
+        URLSession.shared.dataTask(with: apiURL) { (data, response
+            , error) in
             
-            lat = (locationManager.location?.coordinate.latitude)!
-            long = (locationManager.location?.coordinate.longitude)!
-            
-            //had to add this because adding it directly to the url made swift throw an error.
-            let countStopsAPI = "&count=" + numberOfStops.description
-            
-            guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
-            
-            URLSession.shared.dataTask(with: apiURL) { (data, response
-                , error) in
-                
-                guard let data = data else { return }
-                do {
-                    let decoder = JSONDecoder()
-                    //Decodes the JSON recieved from the url.
-                    let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
-                    self.currentStopData = mtdData
-                    DispatchQueue.main.async {
-                        //Iterates through all of the stops in the decoded data (stops) in mtdData.
-                        for i in 0..<mtdData.stops.count {
-                            //Adds the stop name and stop id to respective arrays.
-                            self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
-                            self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
-                            
-                            //Gets the distance, in feet, and converts it to miles and adds it to the array.
-                            let currentDistacne = ((mtdData.stops[i].distance)*self.feetToMileConv)
-                            let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
-                            self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
-                        }
-                        //Code to acess the coreData functinality.
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        let context = appDelegate.persistentContainer.viewContext
-                        let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
-                        let newUser = NSManagedObject(entity: entity!, insertInto: context)
+            guard let data = data else { return }
+            do {
+                let decoder = JSONDecoder()
+                //Decodes the JSON recieved from the url.
+                let mtdData = try decoder.decode(mtd_stop_loc.self, from: data)
+                self.currentStopData = mtdData
+                DispatchQueue.main.async {
+                    //Iterates through all of the stops in the decoded data (stops) in mtdData.
+                    for i in 0..<mtdData.stops.count {
+                        //Adds the stop name and stop id to respective arrays.
+                        self.stopNameArr = self.stopNameArr.adding(mtdData.stops[i].stop_name) as NSArray
+                        self.stopIDArr = self.stopIDArr.adding(mtdData.stops[i].stop_id) as NSArray
                         
-                        //Adds the stop data to the currentStopList.
-                        newUser.setValue(mtdData, forKey: "currentStopList")
-                        
-                        if(!self.initialLoad){
-                            self.initialLoad = true
-                            self.displayTable()
-                            
-                        }
-                        if(!self.isStopArrEmpty()){
-                            self.stopTableView.reloadData()
-                            print(self.view.subviews.count)
-                        }
+                        //Gets the distance, in feet, and converts it to miles and adds it to the array.
+                        let currentDistacne = ((mtdData.stops[i].distance)*self.feetToMileConv)
+                        let roundedDownDistance = String(format: "%.2f", currentDistacne) + " mi"
+                        self.stopDistance = self.stopDistance.adding(roundedDownDistance) as NSArray
+                    }
+                    //Code to acess the coreData functinality.
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let context = appDelegate.persistentContainer.viewContext
+                    let entity = NSEntityDescription.entity(forEntityName: "StopData", in: context)
+                    let newUser = NSManagedObject(entity: entity!, insertInto: context)
+                    
+                    //Adds the stop data to the currentStopList.
+                    newUser.setValue(mtdData, forKey: "currentStopList")
+                    
+                    if(!self.initialLoad){
+                        self.initialLoad = true
+                        self.displayTable()
                         
                     }
-                } catch let err {
-                    print("Error Downloading data", err)
+                    if(!self.isStopArrEmpty()){
+                        self.stopTableView.reloadData()
+                        print(self.view.subviews.count)
+                    }
+                    
                 }
-                }.resume()
-        }else{
-            showLocationDisabledPopUp()
-        }
+            } catch let err {
+                print("Error Downloading data", err)
+            }
+            }.resume()
+        
     }
     
     
@@ -341,7 +336,7 @@ extension ViewController {
     /// This function uses the navigationController to open up a new new controller: StopBusListViewController with the values of the currentStopCode and the currentStop in the constructor. It is also animated to look good.
     func stopBusView(){
         navigationController?.pushViewController(RoutesViewController(stop: currentStop, code: currentStopCode), animated: true)
-
+        
     }
 }
 

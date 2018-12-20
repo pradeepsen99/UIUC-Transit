@@ -175,15 +175,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationItem.rightBarButtonItem = favButton
     }
     
-    override func viewDidLoad() {
-        checkIfStopChangeColor()
-        
-        view.backgroundColor = UIColor.darkGray
-        self.title = currentStop
-        
-        //Adds the favorite button
-
-        
+    func downloadBusNames(){
         guard let gitUrl = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=f298fa4670de47f68a5630304e66227d&stop_id="+currentStopCode+"&pt=60") else { return }
         
         URLSession.shared.dataTask(with: gitUrl) { (data, response
@@ -211,6 +203,18 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             }.resume()
     }
+    
+    override func viewDidLoad() {
+        checkIfStopChangeColor()
+        
+        view.backgroundColor = UIColor.darkGray
+        self.title = currentStop
+        
+        //Adds the favorite button
+
+        downloadBusNames()
+
+    }
 
     
     
@@ -233,6 +237,23 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             stopTableView.addSubview(refreshControl)
         }
+        refreshControl.addTarget(self, action: #selector(refreshStopData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
+    }
+    
+    /// This functions runs when the user pulls down and activates the refreshControl.
+    ///
+    /// - Parameter sender: un-used var
+    @objc private func refreshStopData(_ sender: Any) {
+        self.refreshControl.beginRefreshing()
+        // Re-Fetch Stop Data
+        DispatchQueue.main.async {
+            self.busNameArr = []
+            self.busTimeArr = []
+            self.downloadBusNames()
+            self.stopTableView.reloadData()
+        }
+        self.refreshControl.endRefreshing()
     }
 }
 
