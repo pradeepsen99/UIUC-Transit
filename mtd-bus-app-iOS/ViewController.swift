@@ -213,7 +213,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                     if(!self.isStopArrEmpty()){
                         self.stopTableView.reloadData()
-                        print(self.view.subviews.count)
+                        //print(self.view.subviews.count)
                     }
                     
                 }

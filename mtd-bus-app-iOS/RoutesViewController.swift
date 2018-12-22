@@ -39,6 +39,7 @@ import UserNotifications
 class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentStop:String = ""
     var currentStopCode: String = ""
+    var initialLoad: Bool = false
     
     fileprivate var currentStopData: mtd_routes? = nil
     fileprivate var busNameArr: NSArray = []
@@ -96,9 +97,8 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        
+        //TODO Revamp the 
         let share = UITableViewRowAction(style: .normal, title: "Add Reminder") { action, index in
             
             let defaults = UserDefaults.standard
@@ -195,8 +195,12 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.busTimeArr = self.busTimeArr.adding(mtdData.departures[i].expected_mins.description) as NSArray
                         }
                     }
+                    //runs a one time code that displays the table.
+                    if(!self.initialLoad){
+                        self.displayTable()
+                        self.initialLoad = true
+                    }
                     
-                    self.displayTable()
                 }
             } catch let err {
                 print("Error Downloading data", err)
@@ -213,13 +217,12 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Adds the favorite button
 
         downloadBusNames()
+        initTable()
 
     }
-
     
-    
-    /// Displays the table using the given values.
-    func displayTable(){
+    //This function initalizes the tableView. To be run during 
+    func initTable(){
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
@@ -229,6 +232,11 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.stopTableView.dataSource = self
         self.stopTableView.delegate = self
         self.stopTableView.separatorStyle = .none
+    }
+    
+    /// Displays the table using the given values.
+    func displayTable(){
+
         view.addSubview(self.stopTableView)
         
         //Swiping down to refresh code.
