@@ -36,11 +36,18 @@
 import UIKit
 import CoreLocation
 import CoreData
+import UserNotifications
+
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     fileprivate var stopNameArr: NSArray = []
     fileprivate var stopIDArr: NSArray = []
     fileprivate var stopTableView: UITableView!
+    
+    let locationManager = CLLocationManager()
+    
+    let center = UNUserNotificationCenter.current()
+    let options: UNAuthorizationOptions = [.alert, .sound];
     
     var currentStop: String = ""
     var currentStopCode: String = ""
@@ -87,6 +94,26 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
 
+        // For use when the app is open
+        DispatchQueue.main.async {
+            //Requests the user to provide access to use their location.
+            self.locationManager.requestWhenInUseAuthorization()
+            
+            //Requests the user to provide access to give them notifications for stuff like bus timings.
+            self.center.requestAuthorization(options: self.options) { (granted, error) in
+                if !granted {
+                    print("Something went wrong")
+                }
+            }
+            
+        }
+        
+        // If location services is enabled get the users location
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self as? CLLocationManagerDelegate
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
         
         displayTable()
         

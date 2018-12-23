@@ -77,10 +77,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.navigationController?.navigationBar.topItem?.title = "Settings"
         
-        //Adds the options to select from
-        settingsArr = settingsArr.adding("Notifications") as NSArray
+        //This function contains the options to choose from
+        addingValsArray()
         
         displayTable()
+    }
+    
+    
+    func addingValsArray(){
+        //Adds the options to select from
+        settingsArr = settingsArr.adding("Notifications") as NSArray
+        settingsArr = settingsArr.adding("Night Mode") as NSArray
+        //settingsArr = settingsArr.adding("")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat

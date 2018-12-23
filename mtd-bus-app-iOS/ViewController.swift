@@ -67,7 +67,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var initialLoad: Bool = false
     
-    
+    //Initial function that is run when the form loads. This code runs the initTable(), downloadCurrentStopData() functions. It also gets the current user's location via locationManager.
     override func viewDidLoad() {
         
         
@@ -75,20 +75,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //view.backgroundColor = UIColor.gray
         initTable()
-        
-        // For use when the app is open
-        DispatchQueue.main.async {
-            //Requests the user to provide access to use their location.
-            self.locationManager.requestWhenInUseAuthorization()
-            
-            //Requests the user to provide access to give them notifications for stuff like bus timings.
-            self.center.requestAuthorization(options: self.options) { (granted, error) in
-                if !granted {
-                    print("Something went wrong")
-                }
-            }
-            
-        }
         
         // If location services is enabled get the users location
         if CLLocationManager.locationServicesEnabled() {
@@ -113,7 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return stopNameArr.count == 0
     }
     
-    /// Displays the table based on pre determined values. The table will fit in the middle of the screen, making sure to be under the tab bar and the navigation controller. Can change the values inside the function to make the table bigger or smaller, change color, etc.
+    //Initalizes the table based on pre determined values. The table will fit in the middle of the screen, making sure to be under the tab bar and the navigation controller. Can change the values inside the function to make the table bigger or smaller, change color, etc.
     func initTable(){
         
         let barHeight: CGFloat = 0
@@ -131,6 +117,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    //Displays the table on command only if stopNameArr.count = 0. It also adds in the refresh control. This is triggered everytime the data is redownloaded.
     func displayTable(){
         if(!isStopArrEmpty()){
             view.addSubview(self.stopTableView)
@@ -148,8 +135,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     /// This functions runs when the user pulls down and activates the refreshControl.
-    ///
-    /// - Parameter sender: un-used var
     @objc private func refreshStopData(_ sender: Any) {
         self.refreshControl.beginRefreshing()
         // Re-Fetch Stop Data
@@ -165,16 +150,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    /// This function updates the current Lat and Long values. It also downloads the stop data based on the current lat+long values
+    /// This function updates the current Lat and Long values. It also downloads the stop data from the API based on the current lat+long values.
     @IBAction func downloadCurrentStopData (){
         
-        lat = (locationManager.location?.coordinate.latitude)!
-        long = (locationManager.location?.coordinate.longitude)!
+        DispatchQueue.main.async {
+            self.lat = (self.locationManager.location?.coordinate.latitude)!
+            self.long = (self.locationManager.location?.coordinate.longitude)!
+        
         
         //had to add this because adding it directly to the url made swift throw an error.
-        let countStopsAPI = "&count=" + numberOfStops.description
+            let countStopsAPI = "&count=" + self.numberOfStops.description
         
-        guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+lat.description + "&lon=" + long.description + countStopsAPI) else { return }
+            guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+self.lat.description + "&lon=" + self.long.description + countStopsAPI) else { return }
         
         URLSession.shared.dataTask(with: apiURL) { (data, response
             , error) in
@@ -221,15 +208,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print("Error Downloading data", err)
             }
             }.resume()
-        
+        }
     }
     
     
     /// If location has been deined access, give the user the option to change it
-    ///
-    /// - Parameters:
-    ///   - manager: Location Manager
-    ///   - status: CLAuthorizationStatus
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if(status == CLAuthorizationStatus.denied) {
             showLocationDisabledPopUp()
@@ -264,10 +247,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     /// On click option for each table cell
-    ///
-    /// - Parameters:
-    ///   - tableView: UITableView
-    ///   - indexPath: Index of the selected cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentStop = stopNameArr[indexPath.item] as! String
         currentStopCode = stopIDArr[indexPath.item] as! String
@@ -276,22 +255,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     /// Returns number of rows in the specified table.
-    ///
-    /// - Parameters:
-    ///   - tableView: UITableView
-    ///   - section: the selected section
-    /// - Returns: The number of rows the the specified table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stopNameArr.count
     }
     
     
     /// Gives the value and a unique identifier to each of the rows in the table.
-    ///
-    /// - Parameters:
-    ///   - tableView: UITableView
-    ///   - indexPath: Current Index of the row being added.
-    /// - Returns: Completed UITableViewCell with values.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "MyCell")
@@ -302,11 +271,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     /// This function runs when the user uses 3D touch and lightly presses (peek). This changes the currentStop and currentStopCode to the data of the cell the user pressed on.
-    ///
-    /// - Parameters:
-    ///   - previewingContext: The viewController to display when peeking
-    ///   - location: Point in the screen where the user is pressing down.
-    /// - Returns: The ViewController to be displayed.
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = stopTableView.indexPathForRow(at: location) else {
             return nil
@@ -321,10 +285,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     /// This function runs when the user uses the 3D touch and presses on it with full force. This pushes the selected view using the navigation controller.
-    ///
-    /// - Parameters:
-    ///   - previewingContext: un-used var
-    ///   - viewControllerToCommit: un-used var
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         stopBusView()
     }
