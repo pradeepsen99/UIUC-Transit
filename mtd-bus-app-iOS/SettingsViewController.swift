@@ -107,7 +107,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
         self.settingsTableView.separatorStyle = .singleLine
-        self.settingsTableView.rowHeight = UITableViewAutomaticDimension
+        self.settingsTableView.rowHeight = UITableView.automaticDimension
         
         self.settingsTableView.alwaysBounceVertical = false
         self.settingsTableView.allowsSelection = false

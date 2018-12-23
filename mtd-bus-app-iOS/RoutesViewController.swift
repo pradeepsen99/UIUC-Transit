@@ -108,7 +108,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let content = UNMutableNotificationContent()
                 content.title = "Bus Reminder!"
                 content.body = (self.busNameArr[editActionsForRowAt.row] as! String).description + " has arrived at " + self.currentStop
-                content.sound = UNNotificationSound.default()
+                content.sound = UNNotificationSound.default
                 content.categoryIdentifier = "UYLReminderCategory"
                 
                 print(self.busTimeArr[editActionsForRowAt.row])
