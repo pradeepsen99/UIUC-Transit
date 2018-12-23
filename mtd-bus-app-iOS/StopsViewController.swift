@@ -57,7 +57,8 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var resultSearchController = UISearchController()
     
     var mtdData: mtd_stop_loc? = nil
-        
+    
+    //This function runs then the application comes into view. It runs convertJSONtoArr(), displayTable() and displaySearchBar() functions.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +71,12 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         convertJSONtoArr()
         displayTable()
 
+        displaySearchBar()
+        
+    }
+    
+    //This function checks to see if the iOS version is 11+. If it is then it adds a custom searchbar below the title of the viewController. In the event that the devide doesn't have ios11+ then
+    func displaySearchBar(){
         //Checking if iOS Version is 11+ then can use navigationItem.searchController
         if #available(iOS 11.0, *) {
             let sc = UISearchController(searchResultsController: nil)
@@ -96,7 +103,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             stopTableView.tableHeaderView = resultSearchController.searchBar
         }
-        
     }
     
     
@@ -105,10 +111,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     /// This funciton is run when the user types in something into the search bar, anytime the string changes this function is run with the updated string.
-    ///
-    /// - Parameters:
-    ///   - searchBar: The search bar being used.
-    ///   - searchText: The text thats currently in the search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //Flag variable, used in deciding wether to sue the regular array or the filtered array.
         isSearching = true
@@ -132,6 +134,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         stopTableView.reloadData()
     }
     
+    //This function resets the array that is displayed on the table to reflect all of the stops.
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         isSearching = false
         
@@ -141,6 +144,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         stopTableView.reloadData()
     }
     
+    //Converts the JSON text from the file and sends the data to it's respective arrays.
     func convertJSONtoArr(){
         //All the stops are stored in a txt file named AllStops, access it through here.
         let allStopsTxt = getDataFromText(fileName: "AllStops")
@@ -160,9 +164,6 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     /// Helper function to get all of the contents from the described .txt file.
-    ///
-    /// - Parameter fileName: The file name
-    /// - Returns: Text of the whole file
     func getDataFromText(fileName: String) -> String{
         var text: String = ""
         if let path = Bundle.main.path(forResource: fileName, ofType: "txt") {
@@ -177,7 +178,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return text
     }
     
-    
+    //Displays the table with the predetermined values.
     func displayTable(){
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
@@ -191,7 +192,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.addSubview(self.stopTableView)
     }
     
-    
+    //didSelectRowAt function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //If isSearching is true then uses values from the filtered array because that's what is being displayed, if false, then uses the regular array.
         if(isSearching){
@@ -206,6 +207,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    //numberOfRowsInSection function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //If isSearching is true then uses count from the filtered array because that's what is being displayed, if false, then uses the regular array.
         if isSearching {
@@ -215,6 +217,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    //cellForRowAt function
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //If isSearching is true then uses values from the filtered array because that's what is being displayed, if false, then uses the refular array.
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
@@ -229,6 +232,7 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 
 extension StopsViewController{
+    //This function goes over to the RoutesViewController with the values of currentStop and currentStopCode to dispaly the routes for the selected stop.
     func stopBusView(){
         navigationController?.pushViewController(RoutesViewController(stop: currentStop, code: currentStopCode), animated: true)
     }
