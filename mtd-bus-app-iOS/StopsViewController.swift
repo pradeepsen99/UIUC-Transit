@@ -68,9 +68,10 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.navigationController?.navigationBar.topItem?.title = "Stops"
         
+
+        
         convertJSONtoArr()
         displayTable()
-
         displaySearchBar()
         
     }
@@ -78,9 +79,12 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //This function checks to see if the iOS version is 11+. If it is then it adds a custom searchbar below the title of the viewController. In the event that the devide doesn't have ios11+ then
     func displaySearchBar(){
         //Checking if iOS Version is 11+ then can use navigationItem.searchController
+
         if #available(iOS 11.0, *) {
             let sc = UISearchController(searchResultsController: nil)
             sc.searchBar.delegate = self
+            sc.dimsBackgroundDuringPresentation = false
+            
             let scb = sc.searchBar
             scb.tintColor = UIColor.white
             scb.barTintColor = UIColor.white
@@ -101,6 +105,8 @@ class StopsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             navigationItem.searchController = sc
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
+            resultSearchController.dimsBackgroundDuringPresentation = false
+            //resultSearchController.obscuresBackgroundDuringPresentation = false
             stopTableView.tableHeaderView = resultSearchController.searchBar
         }
     }

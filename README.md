@@ -48,7 +48,7 @@ And after that click the run button and set the build to either the Simulator or
 * - [x] Add dynamic favorites button.
 * - [x] Settings tab with settings related to app.
 * - [x] Add slide down to refresh option.
-* - [ ] Fix bug where StopsViewController doesn't reset searches after clicking away.
+* - [x] Fix bug where StopsViewController doesn't reset searches after clicking away.
 * - [ ] Add API limits such as refreshing routes only once a mintue and changelog stuff.
 * - [ ] Info on the route when clicked such as current location and distance to stop.
 * - [ ] Info on the Bus stop when clicked such as lat+long and show in Maps/Google Maps.
