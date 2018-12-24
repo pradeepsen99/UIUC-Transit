@@ -143,7 +143,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.stopIDArr = []
             self.stopDistance = []
             self.downloadCurrentStopData()
-            self.stopTableView.reloadData()
         }
         self.refreshControl.endRefreshing()
     }
@@ -153,15 +152,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     /// This function updates the current Lat and Long values. It also downloads the stop data from the API based on the current lat+long values.
     @IBAction func downloadCurrentStopData (){
         
-        DispatchQueue.main.async {
-            self.lat = (self.locationManager.location?.coordinate.latitude)!
-            self.long = (self.locationManager.location?.coordinate.longitude)!
+        self.lat = (self.locationManager.location?.coordinate.latitude)!
+        self.long = (self.locationManager.location?.coordinate.longitude)!
         
         
         //had to add this because adding it directly to the url made swift throw an error.
-            let countStopsAPI = "&count=" + self.numberOfStops.description
+        let countStopsAPI = "&count=" + self.numberOfStops.description
         
-            guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+self.lat.description + "&lon=" + self.long.description + countStopsAPI) else { return }
+        guard let apiURL = URL(string: "https://developer.cumtd.com/api/v2.2/JSON/getstopsbylatlon?key=" + mainApiKey.description + "&lat="+self.lat.description + "&lon=" + self.long.description + countStopsAPI) else { return }
         
         URLSession.shared.dataTask(with: apiURL) { (data, response
             , error) in
@@ -208,7 +206,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print("Error Downloading data", err)
             }
             }.resume()
-        }
     }
     
     
@@ -307,5 +304,5 @@ extension ViewController {
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

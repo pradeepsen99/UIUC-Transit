@@ -60,10 +60,6 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     private let refreshControl = UIRefreshControl()
     
     /// Initializer of the class
-    ///
-    /// - Parameters:
-    ///   - stop: the current stop name.
-    ///   - code: the current stop code.
     init(stop: String, code: String) {
         self.currentStop = stop
         self.currentStopCode = code
@@ -71,17 +67,11 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     /// Required function to have a constructor
-    ///
-    /// - Parameter aDecoder: un-used var
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     /// Function to deselect cell on e unclicked.
-    ///
-    /// - Parameters:
-    ///   - tableView: tableView clicked at
-    ///   - indexPath: index of cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -98,7 +88,6 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        //TODO Revamp the 
         let share = UITableViewRowAction(style: .normal, title: "Add Reminder") { action, index in
             
             let defaults = UserDefaults.standard
@@ -200,7 +189,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.displayTable()
                         self.initialLoad = true
                     }
-                    
+                    self.stopTableView.reloadData()
                 }
             } catch let err {
                 print("Error Downloading data", err)
@@ -221,7 +210,7 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
-    //This function initalizes the tableView. To be run during 
+    //This function initalizes the tableView. To be run during when viewDidLoad.
     func initTable(){
         let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
@@ -236,22 +225,21 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     /// Displays the table using the given values.
     func displayTable(){
-
-        view.addSubview(self.stopTableView)
-        
-        //Swiping down to refresh code.
-        if #available(iOS 10.0, *) {
-            stopTableView.refreshControl = refreshControl
-        } else {
-            stopTableView.addSubview(refreshControl)
+        if(busNameArr.count > 0){
+            view.addSubview(self.stopTableView)
+            
+            //Swiping down to refresh code.
+            if #available(iOS 10.0, *) {
+                stopTableView.refreshControl = refreshControl
+            } else {
+                stopTableView.addSubview(refreshControl)
+            }
+            refreshControl.addTarget(self, action: #selector(refreshStopData(_:)), for: .valueChanged)
+            refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
         }
-        refreshControl.addTarget(self, action: #selector(refreshStopData(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red: 0, green:0, blue:0.85, alpha:1.0)
     }
     
     /// This functions runs when the user pulls down and activates the refreshControl.
-    ///
-    /// - Parameter sender: un-used var
     @objc private func refreshStopData(_ sender: Any) {
         self.refreshControl.beginRefreshing()
         // Re-Fetch Stop Data
@@ -259,7 +247,6 @@ class RoutesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.busNameArr = []
             self.busTimeArr = []
             self.downloadBusNames()
-            self.stopTableView.reloadData()
         }
         self.refreshControl.endRefreshing()
     }

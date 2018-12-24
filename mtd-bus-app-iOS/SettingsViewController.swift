@@ -53,8 +53,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         cell.accessoryView = switchView
         
-        let image : UIImage = UIImage(named: "advertising")!
-        cell.imageView?.image = image
+        //let image : UIImage = UIImage(named: "advertising")!
+        //cell.imageView?.image = image
         
         return cell
     }
