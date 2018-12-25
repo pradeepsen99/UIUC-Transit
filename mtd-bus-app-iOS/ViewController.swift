@@ -41,7 +41,6 @@ import UserNotifications
 
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
-    
     let numberOfStops: Int = 15
     let feetToMileConv: Double = 0.000189393939
     
@@ -76,22 +75,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //view.backgroundColor = UIColor.gray
         initTable()
         
-        // If location services is enabled get the users location
+        // If location services is enabled get the users location and run functions, otherwise, provide a prompt that forces them to add location.
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self as? CLLocationManagerDelegate
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined,.restricted, .denied:
+                showLocationDisabledPopUp()
+                print("denied")
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.delegate = self as? CLLocationManagerDelegate
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.startUpdatingLocation()
+                print("enabled")
+                downloadCurrentStopData()
+                if(!isStopArrEmpty()){
+                    //Set up for 3D Touch in the cells of stopTableView
+                    registerForPreviewing(with: self, sourceView: stopTableView)
+                }
+                print("works!")
+            }
+        } else {
+            print("Location services are not enabled")
+            showLocationDisabledPopUp()
         }
         
-        //Title of the Tab
         self.navigationController?.navigationBar.topItem?.title = "Nearby"
-        
-        downloadCurrentStopData()
-        
-        if(!isStopArrEmpty()){
-            //Set up for 3D Touch in the cells of stopTableView
-            registerForPreviewing(with: self, sourceView: stopTableView)
-        }
         
     }
     
@@ -150,7 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     /// This function updates the current Lat and Long values. It also downloads the stop data from the API based on the current lat+long values.
-    @IBAction func downloadCurrentStopData (){
+    func downloadCurrentStopData (){
         
         self.lat = (self.locationManager.location?.coordinate.latitude)!
         self.long = (self.locationManager.location?.coordinate.longitude)!
