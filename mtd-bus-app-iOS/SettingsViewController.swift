@@ -87,7 +87,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func addingValsArray(){
         //Adds the options to select from
         settingsArr = settingsArr.adding("Notifications") as NSArray
-        settingsArr = settingsArr.adding("Night Mode") as NSArray
+        //settingsArr = settingsArr.adding("Night Mode") as NSArray
         //settingsArr = settingsArr.adding("")
     }
     
