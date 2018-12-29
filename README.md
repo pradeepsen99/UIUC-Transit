@@ -3,10 +3,10 @@
 An app, based on your current location in the Champaign-Urbana area, gives the nearest CUMTD bus stop and the busses that run witin those stops.
 
 <p float="left">
-  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot1.png" width="300" />
-  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot2.png" width="300" /> 
-  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot3.png" width="300" />
-  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot4.png" width="300" />
+  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot1.png" width="200" />
+  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot2.png" width="200" /> 
+  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot3.png" width="200" />
+  <img src="https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot4.png" width="200" />
 </p>
 
 ## Getting Started
