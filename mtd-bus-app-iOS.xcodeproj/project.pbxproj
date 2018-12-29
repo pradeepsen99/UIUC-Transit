@@ -11,7 +11,6 @@
 		6A08EEBC20EA8222005439A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBB20EA8222005439A4 /* AppDelegate.swift */; };
 		6A08EEBE20EA8222005439A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08EEBD20EA8222005439A4 /* ViewController.swift */; };
 		6A08EEC120EA8222005439A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EEBF20EA8222005439A4 /* Main.storyboard */; };
-		6A08EECB20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6A08EECA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app */; };
 		6A08EED120EA8223005439A4 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EECF20EA8223005439A4 /* Interface.storyboard */; };
 		6A08EED320EA8223005439A4 /* AssetsWatch.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A08EED220EA8223005439A4 /* AssetsWatch.xcassets */; };
 		6A08EEDA20EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6A08EED920EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -32,13 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6A08EECC20EA8223005439A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A08EEB020EA8221005439A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A08EEC920EA8223005439A4;
-			remoteInfo = "mtd-bus-app-iOS WatchKit App";
-		};
 		6A08EEDB20EA8223005439A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A08EEB020EA8221005439A4 /* Project object */;
@@ -66,7 +58,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				6A08EECB20EA8223005439A4 /* mtd-bus-app-iOS WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,7 +199,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6A08EECD20EA8223005439A4 /* PBXTargetDependency */,
 			);
 			name = "mtd-bus-app-iOS";
 			productName = "mtd-bus-app-iOS";
@@ -363,11 +353,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A08EECD20EA8223005439A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A08EEC920EA8223005439A4 /* mtd-bus-app-iOS WatchKit App */;
-			targetProxy = 6A08EECC20EA8223005439A4 /* PBXContainerItemProxy */;
-		};
 		6A08EEDC20EA8223005439A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A08EED820EA8223005439A4 /* mtd-bus-app-iOS WatchKit Extension */;
@@ -606,7 +591,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "pradeep.mtd-bus-app-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -625,7 +610,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "pradeep.mtd-bus-app-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

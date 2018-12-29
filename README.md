@@ -62,6 +62,7 @@ And after that click the run button and set the build to either the Simulator or
 * - [ ] App Icons.
 * - [ ] Night Mode.
 * - [ ] Color blind Mode.
+* - [ ] https://stackoverflow.com/questions/30426501/prevent-deploying-disable-watchkit-app-with-ios-iphone-app-in-xcode
 
 ## Authors
 
