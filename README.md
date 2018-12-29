@@ -2,6 +2,11 @@
 
 An app, based on your current location in the Champaign-Urbana area, gives the nearest CUMTD bus stop and the busses that run witin those stops.
 
+!(https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot1.png)
+!(https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot2.png)
+!(https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot3.png)
+!(https://raw.githubusercontent.com/pradeepsen99/Navigation-for-CUMTD/master/screenshots/4.7-inch%20(iPhone6)-Screenshot4.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
