@@ -1,4 +1,4 @@
-# Navigation for CUMTD 
+# UIUC Transit
 
 An app, based on your current location in the Champaign-Urbana area, gives the nearest CUMTD bus stop and the busses that run witin those stops.
 
